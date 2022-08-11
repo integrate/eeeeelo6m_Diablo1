@@ -17,7 +17,7 @@ class Stenaputi:
             cy+=self.sten_cartinca.get_height()
             if times_h==0 and times_w!=0:
                 cx+=self.sten_cartinca.get_width()
-                times_h=h/self.sten_cartinca.get_hidth()
+                times_h=h/self.sten_cartinca.get_height()
                 times_w -= 1
 
 
