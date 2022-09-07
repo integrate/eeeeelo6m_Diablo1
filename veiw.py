@@ -17,7 +17,7 @@ def veiw():
     derevo = pygame.Rect(fullscreen.fulscren(screen,model.derevo.width, model.derevo.height, model.derevo.x, model.derevo.y))
     for stenaputi in model.steniputi:
         stenaputi.draw(screen)
-    print(igroc)
+
 
     draw.rect(screen, [255, 30, 30], igroc)
     draw.rect(screen,[150,100,150],derevo)
