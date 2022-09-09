@@ -5,27 +5,12 @@ class Stenaputi:
         self.cratinca=pygame.Surface([w,h])
         self.sten_cartinca=pygame.image.load('picture/стэнка.png')
         self.sten_cartinca=pygame.transform.scale(self.sten_cartinca,[self.sten_cartinca.get_width()/10,self.sten_cartinca.get_height()/10])
-        self.times_h=range(0,math.ceil(h/self.sten_cartinca.get_height()))
-        self.times_w=range(1,w//self.sten_cartinca.get_width())
-        # times_w=w/self.sten_cartinca.get_width()
-        # times_h=h/self.sten_cartinca.get_height()
-
-
-        # while times_w>0 and times_h>0:
-        #     self.cratinca.blit(self.sten_cartinca,[cx,cy])
-        #
-        #     times_h-=1
-        #     cy+=self.sten_cartinca.get_height()
-        #     if times_h<=0:
-        #         cx+=self.sten_cartinca.get_width()
-        #         cy=0
-        #         times_h=h/self.sten_cartinca.get_height()
-        #         times_w -= 1
         cy=range(0,h,self.sten_cartinca.get_height())
-        cx=0
-        for c in cy:
-            self.cratinca.blit(self.sten_cartinca, [cx, c])
-            print(c)
+        cx=range(0,w,self.sten_cartinca.get_width())
+        for c1 in cx:
+            for c2 in cy:
+                self.cratinca.blit(self.sten_cartinca, [c1, c2])
+
 
         self.x=x
         self.y=y

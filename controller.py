@@ -12,7 +12,11 @@ def control():
             model.igroc.x+=10
         if r.type==pygame.KEYDOWN and r.key==pygame.K_a:
             model.igroc.x-=10
+            if model.igroc.x<0:
+                model.igroc.x=0
         if r.type==pygame.KEYDOWN and r.key==pygame.K_w:
             model.igroc.y-=10
         if r.type==pygame.KEYDOWN and r.key==pygame.K_s:
             model.igroc.y+=10
+
+
