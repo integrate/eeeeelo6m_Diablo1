@@ -9,14 +9,14 @@ def control():
             exit()
         if r.type==pygame.KEYDOWN and r.key==pygame.K_d:
 
-            model.igroc.x+=10
+            model.igroc.dvigenie_right()
         if r.type==pygame.KEYDOWN and r.key==pygame.K_a:
-            model.igroc.x-=10
-            if model.igroc.x<0:
-                model.igroc.x=0
+
+            model.igroc.dvigenie_left()
+
         if r.type==pygame.KEYDOWN and r.key==pygame.K_w:
-            model.igroc.y-=10
+            model.igroc.dvigenie_top()
         if r.type==pygame.KEYDOWN and r.key==pygame.K_s:
-            model.igroc.y+=10
+            model.igroc.dvigenie_bottom()
 
 
