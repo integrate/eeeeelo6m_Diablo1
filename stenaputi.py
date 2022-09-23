@@ -22,10 +22,7 @@ class Stenaputi:
     def draw(self,screen:pygame.Surface):
         stena_fullscreen=pygame.Rect(fullscreen.fulscren(screen,self.w,self.h,self.x,self.y))
         pygame.draw.rect(screen,[0,0,0],stena_fullscreen)
-        screen.blit(self.cratinca,stena_fullscreen)
-        # screen.blit(self.sten_cartinca,stena_fullscreen,[0,0,stena_fullscreen.w,stena_fullscreen.h])
+
+        screen.blit(self.sten_cartinca,stena_fullscreen,[0,0,stena_fullscreen.w,stena_fullscreen.h])
 
 
-# self.times_h=range(0,math.ceil(12/5))
-# self.times_h=range(0,h//math.ceil(self.sten_cartinca.get_height()))
-# self.times_h=range(0,h//math.ceil(self.sten_cartinca.get_height()))
