@@ -75,4 +75,17 @@ class Igroc:
             self.rect_igroc.y += self.speedy
 
     def dvigenie_top(self):
-        self.rect_igroc.y -= self.speedy
+        steni = []
+        for stena in self.steni:
+            crossy = stena.stena.bottom <= self.rect_igroc.y and stena.stena.bottom > self.rect_igroc.y - self.speedy
+            crossx = stena.stena.x < self.rect_igroc.right < stena.stena.right or stena.stena.right > self.rect_igroc.x > stena.stena.x or self.rect_igroc.x <= stena.stena.x <= self.rect_igroc.right
+            if crossx and crossy:
+                steni.append(stena)
+        if len(steni) > 0:
+            b = steni[0].y
+            for stena in steni:
+                if stena.stena.bottom > b:
+                    b = stena.stena.bottom
+            self.rect_igroc.y = b
+        else:
+            self.rect_igroc.y -= self.speedy
