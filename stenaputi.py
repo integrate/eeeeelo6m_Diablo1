@@ -20,7 +20,7 @@ class Stenaputi:
         self.y=y
 
         self.nospawn=nospawn
-        self.stena=pygame.Rect(self.x,self.y,self.w,self.h)
+        self.rect=pygame.Rect(self.x, self.y, self.w, self.h)
 
     def draw(self,screen:pygame.Surface):
         stena_fullscreen=pygame.Rect(fullscreen.fulscren(screen,self.w,self.h,self.x,self.y))

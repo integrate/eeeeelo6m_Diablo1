@@ -2,7 +2,7 @@ import pygame, fullscreen
 
 
 class Igroc:
-    def __init__(self, x, y, hp, dmg, deff, speedx, speedy, steni):
+    def __init__(self, x, y, hp, dmg, deff, speedx, speedy, rects):
         self.x = x
         self.y = y
         self.hp = hp
@@ -10,7 +10,7 @@ class Igroc:
         self.deff = deff
         self.speedx = speedx
         self.speedy = speedy
-        self.steni = steni
+        self.rects = rects
         self.rect_igroc = pygame.Rect(self.x, self.y, 100, 100)
 
     def draw(self, screen):
@@ -24,17 +24,17 @@ class Igroc:
         steni = []
         # if self.rect_igroc.x < 0:
         #     self.rect_igroc.x = 0
-        for stena in self.steni:
-            crossx = stena.stena.right <= self.rect_igroc.x and stena.stena.right > self.rect_igroc.x - self.speedx
-            crossy = stena.y <= self.rect_igroc.y <= stena.stena.bottom or stena.y <= self.rect_igroc.bottom <= stena.stena.bottom or stena.y <= self.rect_igroc.y <= stena.stena.bottom or self.rect_igroc.bottom > stena.y > self.rect_igroc.y
+        for stena in self.rects:
+            crossx = stena.rect.right <= self.rect_igroc.x and stena.rect.right > self.rect_igroc.x - self.speedx
+            crossy = stena.y < self.rect_igroc.y < stena.rect.bottom or stena.y < self.rect_igroc.bottom < stena.rect.bottom or stena.y < self.rect_igroc.y < stena.rect.bottom or self.rect_igroc.bottom > stena.y > self.rect_igroc.y
 
             if crossx and crossy:
                 steni.append(stena)
         if len(steni)>0:
-            b=steni[0].stena.right
+            b=steni[0].rect.right
             for stena in steni:
-                if stena.stena.right>b:
-                    b=stena.stena.right
+                if stena.rect.right>b:
+                    b=stena.rect.right
             print(b)
             self.rect_igroc.x=b
         else:
@@ -43,16 +43,16 @@ class Igroc:
 
     def dvigenie_right(self):
         steni = []
-        for stena in self.steni:
-            crossx = stena.stena.x >= self.rect_igroc.right and stena.stena.x < self.rect_igroc.right + self.speedx
-            crossy = stena.y <= self.rect_igroc.y <= stena.stena.bottom or stena.y <= self.rect_igroc.bottom <= stena.stena.bottom or stena.y <= self.rect_igroc.y <= stena.stena.bottom or self.rect_igroc.bottom > stena.y > self.rect_igroc.y
+        for stena in self.rects:
+            crossx = stena.rect.x >= self.rect_igroc.right and stena.rect.x < self.rect_igroc.right + self.speedx
+            crossy = stena.y < self.rect_igroc.y < stena.rect.bottom or stena.y < self.rect_igroc.bottom < stena.rect.bottom or stena.y < self.rect_igroc.y < stena.rect.bottom or self.rect_igroc.bottom > stena.y > self.rect_igroc.y
             if crossx and crossy:
                 steni.append(stena)
         if len(steni)>0:
-            b=steni[0].stena.x
+            b=steni[0].rect.x
             for stena in steni:
-                if stena.stena.x<b:
-                    b=stena.stena.x
+                if stena.rect.x<b:
+                    b=stena.rect.x
             print(b)
             self.rect_igroc.right=b
         else:
@@ -60,32 +60,32 @@ class Igroc:
 #1-17:10,2-17;11,3-17:15,4-17:16
     def dvigenie_bottom(self):
         steni = []
-        for stena in self.steni:
-            crossy = stena.stena.y >= self.rect_igroc.bottom and stena.stena.y<self.rect_igroc.bottom+self.speedy
-            crossx= stena.stena.x<self.rect_igroc.right<stena.stena.right or stena.stena.right>self.rect_igroc.x>stena.stena.x or self.rect_igroc.x<=stena.stena.x<=self.rect_igroc.right
+        for stena in self.rects:
+            crossy = stena.rect.y >= self.rect_igroc.bottom and stena.rect.y < self.rect_igroc.bottom + self.speedy
+            crossx= stena.rect.x < self.rect_igroc.right < stena.rect.right or stena.rect.right > self.rect_igroc.x > stena.rect.x or self.rect_igroc.x < stena.rect.x < self.rect_igroc.right or self.rect_igroc.x < stena.rect.right < self.rect_igroc.right or (self.rect_igroc.right==stena.rect.right and self.rect_igroc.x==stena.rect.x)
             if crossx and crossy:
                 steni.append(stena)
         if len(steni)>0:
             b=steni[0].y
             for stena in steni:
-                if stena.stena.y<b:
-                    b=stena.stena.y
+                if stena.rect.y<b:
+                    b=stena.rect.y
             self.rect_igroc.bottom=b
         else:
             self.rect_igroc.y += self.speedy
 
     def dvigenie_top(self):
         steni = []
-        for stena in self.steni:
-            crossy = stena.stena.bottom <= self.rect_igroc.y and stena.stena.bottom > self.rect_igroc.y - self.speedy
-            crossx = stena.stena.x < self.rect_igroc.right < stena.stena.right or stena.stena.right > self.rect_igroc.x > stena.stena.x or self.rect_igroc.x <= stena.stena.x <= self.rect_igroc.right
+        for stena in self.rects:
+            crossy = stena.rect.bottom <= self.rect_igroc.y and stena.rect.bottom > self.rect_igroc.y - self.speedy
+            crossx = stena.rect.x < self.rect_igroc.right < stena.rect.right or stena.rect.right > self.rect_igroc.x > stena.rect.x or self.rect_igroc.x < stena.rect.x < self.rect_igroc.right or self.rect_igroc.x < stena.rect.right < self.rect_igroc.right or (self.rect_igroc.right==stena.rect.right and self.rect_igroc.x==stena.rect.x)
             if crossx and crossy:
                 steni.append(stena)
         if len(steni) > 0:
             b = steni[0].y
             for stena in steni:
-                if stena.stena.bottom > b:
-                    b = stena.stena.bottom
+                if stena.rect.bottom > b:
+                    b = stena.rect.bottom
             self.rect_igroc.y = b
         else:
             self.rect_igroc.y -= self.speedy
