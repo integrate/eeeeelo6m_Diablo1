@@ -26,7 +26,7 @@ class Igroc:
         #     self.rect_igroc.x = 0
         for stena in self.rects:
             crossx = stena.rect.right <= self.rect_igroc.x and stena.rect.right > self.rect_igroc.x - self.speedx
-            crossy = stena.y < self.rect_igroc.y < stena.rect.bottom or stena.y < self.rect_igroc.bottom < stena.rect.bottom or stena.y < self.rect_igroc.y < stena.rect.bottom or self.rect_igroc.bottom > stena.y > self.rect_igroc.y
+            crossy = stena.rect.y < self.rect_igroc.y < stena.rect.bottom or stena.rect.y < self.rect_igroc.bottom < stena.rect.bottom or self.rect_igroc.bottom > stena.rect.y > self.rect_igroc.y or self.rect_igroc.bottom > stena.rect.bottom > self.rect_igroc.y or (self.rect_igroc.bottom==stena.rect.bottom and self.rect_igroc.y==stena.rect.y)
 
             if crossx and crossy:
                 steni.append(stena)
@@ -45,7 +45,8 @@ class Igroc:
         steni = []
         for stena in self.rects:
             crossx = stena.rect.x >= self.rect_igroc.right and stena.rect.x < self.rect_igroc.right + self.speedx
-            crossy = stena.y < self.rect_igroc.y < stena.rect.bottom or stena.y < self.rect_igroc.bottom < stena.rect.bottom or stena.y < self.rect_igroc.y < stena.rect.bottom or self.rect_igroc.bottom > stena.y > self.rect_igroc.y
+            crossy = stena.rect.y < self.rect_igroc.y < stena.rect.bottom or stena.rect.y < self.rect_igroc.bottom < stena.rect.bottom or self.rect_igroc.bottom > stena.rect.y > self.rect_igroc.y or self.rect_igroc.bottom > stena.rect.bottom > self.rect_igroc.y or (self.rect_igroc.bottom==stena.rect.bottom and self.rect_igroc.y==stena.rect.y)
+
             if crossx and crossy:
                 steni.append(stena)
         if len(steni)>0:
