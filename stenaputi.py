@@ -28,3 +28,9 @@ class Stenaputi:
         screen.blit(self.cratinca,stena_fullscreen,[0,0,stena_fullscreen.w,stena_fullscreen.h])
 
 
+class Vid2(Stenaputi):
+    def __init__(self,x,y,w,h):
+        Stenaputi.__init__(self,x,y,w,h)
+        self.cratinca.fill([0,0,0])
+
+
