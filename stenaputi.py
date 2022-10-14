@@ -1,7 +1,8 @@
-import pygame,help,fullscreen,math
+import pygame,help,fullscreen,math,nospawn as modul_nospawn
 
-class Stenaputi:
-    def __init__(self,x,y,w,h,nospawn=None):
+class Stenaputi(modul_nospawn.Nospawn):
+    def __init__(self,x,y,w,h,nospawn):
+        modul_nospawn.Nospawn.__init__(self,x,y,w,h,nospawn)
         self.cratinca=pygame.Surface([w,h])
         self.sten_cartinca=pygame.image.load('picture/стэнка.png')
         self.sten_cartinca=pygame.transform.scale(self.sten_cartinca,[self.sten_cartinca.get_width()/10,self.sten_cartinca.get_height()/10])
@@ -18,19 +19,19 @@ class Stenaputi:
 
         self.x=x
         self.y=y
-
-        self.nospawn=nospawn
         self.rect=pygame.Rect(self.x, self.y, self.w, self.h)
 
-    def draw(self,screen:pygame.Surface):
-        stena_fullscreen=pygame.Rect(fullscreen.fulscren(screen,self.w,self.h,self.x,self.y))
+
+    def draw(self,screen:pygame.Surface,minimap=False):
+        super().draw(screen,minimap)
+        stena_fullscreen=pygame.Rect(fullscreen.fulscren(screen,self.w,self.h,self.x,self.y,minimap))
         pygame.draw.rect(screen,[0,0,0],stena_fullscreen)
         screen.blit(self.cratinca,stena_fullscreen,[0,0,stena_fullscreen.w,stena_fullscreen.h])
 
 
 class Vid2(Stenaputi):
     def __init__(self,x,y,w,h):
-        Stenaputi.__init__(self,x,y,w,h)
+        Stenaputi.__init__(self,x,y,w,h,0)
         self.cratinca.fill([0,0,0])
 
 

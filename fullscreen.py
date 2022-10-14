@@ -1,7 +1,12 @@
 import model
-base_w=1366
-base_h=768
-def fulscren(screen,w, h,x, y):
+
+def fulscren(screen,w, h,x, y,minimap):
+    if minimap==True:
+        base_w = 1366*3
+        base_h = 768*3
+    else:
+        base_w = 1366
+        base_h = 768
     wp=screen.get_width() * model.igroc.rect_igroc.width / base_w
     hp=screen.get_height() * model.igroc.rect_igroc.height / base_h
     xp=screen.get_width() * model.igroc.rect_igroc.x / base_w

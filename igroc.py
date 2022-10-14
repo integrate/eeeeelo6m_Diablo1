@@ -13,10 +13,10 @@ class Igroc:
         self.rects = rects
         self.rect_igroc = pygame.Rect(self.x, self.y, 100, 100)
 
-    def draw(self, screen):
+    def draw(self, screen,minimap=False):
         igroc = pygame.Rect(
             fullscreen.fulscren(screen, self.rect_igroc.width, self.rect_igroc.height, self.rect_igroc.x,
-                                self.rect_igroc.y))
+                                self.rect_igroc.y,minimap))
         pygame.draw.rect(screen, [255, 30, 30], igroc)
 
     def dvigenie_left(self):
