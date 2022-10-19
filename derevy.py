@@ -9,6 +9,6 @@ class Derevo(modul_nospawn.Nospawn):
         self.w=w
         self.rect=pygame.Rect(self.x,self.y,self.w,self.h)
     def draw(self,screen,minimap=False):
-        super().draw(screen,minimap)
+        # super().draw(screen,minimap)
         derevo = pygame.Rect(fullscreen.fulscren(screen, self.rect.width, self.rect.height, self.rect.x, self.rect.y,minimap))
         pygame.draw.rect(screen, [97, 67, 9], derevo)
