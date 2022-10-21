@@ -1,12 +1,12 @@
-import model
+import model,settings
 
 def fulscren(screen,w, h,x, y,minimap):
     if minimap==True:
-        base_w = 1366*3
-        base_h = 768*3
+        base_w = 1366*settings.MULMINIMAP
+        base_h = 768*settings.MULMINIMAP
     else:
-        base_w = 1366
-        base_h = 768
+        base_w = 1366*settings.MULMAP
+        base_h = 768*settings.MULMAP
     wp=screen.get_width() * model.igroc.rect_igroc.width / base_w
     hp=screen.get_height() * model.igroc.rect_igroc.height / base_h
     xp=screen.get_width() * model.igroc.rect_igroc.x / base_w
