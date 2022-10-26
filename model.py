@@ -1,4 +1,4 @@
-import pygame, stenaputi as osnovnay_stena, igroc as igroc_mod, derevy, random
+import pygame,settings, stenaputi as osnovnay_stena, igroc as igroc_mod, derevy, random
 
 obshie_nospawn = []
 obshie = []
@@ -26,9 +26,9 @@ def add_derevo():
             colpowtor=50
             colder-=1
         if colpowtor==50:
-            derevo = derevy.Derevo(random.randint(-12500, 12500), random.randint(-12500, 12500), 50, 50, 100)
+            derevo = derevy.Derevo(random.randint(-settings.MAP_SIZE/2, settings.MAP_SIZE/2-50), random.randint(-settings.MAP_SIZE/2, settings.MAP_SIZE/2), 50, 50, 100)
         if derevo.rect.collidelist(obshie_nospawn)!=-1 and colpowtor>0:
-            derevo = derevy.Derevo(random.randint(-12500, 12500), random.randint(-12500, 12500), 50, 50, 100)
+            derevo = derevy.Derevo(random.randint(-settings.MAP_SIZE/2, settings.MAP_SIZE/2-50), random.randint(-settings.MAP_SIZE/2, settings.MAP_SIZE/2), 50, 50, 100)
             colpowtor-=1
         if derevo.rect.collidelist(obshie_nospawn)==-1:
             obshie.append(derevo)
@@ -39,14 +39,14 @@ def add_derevo():
 
 
 def add_granici():
-    granici = osnovnay_stena.Vid2(-12500, -13500, 25000, 1000)
-    obshie.append(granici)
-    granici = osnovnay_stena.Vid2(-12500, 13500, 25000, 1000)
-    obshie.append(granici)
-    granici = osnovnay_stena.Vid2(-12500, -12500, 100, 25000)
-    obshie.append(granici)
-    granici = osnovnay_stena.Vid2(12500, -12500, 100, 25000)
-    obshie.append(granici)
+    granici_top = osnovnay_stena.Vid2(-settings.MAP_SIZE/2, -settings.MAP_SIZE/2-settings.MAP_FAT, settings.MAP_SIZE, settings.MAP_FAT)
+    obshie.append(granici_top)
+    granici_down = osnovnay_stena.Vid2(-settings.MAP_SIZE/2, settings.MAP_SIZE/2+200, settings.MAP_SIZE, settings.MAP_FAT)
+    obshie.append(granici_down)
+    granici_left = osnovnay_stena.Vid2(-settings.MAP_SIZE/2-settings.MAP_FAT, -settings.MAP_SIZE/2-settings.MAP_FAT, settings.MAP_FAT, settings.MAP_SIZE+settings.MAP_FAT)
+    obshie.append(granici_left)
+    granici_right = osnovnay_stena.Vid2(settings.MAP_SIZE/2, -settings.MAP_SIZE/2-settings.MAP_FAT, settings.MAP_FAT,settings.MAP_SIZE+settings.MAP_FAT)
+    obshie.append(granici_right)
 
 
 add_granici()
