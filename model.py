@@ -2,16 +2,34 @@ import pygame,settings, stenaputi as osnovnay_stena, igroc as igroc_mod, derevy,
 
 obshie_nospawn = []
 obshie = []
-igroc = igroc_mod.Igroc(0, 1000, 100, 1, 1, 100, 100, obshie)
+igroc = igroc_mod.Igroc(0, 1000, 100, 1, 1, 25, 25, obshie)
 
 
 def add_stena_puti():
-    stena = osnovnay_stena.Stenaputi(-275, 631, 100, 200, 200)
+    global vid
+    vid=random.randint(1,3)
+
+    stena(0, 0,100, 2000, 400)
+    stena(400, -400, 100, 2400, 400)
+    stena(-2500, -400, 2900, 100, 400)
+    stena(-2700,0 , 2700, 100, 400)
+
+
+def add_exit():
+    global a
+    a=pygame.Rect(-2600,-275,150,150)
+
+
+
+add_exit()
+
+
+
+def stena(x,y,w,h,nospawn=200):
+    stena = osnovnay_stena.Stenaputi(x,y,w,h,nospawn)
     obshie.append(stena)
     obshie_nospawn.append(stena.rect_nospawn)
-    stena = osnovnay_stena.Stenaputi(-270, 10, 700, 4, 200)
-    obshie.append(stena)
-    obshie_nospawn.append(stena.rect_nospawn)
+
 
 
 
@@ -19,7 +37,7 @@ add_stena_puti()
 
 
 def add_derevo():
-    colder=1250
+    colder=500
     colpowtor=50
     while colder>0 :
         if colpowtor==0:

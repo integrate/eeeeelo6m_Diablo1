@@ -26,11 +26,7 @@ def veiw():
     minimap.fill([73,97, 0])
     world(minimap,True)
     screen.blit(minimap,rect_minimap)
-
-
-
-
-
+    pygame.draw.rect(screen,[0,0,0],fullscreen.fulscren(screen,model.a.w,model.a.h,model.a.x,model.a.y,False))
     display.flip()
 
 
