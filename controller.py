@@ -18,5 +18,7 @@ def control():
             model.igroc.dvigenie_top()
         if r.type==pygame.KEYDOWN and r.key==pygame.K_s:
             model.igroc.dvigenie_bottom()
+        if r.type==pygame.KEYUP and pygame.K_e==r.key:
+            model.next_lvl()
 
 

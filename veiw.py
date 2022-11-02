@@ -15,7 +15,7 @@ rect_minimap=pygame.Rect(screen.get_width()-minimap_size_w-30,30,minimap_size_w,
 minimap=pygame.Surface([rect_minimap.w,rect_minimap.h])
 
 def world(what,minimap):
-
+    pygame.draw.rect(what, [0, 0, 0],fullscreen.fulscren(what, model.exit.w, model.exit.h, model.exit.x, model.exit.y, minimap))
     for stenaputi in model.obshie:
         stenaputi.draw(what,minimap)
     model.igroc.draw(what,minimap)
@@ -26,7 +26,6 @@ def veiw():
     minimap.fill([73,97, 0])
     world(minimap,True)
     screen.blit(minimap,rect_minimap)
-    pygame.draw.rect(screen,[0,0,0],fullscreen.fulscren(screen,model.a.w,model.a.h,model.a.x,model.a.y,False))
     display.flip()
 
 

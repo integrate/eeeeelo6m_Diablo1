@@ -3,25 +3,21 @@ import pygame,settings, stenaputi as osnovnay_stena, igroc as igroc_mod, derevy,
 obshie_nospawn = []
 obshie = []
 igroc = igroc_mod.Igroc(0, 1000, 100, 1, 1, 25, 25, obshie)
-
+lvl=5
 
 def add_stena_puti():
-    global vid
+    global vid,exit,spawn
     vid=random.randint(1,3)
 
     stena(0, 0,100, 2000, 400)
     stena(400, -400, 100, 2400, 400)
     stena(-2500, -400, 2900, 100, 400)
     stena(-2700,0 , 2700, 100, 400)
+    exit=pygame.Rect(-2600, -275, 150, 150)
+    spawn=[250,3000]
+    igroc.rect_igroc.x=spawn[0]
+    igroc.rect_igroc.y=spawn[1]
 
-
-def add_exit():
-    global a
-    a=pygame.Rect(-2600,-275,150,150)
-
-
-
-add_exit()
 
 
 
@@ -30,10 +26,6 @@ def stena(x,y,w,h,nospawn=200):
     obshie.append(stena)
     obshie_nospawn.append(stena.rect_nospawn)
 
-
-
-
-add_stena_puti()
 
 
 def add_derevo():
@@ -67,10 +59,20 @@ def add_granici():
     obshie.append(granici_right)
 
 
-add_granici()
+def next_lvl():
+    global lvl,obshie,obshie_nospawn
+    if igroc.rect_igroc.colliderect(exit):
+        obshie.clear()
+        obshie_nospawn.clear()
+        lvl-=1
 
-add_derevo()
+
+
 
 
 def step():
-    pass
+    if len(obshie)==0:
+
+        add_stena_puti()
+        add_granici()
+        add_derevo()
