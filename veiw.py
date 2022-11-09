@@ -28,11 +28,12 @@ def veiw():
     minimap.fill([73,97, 0])
     world(minimap,True)
     screen.blit(minimap,rect_minimap)
-    if model.sostoynie=='potemnenie':
-
+    if model.sostoynie=='potemnenie' and time.time()-model.go_to_next_lvl<2.5:
         screen.blit(perehod,[0,0])
         perehod.fill([0,0,0,(time.time()-model.go_to_next_lvl)*100])
+
     display.flip()
+
 
 
 

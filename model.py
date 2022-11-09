@@ -1,12 +1,8 @@
 import pygame, settings, stenaputi as osnovnay_stena, igroc as igroc_mod, derevy, random, \
     time
 
-obshie_nospawn = []
-obshie = []
-igroc = igroc_mod.Igroc(0, 1000, 100, 1, 1, 25, 25, obshie)
-lvl = 5
-go_to_next_lvl = 0
-sostoynie = 'normal'#potemnenie,peregeneraciy,osvetlenie
+
+
 
 
 def add_stena_puti():
@@ -67,19 +63,59 @@ def add_granici():
 
 
 def next_lvl():
-    global lvl, obshie, obshie_nospawn, go_to_next_lvl,sostoynie
+    global lvl, obshie, obshie_nospawn, go_to_next_lvl, sostoynie
 
-    if igroc.rect_igroc.colliderect(exit):
+    if igroc.rect_igroc.colliderect(exit) and sostoynie=='normal':
         go_to_next_lvl = time.time()
-        sostoynie='potemnenie'
+        sostoynie = 'potemnenie'
         # if time.time() - go_to_next_lvl > 2:
         #     obshie.clear()
         #     obshie_nospawn.clear()
         #     lvl -= 1
 
 
+def go_right():
+    if sostoynie == 'normal':
+        igroc.dvigenie_right()
+
+
+def go_left():
+    if sostoynie == 'normal':
+        igroc.dvigenie_left()
+
+
+def go_down():
+    if sostoynie == 'normal':
+        igroc.dvigenie_bottom()
+
+
+def go_top():
+    if sostoynie == 'normal':
+        igroc.dvigenie_top()
+
+
+
 def step():
-    if len(obshie) == 0:
+    global sostoynie
+    if time.time()-go_to_next_lvl>2.5 and sostoynie=='potemnenie':
+        sostoynie='peregeneraciy'
+    print(sostoynie)
+
+    if sostoynie=='peregeneraciy':
+        obshie.clear()
+        obshie_nospawn.clear()
         add_stena_puti()
         add_granici()
         add_derevo()
+        sostoynie='osvetlenie'
+
+
+obshie_nospawn = []
+obshie = []
+igroc = igroc_mod.Igroc(0, 1000, 100, 1, 1, 100, 100, obshie)
+lvl = 5
+go_to_next_lvl = 0
+sostoynie = 'normal'  # potemnenie,peregeneraciy,osvetlenie
+add_stena_puti()
+add_granici()
+add_derevo()
