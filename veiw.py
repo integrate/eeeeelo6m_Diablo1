@@ -1,8 +1,8 @@
 # 1366,768
 import pygame
 
-screen = pygame.display.set_mode(flags=pygame.FULLSCREEN)
-# screen = pygame.display.set_mode([683, 384])
+# screen = pygame.display.set_mode(flags=pygame.FULLSCREEN)
+screen = pygame.display.set_mode([683, 384])
 # screen = pygame.display.set_mode([1366,768])
 # print(screen.get_rect())
 import model,stenaputi,fullscreen,settings,time
@@ -28,9 +28,23 @@ def veiw():
     minimap.fill([73,97, 0])
     world(minimap,True)
     screen.blit(minimap,rect_minimap)
-    if model.sostoynie=='potemnenie' and time.time()-model.go_to_next_lvl<2.5:
+    if model.sostoynie==model.SOSTOYNIE_POTEMNENIE and time.time()-model.go_to_next_lvl<2.5:
         screen.blit(perehod,[0,0])
+
         perehod.fill([0,0,0,(time.time()-model.go_to_next_lvl)*100])
+    if model.sostoynie==model.SOSTOYNIE_OSVETLENIE and 2.5-(time.time()-model.go_to_next_lvl)>0:
+        screen.blit(perehod,[0,0])
+        perehod.fill([0,0,0,250-(time.time()-model.go_to_next_lvl)*100])
+    if model.sostoynie==model.SOSTOYNIE_POTEMNENIE and time.time()-model.go_to_next_lvl>2.5:
+        perehod.fill([0,0,0,255])
+        screen.blit(perehod,[0,0])
+    if model.sostoynie==model.SOSTOYNIE_PEREGENERACIY:
+        perehod.fill([0,0,0,255])
+        screen.blit(perehod,[0,0])
+
+
+
+
 
     display.flip()
 

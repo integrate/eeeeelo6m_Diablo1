@@ -65,9 +65,9 @@ def add_granici():
 def next_lvl():
     global lvl, obshie, obshie_nospawn, go_to_next_lvl, sostoynie
 
-    if igroc.rect_igroc.colliderect(exit) and sostoynie=='normal':
+    if igroc.rect_igroc.colliderect(exit) and sostoynie==SOSTOYNIE_NORMAL:
         go_to_next_lvl = time.time()
-        sostoynie = 'potemnenie'
+        sostoynie = SOSTOYNIE_POTEMNENIE
         # if time.time() - go_to_next_lvl > 2:
         #     obshie.clear()
         #     obshie_nospawn.clear()
@@ -75,39 +75,40 @@ def next_lvl():
 
 
 def go_right():
-    if sostoynie == 'normal':
+    if sostoynie == SOSTOYNIE_NORMAL:
         igroc.dvigenie_right()
 
 
 def go_left():
-    if sostoynie == 'normal':
+    if sostoynie == SOSTOYNIE_NORMAL:
         igroc.dvigenie_left()
 
 
 def go_down():
-    if sostoynie == 'normal':
+    if sostoynie == SOSTOYNIE_NORMAL:
         igroc.dvigenie_bottom()
 
 
 def go_top():
-    if sostoynie == 'normal':
+    if sostoynie == SOSTOYNIE_NORMAL:
         igroc.dvigenie_top()
 
 
 
 def step():
-    global sostoynie
-    if time.time()-go_to_next_lvl>2.5 and sostoynie=='potemnenie':
-        sostoynie='peregeneraciy'
-    print(sostoynie)
+    global sostoynie,go_to_next_lvl
+    if time.time()-go_to_next_lvl>2.5 and sostoynie==SOSTOYNIE_POTEMNENIE:
+        sostoynie=SOSTOYNIE_PEREGENERACIY
 
-    if sostoynie=='peregeneraciy':
+    elif sostoynie==SOSTOYNIE_PEREGENERACIY:
         obshie.clear()
         obshie_nospawn.clear()
         add_stena_puti()
         add_granici()
         add_derevo()
-        sostoynie='osvetlenie'
+        time.sleep(random.randint(100,200)/100)
+        sostoynie=SOSTOYNIE_OSVETLENIE
+        go_to_next_lvl=time.time()
 
 
 obshie_nospawn = []
@@ -115,7 +116,13 @@ obshie = []
 igroc = igroc_mod.Igroc(0, 1000, 100, 1, 1, 100, 100, obshie)
 lvl = 5
 go_to_next_lvl = 0
-sostoynie = 'normal'  # potemnenie,peregeneraciy,osvetlenie
+SOSTOYNIE_NORMAL=1
+SOSTOYNIE_POTEMNENIE=2
+SOSTOYNIE_PEREGENERACIY=3
+SOSTOYNIE_OSVETLENIE=4
+
+
+sostoynie = SOSTOYNIE_NORMAL  # potemnenie,peregeneraciy,osvetlenie
 add_stena_puti()
 add_granici()
 add_derevo()
