@@ -109,11 +109,13 @@ def step():
         time.sleep(random.randint(100,200)/100)
         sostoynie=SOSTOYNIE_OSVETLENIE
         go_to_next_lvl=time.time()
-
+    elif sostoynie==SOSTOYNIE_OSVETLENIE  and 2.5-(time.time()-go_to_next_lvl)<0:
+        sostoynie=SOSTOYNIE_NORMAL
 
 obshie_nospawn = []
 obshie = []
-igroc = igroc_mod.Igroc(0, 1000, 100, 1, 1, 100, 100, obshie)
+igroc = igroc_mod.Igroc(0, 1000, 100, 10, 3, 100, 100, obshie)
+vrag=pygame.rect
 lvl = 5
 go_to_next_lvl = 0
 SOSTOYNIE_NORMAL=1

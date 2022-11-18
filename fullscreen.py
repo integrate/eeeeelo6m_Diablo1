@@ -1,4 +1,4 @@
-import model,settings
+import model,settings,pygame
 
 def fulscren(screen,w, h,x, y,minimap):
     if minimap==True:
@@ -24,3 +24,8 @@ def fulscren(screen,w, h,x, y,minimap):
     x+=sdvigx
 
     return x,y,w,h
+
+def fullscreen_rect(rect,screen,minimap):
+
+    a=pygame.Rect(fulscren(screen,rect.w,rect.h,rect.x,rect.y,minimap))
+    return a
