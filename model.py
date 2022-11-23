@@ -1,5 +1,5 @@
 import pygame, settings, stenaputi as osnovnay_stena, igroc as igroc_mod, derevy, random, \
-    time
+    time,vrag,randomspawn
 
 
 
@@ -25,25 +25,37 @@ def stena(x, y, w, h, nospawn=200):
     obshie_nospawn.append(stena.rect_nospawn)
 
 
+def add_vrag():
+    def maker(x, y):
+        derevo = vrag.Vrag(x, y)
+        return derevo
+    randomspawn.add_derevo(50,maker,obshie_nospawn,obshie,50)
+
+
 def add_derevo():
-    colder = 500
-    colpowtor = 50
-    while colder > 0:
-        if colpowtor == 0:
-            colpowtor = 50
-            colder -= 1
-        if colpowtor == 50:
-            derevo = derevy.Derevo(random.randint(-settings.MAP_SIZE / 2, settings.MAP_SIZE / 2 - 50),
-                                   random.randint(-settings.MAP_SIZE / 2, settings.MAP_SIZE / 2), 50, 50, 100)
-        if derevo.rect.collidelist(obshie_nospawn) != -1 and colpowtor > 0:
-            derevo = derevy.Derevo(random.randint(-settings.MAP_SIZE / 2, settings.MAP_SIZE / 2 - 50),
-                                   random.randint(-settings.MAP_SIZE / 2, settings.MAP_SIZE / 2), 50, 50, 100)
-            colpowtor -= 1
-        if derevo.rect.collidelist(obshie_nospawn) == -1:
-            obshie.append(derevo)
-            obshie_nospawn.append(derevo.rect_nospawn)
-            colder -= 1
-            colpowtor = 50
+    def maker(x,y):
+        derevo = derevy.Derevo(x,y,50,50,100)
+        return derevo
+
+    randomspawn.add_derevo(500,maker,obshie_nospawn,obshie,50)
+    # colder = 500
+    # colpowtor = 50
+    # while colder > 0:
+    #     if colpowtor == 0:
+    #         colpowtor = 50
+    #         colder -= 1
+    #     if colpowtor == 50:
+    #         derevo = derevy.Derevo(random.randint(-settings.MAP_SIZE / 2, settings.MAP_SIZE / 2 - 50),
+    #                                random.randint(-settings.MAP_SIZE / 2, settings.MAP_SIZE / 2), 50, 50, 100)
+    #     if derevo.rect.collidelist(obshie_nospawn) != -1 and colpowtor > 0:
+    #         derevo = derevy.Derevo(random.randint(-settings.MAP_SIZE / 2, settings.MAP_SIZE / 2 - 50),
+    #                                random.randint(-settings.MAP_SIZE / 2, settings.MAP_SIZE / 2), 50, 50, 100)
+    #         colpowtor -= 1
+    #     if derevo.rect.collidelist(obshie_nospawn) == -1:
+    #         obshie.append(derevo)
+    #         obshie_nospawn.append(derevo.rect_nospawn)
+    #         colder -= 1
+    #         colpowtor = 50
 
 
 def add_granici():
@@ -106,6 +118,7 @@ def step():
         add_stena_puti()
         add_granici()
         add_derevo()
+        add_vrag()
         time.sleep(random.randint(100,200)/100)
         sostoynie=SOSTOYNIE_OSVETLENIE
         go_to_next_lvl=time.time()
@@ -115,7 +128,6 @@ def step():
 obshie_nospawn = []
 obshie = []
 igroc = igroc_mod.Igroc(0, 1000, 100, 10, 3, 100, 100, obshie)
-vrag=pygame.rect
 lvl = 5
 go_to_next_lvl = 0
 SOSTOYNIE_NORMAL=1
@@ -128,3 +140,4 @@ sostoynie = SOSTOYNIE_NORMAL  # potemnenie,peregeneraciy,osvetlenie
 add_stena_puti()
 add_granici()
 add_derevo()
+add_vrag()
