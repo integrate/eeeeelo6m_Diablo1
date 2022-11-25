@@ -22,3 +22,4 @@ def control():
 
         if r.type == pygame.KEYUP and pygame.K_e == r.key:
             model.next_lvl()
+

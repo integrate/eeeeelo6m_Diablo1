@@ -112,7 +112,7 @@ def step():
     if time.time()-go_to_next_lvl>2.5 and sostoynie==SOSTOYNIE_POTEMNENIE:
         sostoynie=SOSTOYNIE_PEREGENERACIY
 
-    elif sostoynie==SOSTOYNIE_PEREGENERACIY:
+    elif sostoynie==SOSTOYNIE_PEREGENERACIY :
         obshie.clear()
         obshie_nospawn.clear()
         add_stena_puti()
@@ -125,6 +125,8 @@ def step():
     elif sostoynie==SOSTOYNIE_OSVETLENIE  and 2.5-(time.time()-go_to_next_lvl)<0:
         sostoynie=SOSTOYNIE_NORMAL
 
+
+
 obshie_nospawn = []
 obshie = []
 igroc = igroc_mod.Igroc(0, 1000, 100, 10, 3, 100, 100, obshie)
@@ -134,9 +136,11 @@ SOSTOYNIE_NORMAL=1
 SOSTOYNIE_POTEMNENIE=2
 SOSTOYNIE_PEREGENERACIY=3
 SOSTOYNIE_OSVETLENIE=4
+SOSTOYNIE_POTEMNENIE_WAR=5
+SOSTOYNIE_OSVETLENIE_WAR=6
+SOSTOYNIE_START_WAR=7
 
-
-sostoynie = SOSTOYNIE_NORMAL  # potemnenie,peregeneraciy,osvetlenie
+sostoynie = SOSTOYNIE_NORMAL  # potemnenie,peregeneraciy,osvetlenie,
 add_stena_puti()
 add_granici()
 add_derevo()
