@@ -97,8 +97,12 @@ def go_left():
 
 
 def go_down():
+    global sostoynie,go_to_next_lvl
     if sostoynie == SOSTOYNIE_NORMAL:
-        igroc.dvigenie_bottom()
+        a=igroc.dvigenie_bottom()
+        if type(a) is vrag.Vrag:
+            sostoynie=SOSTOYNIE_POTEMNENIE_WAR
+            go_to_next_lvl = time.time()
 
 
 def go_top():
