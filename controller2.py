@@ -1,4 +1,8 @@
+import pygame
+from pygame import event
 
 
 def controller2():
-    pass
+    e=event.get()
+    for r in e:
+        print(r.type)

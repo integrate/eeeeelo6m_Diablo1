@@ -106,13 +106,19 @@ def go_down():
 
 
 def go_top():
+    global sostoynie,go_to_next_lvl
     if sostoynie == SOSTOYNIE_NORMAL:
-        igroc.dvigenie_top()
+        a=igroc.dvigenie_top()
+        if type(a) is vrag.Vrag:
+            sostoynie=SOSTOYNIE_POTEMNENIE_WAR
+            go_to_next_lvl = time.time()
 
 
 
 def step():
     global sostoynie,go_to_next_lvl
+    if time.time() - go_to_next_lvl > 2.5 and sostoynie == SOSTOYNIE_POTEMNENIE_WAR:
+        sostoynie=SOSTOYNIE_START_WAR
     if time.time()-go_to_next_lvl>2.5 and sostoynie==SOSTOYNIE_POTEMNENIE:
         sostoynie=SOSTOYNIE_PEREGENERACIY
 
@@ -133,7 +139,7 @@ def step():
 
 obshie_nospawn = []
 obshie = []
-igroc = igroc_mod.Igroc(0, 1000, 100, 10, 3, 100, 100, obshie)
+igroc = igroc_mod.Igroc(0, 1000, 100, 10, 3, 100, 1000, obshie)
 lvl = 5
 go_to_next_lvl = 0
 SOSTOYNIE_NORMAL=1

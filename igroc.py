@@ -93,7 +93,17 @@ class Igroc:
 
 
     def dvigenie_top(self):
-        steni = []
+        b=self.correct_wall_top()
+        if b is not None:
+            self.rect_igroc.y = b.rect.bottom
+            return b
+        else:
+            self.rect_igroc.y -= self.speedy
+
+
+    def correct_wall_top(self):
+        steni=[]
+        b=None
         for stena in self.rects:
             crossy = stena.rect.bottom <= self.rect_igroc.y and stena.rect.bottom > self.rect_igroc.y - self.speedy
             crossx = stena.rect.x < self.rect_igroc.right < stena.rect.right or stena.rect.right > self.rect_igroc.x > stena.rect.x or self.rect_igroc.x < stena.rect.x < self.rect_igroc.right or self.rect_igroc.x < stena.rect.right < self.rect_igroc.right or (
@@ -101,10 +111,9 @@ class Igroc:
             if crossx and crossy:
                 steni.append(stena)
         if len(steni) > 0:
-            b = steni[0].y
+            b = steni[0]
             for stena in steni:
-                if stena.rect.bottom > b:
-                    b = stena.rect.bottom
-            self.rect_igroc.y = b
-        else:
-            self.rect_igroc.y -= self.speedy
+                if stena.rect.bottom > b.rect.y:
+                    b=stena
+        return b
+

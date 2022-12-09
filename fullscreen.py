@@ -1,6 +1,6 @@
 import model,settings,pygame
 
-def fulscren(screen,w, h,x, y,minimap):
+def fulscren(screen,w, h,x, y,minimap,sdvig=True):
     if minimap==True:
         base_w = 1366*settings.MULMINIMAP
         base_h = 768*settings.MULMINIMAP
@@ -17,15 +17,15 @@ def fulscren(screen,w, h,x, y,minimap):
     x = screen.get_width() * x / base_w
     y = screen.get_height() * y / base_h
 
-
-    sdvigx=+screen.get_width()/2-xp-wp/2
-    sdvigy=screen.get_height()/2-yp-hp/2
-    y+=sdvigy
-    x+=sdvigx
+    if sdvig==True:
+        sdvigx=+screen.get_width()/2-xp-wp/2
+        sdvigy=screen.get_height()/2-yp-hp/2
+        y+=sdvigy
+        x+=sdvigx
 
     return x,y,w,h
 
-def fullscreen_rect(rect,screen,minimap):
+def fullscreen_rect(rect,screen,minimap,sdvig=True):
 
-    a=pygame.Rect(fulscren(screen,rect.w,rect.h,rect.x,rect.y,minimap))
+    a=pygame.Rect(fulscren(screen,rect.w,rect.h,rect.x,rect.y,minimap,sdvig))
     return a

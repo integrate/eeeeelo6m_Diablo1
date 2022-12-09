@@ -1,8 +1,8 @@
-import model,pygame,cletca as cleta
-cletca=cleta.Cletca(12,46,100,100)
-
-
+import model2,pygame,cletca as cleta
+from pygame import display
 screen=pygame.display.get_surface()
-
 def view2():
-    cletca.draw(screen)
+    screen.fill([10,90,100])
+    model2.pole.draw(screen)
+
+    display.flip()

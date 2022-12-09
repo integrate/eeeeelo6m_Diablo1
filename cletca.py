@@ -9,6 +9,6 @@ class Cletca():
         self.sostoynie=sostoynie
         self.cletca=pygame.Rect(self.x,self.y,self.w,self.h)
     def draw(self,screen):
-        cletca=fullscreen.fullscreen_rect(self.cletca,screen,False)
-        pygame.draw.rect(screen,[34,144,143],cletca)
+        cletca=fullscreen.fullscreen_rect(self.cletca,screen,False,False)
+        pygame.draw.rect(screen,[255,255,255],cletca)
 
