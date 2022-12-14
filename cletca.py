@@ -11,4 +11,6 @@ class Cletca():
     def draw(self,screen):
         cletca=fullscreen.fullscreen_rect(self.cletca,screen,False,False)
         pygame.draw.rect(screen,[255,255,255],cletca)
+        pygame.draw.rect(screen,[0,0,0],cletca,3)
+
 
