@@ -1,12 +1,9 @@
 import model,settings,pygame
 
-def fulscren(screen,w, h,x, y,minimap,sdvig=True):
-    if minimap==True:
-        base_w = 1366*settings.MULMINIMAP
-        base_h = 768*settings.MULMINIMAP
-    else:
-        base_w = 1366*settings.MULMAP
-        base_h = 768*settings.MULMAP
+def fulscren(screen,w, h,x, y,mul,sdvig=True):
+    base_w = 1366*settings.MUL[mul]
+    base_h = 768*settings.MUL[mul]
+
     wp=screen.get_width() * model.igroc.rect_igroc.width / base_w
     hp=screen.get_height() * model.igroc.rect_igroc.height / base_h
     xp=screen.get_width() * model.igroc.rect_igroc.x / base_w
@@ -25,7 +22,7 @@ def fulscren(screen,w, h,x, y,minimap,sdvig=True):
 
     return x,y,w,h
 
-def fullscreen_rect(rect,screen,minimap,sdvig=True):
+def fullscreen_rect(rect,screen,mul,sdvig=True):
 
-    a=pygame.Rect(fulscren(screen,rect.w,rect.h,rect.x,rect.y,minimap,sdvig))
+    a=pygame.Rect(fulscren(screen,rect.w,rect.h,rect.x,rect.y,mul,sdvig))
     return a

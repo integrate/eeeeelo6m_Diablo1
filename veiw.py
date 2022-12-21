@@ -1,9 +1,9 @@
 # 1366,768
 import pygame
 
-# screen = pygame.display.set_mode(flags=pygame.FULLSCREEN)
+screen = pygame.display.set_mode(flags=pygame.FULLSCREEN)
 # screen = pygame.display.set_mode([683, 384])
-screen = pygame.display.set_mode([1366,768])
+# screen = pygame.display.set_mode([1366,768])
 # print(screen.get_rect())
 import model, stenaputi, fullscreen, settings, time
 from pygame import display, draw
@@ -18,8 +18,10 @@ perehod.fill([0, 0, 0, 0])
 
 
 def world(what, minimap):
+    mul = 'minimap' if minimap else 'map'
+
     pygame.draw.rect(what, [0, 0, 0],
-                     fullscreen.fulscren(what, model.exit.w, model.exit.h, model.exit.x, model.exit.y, minimap))
+                     fullscreen.fullscreen_rect(model.exit,what,mul ))
     for stenaputi in model.obshie:
         stenaputi.draw(what, minimap)
     model.igroc.draw(what, minimap)
@@ -40,7 +42,7 @@ def veiw():
         screen.blit(perehod, [0, 0])
         perehod.fill([0, 0, 0, 250 - (time.time() - model.go_to_next_lvl) * 100])
 
-    if model.sostoynie == model.SOSTOYNIE_POTEMNENIE or model.sostoynie == model.SOSTOYNIE_POTEMNENIE_WAR and time.time() - model.go_to_next_lvl > 2.5:
+    if (model.sostoynie == model.SOSTOYNIE_POTEMNENIE or model.sostoynie == model.SOSTOYNIE_POTEMNENIE_WAR) and time.time() - model.go_to_next_lvl > 2.5:
         perehod.fill([0, 0, 0, 255])
         screen.blit(perehod, [0, 0])
 

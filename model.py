@@ -75,15 +75,13 @@ def add_granici():
 
 
 def next_lvl():
-    global lvl, obshie, obshie_nospawn, go_to_next_lvl, sostoynie
+    global lvl,  go_to_next_lvl, sostoynie
 
     if igroc.rect_igroc.colliderect(exit) and sostoynie==SOSTOYNIE_NORMAL:
         go_to_next_lvl = time.time()
         sostoynie = SOSTOYNIE_POTEMNENIE
         # if time.time() - go_to_next_lvl > 2:
-        #     obshie.clear()
-        #     obshie_nospawn.clear()
-        #     lvl -= 1
+            #     lvl -= 1
 
 
 def go_right():

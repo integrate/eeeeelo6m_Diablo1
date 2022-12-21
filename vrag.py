@@ -10,5 +10,7 @@ class Vrag(modul_nospawn.Nospawn):
 
 
     def draw(self,screen,minimap):
-        vrag_fullscreen=fullscreen.fullscreen_rect(self.rect,screen,minimap)
+        mul='minimap' if minimap else 'map'
+
+        vrag_fullscreen=fullscreen.fullscreen_rect(self.rect,screen,mul)
         pygame.draw.rect(screen,[23,124,45],vrag_fullscreen)

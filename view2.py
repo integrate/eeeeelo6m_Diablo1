@@ -3,6 +3,7 @@ from pygame import display
 screen=pygame.display.get_surface()
 def view2():
     screen.fill([10,90,100])
-    model2.pole.draw(screen)
+    for cletca in model2.cletcas:
+        cletca.draw(screen)
 
     display.flip()

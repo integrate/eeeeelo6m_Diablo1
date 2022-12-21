@@ -24,7 +24,9 @@ class Stenaputi(modul_nospawn.Nospawn):
 
     def draw(self,screen:pygame.Surface,minimap=False):
         # super().draw(screen,minimap)
-        stena_fullscreen=pygame.Rect(fullscreen.fulscren(screen,self.w,self.h,self.x,self.y,minimap))
+        mul='minimap' if minimap else 'map'
+
+        stena_fullscreen=fullscreen.fullscreen_rect(self.rect,screen,mul)
         pygame.draw.rect(screen,[0,0,0],stena_fullscreen)
         screen.blit(self.cratinca,stena_fullscreen,[0,0,stena_fullscreen.w,stena_fullscreen.h])
 
