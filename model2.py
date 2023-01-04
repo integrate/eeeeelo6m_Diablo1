@@ -39,5 +39,6 @@ def dvogenie_igroc(realx,realy):
             igroc.sdvig(c.cletca.x,c.cletca.y)
 
 
+
 def step():
     pass
