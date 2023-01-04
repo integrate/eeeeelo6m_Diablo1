@@ -1,8 +1,10 @@
 # 1366,768
-import pygame
+import pygame,os
 
-# screen = pygame.display.set_mode(flags=pygame.FULLSCREEN)
-screen = pygame.display.set_mode([683, 384])
+os.environ['SDL_VIDEO_WINDOW_POS'] = "341,192"
+
+screen = pygame.display.set_mode(flags=pygame.FULLSCREEN)
+# screen = pygame.display.set_mode([683, 384])
 # screen = pygame.display.set_mode([1366,768])
 # print(screen.get_rect())
 import model, stenaputi, fullscreen, settings, time

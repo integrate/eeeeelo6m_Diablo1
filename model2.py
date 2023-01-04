@@ -1,3 +1,5 @@
+import pygame
+
 import model,time,cletca,settings,igroc_war
 
 cletcas = []
@@ -23,11 +25,17 @@ def add_pole(col_x,col_y):
 
     igroc=igroc_war.Igroc_war(cletcas[x].x,cletcas[x].y,cletcas[0].w,cletcas[0].h)
 
-add_pole(3,3)
+add_pole(70,70)
 
-def dvogenie_igroc(x,y):
+def dvogenie_igroc(realx,realy):
+    w=cletcas[0].w*(igroc.stamina*2+1)
+    rect=pygame.Rect([375,50,w,w])
     for c in cletcas:
-        if c.cletca.collidepoint(x,y):
+        if c.cletca.colliderect(rect):
+            c.prohod=True
+        else:
+            c.prohod=False
+        if c.cletca_fullscreen.collidepoint(realx,realy):
             igroc.sdvig(c.cletca.x,c.cletca.y)
 
 

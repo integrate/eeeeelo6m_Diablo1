@@ -1,7 +1,6 @@
 import model2,pygame,cletca as cleta
 from pygame import display
-# screen=pygame.display.get_surface()
-screen=display.set_mode([683, 384])
+screen=pygame.display.get_surface()
 clet=cleta.Cletca(100,100,100,100)
 def view2():
     screen.fill([10,90,100])
