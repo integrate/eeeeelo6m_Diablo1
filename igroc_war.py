@@ -7,7 +7,7 @@ class Igroc_war():
         self.w=w
         self.h=h
         self.rect=pygame.Rect(x,y,w,h)
-        self.stamina=10
+        self.stamina=3
 
     def draw(self,screen):
         a=fullscreen.fullscreen_rect(self.rect,screen,'war',False)

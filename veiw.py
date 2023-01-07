@@ -10,7 +10,7 @@ screen = pygame.display.set_mode(flags=pygame.FULLSCREEN)
 import model, stenaputi, fullscreen, settings, time
 from pygame import display, draw
 
-print(1366 / 768)
+
 minimap_size_h = screen.get_height() / settings.PERCENTMINIMAP
 minimap_size_w = screen.get_width() / settings.PERCENTMINIMAP
 rect_minimap = pygame.Rect(screen.get_width() - minimap_size_w - 30, 30, minimap_size_w, minimap_size_h)

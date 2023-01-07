@@ -4,7 +4,6 @@ from pygame import event
 def controller2():
     e=event.get()
     for r in e:
-        print(r.type)
         if r.type==pygame.QUIT:
             exit()
         if r.type==pygame.MOUSEBUTTONDOWN:

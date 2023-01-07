@@ -1,11 +1,12 @@
-import pygame
+import pygame,panelka
 
 import model,time,cletca,settings,igroc_war
 
 cletcas = []
 igroc=None
-
+panel=panelka.Panel()
 def add_pole(col_x,col_y):
+    global rect
     global igroc
     a=range(col_y)
     b=range(col_x)
@@ -23,22 +24,30 @@ def add_pole(col_x,col_y):
     a=col_y*col_x
     x=a-col_x
 
+
     igroc=igroc_war.Igroc_war(cletcas[x].x,cletcas[x].y,cletcas[0].w,cletcas[0].h)
+    do_prohod()
 
-add_pole(70,70)
 
-def dvogenie_igroc(realx,realy):
-    w=cletcas[0].w*(igroc.stamina*2+1)
-    rect=pygame.Rect([375,50,w,w])
+def do_prohod():
+    global rect
+    w=cletcas[0].w*(igroc.stamina*2+1)-2
+    rect=pygame.Rect([igroc.rect.centerx-w/2,igroc.rect.centery-w/2,w,w])
     for c in cletcas:
         if c.cletca.colliderect(rect):
             c.prohod=True
         else:
             c.prohod=False
-        if c.cletca_fullscreen.collidepoint(realx,realy):
+
+def dvogenie_igroc(realx,realy):
+
+    for c in cletcas:
+        if c.prohod==True and c.cletca_fullscreen.collidepoint(realx,realy):
             igroc.sdvig(c.cletca.x,c.cletca.y)
+            do_prohod()
 
 
 
 def step():
     pass
+add_pole(2,30)
