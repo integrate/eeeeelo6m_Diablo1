@@ -26,3 +26,8 @@ def fullscreen_rect(rect,screen,mul,sdvig=True):
 
     a=pygame.Rect(fulscren(screen,rect.w,rect.h,rect.x,rect.y,mul,sdvig))
     return a
+
+
+def fullscreen_surface(screen,cartinka:pygame.Surface):
+    a=fulscren(screen,cartinka.get_width(),cartinka.get_height(),0,0,'war',False)
+    return pygame.transform.scale(cartinka,[a[2],a[3]])

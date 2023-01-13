@@ -17,4 +17,5 @@ class Panel():
         pygame.draw.rect(screen,[134,145,221],a)
         b=fullscreen.fullscreen_rect(self.hp_bar_rect,screen,'war',False)
         pygame.draw.rect(screen,[255,255,255],b)
-        screen.blit(self.hp_bar,[b.centerx/self.hp_bar.get_width()+b.centerx,25])
+        hp_bar=fullscreen.fullscreen_surface(screen,self.hp_bar)
+        screen.blit(hp_bar,[b.centerx-hp_bar.get_width()/2,b.y])

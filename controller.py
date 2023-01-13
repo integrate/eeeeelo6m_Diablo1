@@ -22,4 +22,13 @@ def control():
 
         if r.type == pygame.KEYUP and pygame.K_e == r.key:
             model.next_lvl()
+        f11(r)
+def f11(r):
+    if r.type==pygame.KEYUP and r.key==pygame.K_F11:
+        a=pygame.display.get_surface()
+        if a.get_width()==683:
+            pygame.display.set_mode(flags=pygame.FULLSCREEN)
+        else:
+
+            pygame.display.set_mode([683, 384])
 
