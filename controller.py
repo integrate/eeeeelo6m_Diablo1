@@ -1,4 +1,4 @@
-import pygame, model
+import pygame, model,model_view
 from pygame import event
 
 pygame.key.set_repeat(50, 50)
@@ -22,7 +22,7 @@ def control():
 
         if r.type == pygame.KEYUP and pygame.K_e == r.key:
             model.next_lvl()
-        f11(r)
+        f11(r )
 def f11(r):
     if r.type==pygame.KEYUP and r.key==pygame.K_F11:
         a=pygame.display.get_surface()
@@ -31,4 +31,5 @@ def f11(r):
         else:
 
             pygame.display.set_mode([683, 384])
+        model_view.smena_minimap()
 

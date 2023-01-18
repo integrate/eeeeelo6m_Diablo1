@@ -50,4 +50,4 @@ def dvogenie_igroc(realx,realy):
 
 def step():
     pass
-add_pole(2,30)
+add_pole(5,6)
