@@ -34,7 +34,7 @@ def add_vrag():
 
 def add_derevo():
     def maker(x,y):
-        derevo = derevy.Derevo(x,y,50,50,100)
+        derevo = derevy.Derevo(x,y,75,75,100)
         return derevo
 
     randomspawn.add_derevo(500,maker,obshie_nospawn,obshie,50)
