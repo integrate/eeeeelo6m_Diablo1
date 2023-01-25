@@ -1,5 +1,5 @@
 import pygame, settings, stenaputi as osnovnay_stena, igroc as igroc_mod, derevy, random, \
-    time,vrag,randomspawn
+    time,vrag,randomspawn,exit as exit_mod
 
 
 
@@ -13,7 +13,7 @@ def add_stena_puti():
     stena(400, -400, 100, 2400, 400)
     stena(-2500, -400, 2900, 100, 400)
     stena(-2700, 0, 2700, 100, 400)
-    exit = pygame.Rect(-2600, -275, 150, 150)
+    exit = exit_mod.Exit(-2600, -275, 150, 150)
     spawn = [250, 3000]
     igroc.rect_igroc.x = spawn[0]
     igroc.rect_igroc.y = spawn[1]
@@ -155,7 +155,7 @@ SOSTOYNIE_OSVETLENIE=4
 SOSTOYNIE_POTEMNENIE_WAR=5
 SOSTOYNIE_OSVETLENIE_WAR=6
 SOSTOYNIE_START_WAR=7
-
+exit=None
 sostoynie = SOSTOYNIE_NORMAL  # potemnenie,peregeneraciy,osvetlenie,
 add_stena_puti()
 add_granici()

@@ -17,8 +17,7 @@ perehod.fill([0, 0, 0, 0])
 
 def world(what, minimap):
     mul = 'minimap' if minimap else 'map'
-    pygame.draw.rect(what, [0, 0, 0],
-                     fullscreen.fullscreen_rect(model.exit,what,mul ))
+    model.exit.draw(what,minimap)
     for stenaputi in model.obshie:
         stenaputi.draw(what, minimap)
     model.igroc.draw(what, minimap)
