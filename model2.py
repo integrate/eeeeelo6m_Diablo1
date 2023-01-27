@@ -1,5 +1,4 @@
 import pygame,panelka
-
 import model,time,cletca,settings,igroc_war
 
 cletcas = []
@@ -38,6 +37,10 @@ def do_prohod():
             c.prohod=True
         else:
             c.prohod=False
+
+def vibor_orugiy(realx,realy):
+    panel.pereponel(realx,realy)
+
 
 def dvogenie_igroc(realx,realy):
 
