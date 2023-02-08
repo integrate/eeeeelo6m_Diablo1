@@ -3,7 +3,7 @@ import model,time,cletca,settings,igroc_war
 
 cletcas = []
 igroc=None
-panel=panelka.Panel()
+panel=panelka.Panel([0,1000])
 def add_pole(col_x,col_y):
     global rect
     global igroc
