@@ -61,9 +61,11 @@ class Panel():
         b=fullscreen.fullscreen_rect(self.damage_weapon_rect,screen,'war',False)
         damage_weapon=fullscreen.fullscreen_surface(screen,self.damage_weapon)
         screen.blit(damage_weapon,[b.centerx - damage_weapon.get_width() / 2, b.y])
+        h=self.text('легендарный топор который претворяется молотом', self.font, settings.PANEL_SIZE_W)
+        screen.blit(h,[0,b.h+100])
 
 
-        # screen.blit(self.text('легендарный топор который претворяется молотом',self.font,settings.PANEL_SIZE_W),[b.centerx - damage_weapon.get_width() / 2, b.y+100])
+
 
 
 
@@ -74,22 +76,35 @@ class Panel():
             self.slot_rect.y=25
 
 
-    # @staticmethod
-    # def text(txt,font,w_panel):
-    #     a=''
-    #     s=pygame.Surface([0,0])
-    #     j=[]
-    #     words=txt.split()
-    #
-    #     for r in words:
-    #         e=font.render(r,True,[0,0,0])
-    #         if e.get_width()+s.get_width()>w_panel!=True:
-    #             a=a+' '+r
-    #             s=font.render(a,True,[0,0,0])
-    #         else:
-    #             j.append(s)
-    #             a=r
-    #             s=font.render(a,True,[0,0,0])
+    @staticmethod
+    def text(txt,font,w_panel):
+        a=''
+        s=pygame.Surface([0,0])
+        j=[]
+        words=txt.split()
+
+        for r in words:
+            e=font.render(r,True,[255,0,0])
+            if a=='':
+                a=r
+            elif e.get_width()+s.get_width()<=w_panel:
+                a=a+' '+r
+            else:
+                j.append(s)
+                a=r
+            s=font.render(a,True,[255,0,0])
+        j.append(s)
+        o=0
+        for v in j:
+            if v.get_width()>o:
+                o=v.get_width()
+        k=pygame.Surface([o,len(j)*font.get_height()])
+        o=0
+        for e in j:
+            k.blit(e,[0,o])
+            o+font.get_height()
+
+        return k
 
 
 
