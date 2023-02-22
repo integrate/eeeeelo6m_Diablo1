@@ -156,7 +156,7 @@ SOSTOYNIE_POTEMNENIE_WAR=5
 SOSTOYNIE_OSVETLENIE_WAR=6
 SOSTOYNIE_START_WAR=7
 exit=None
-sostoynie = SOSTOYNIE_START_WAR  # potemnenie,peregeneraciy,osvetlenie,
+sostoynie = SOSTOYNIE_START_WAR # potemnenie,peregeneraciy,osvetlenie,
 add_stena_puti()
 add_granici()
 add_derevo()
