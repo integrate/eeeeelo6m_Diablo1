@@ -9,5 +9,6 @@ def controller2():
         if r.type==pygame.MOUSEBUTTONDOWN:
             model2.dvogenie_igroc(r.pos[0],r.pos[1])
             model2.vibor_orugiy(r.pos[0],r.pos[1])
+            model2.hod()
         controller.f11(r)
 

@@ -20,6 +20,7 @@ class Panel():
 
         self.slot_rect = pygame.Rect(self.panel.x + settings.PANEL_SIZE_W / 3, 200, settings.PANEL_SIZE_W / 3,
                                      settings.PANEL_SIZE_W / 3)
+
         self.slot_rect_art = pygame.image.load('picture/топор.png')
         self.slot_rect_art = pygame.transform.scale(self.slot_rect_art, self.slot_rect.size)
         self.slot_rect_vibor = pygame.Rect(self.panel.x + settings.PANEL_SIZE_W / 3, 25, settings.PANEL_SIZE_W / 3,
@@ -35,10 +36,12 @@ class Panel():
         self.knopca.bottom=self.panel.bottom-10
         self.n=None
 
+        self.exit=pygame.Rect(self.slot_rect_vibor.x-63,self.slot_rect_vibor.y,26,26)
+
 
 
     def draw(self, screen: pygame.surface.Surface):
-        if self.regim == 'normal':
+        if self.regim == 'normal' or self.regim=='hod':
             self.draw_normal(screen)
         if self.regim == 'vibor':
             self.draw_wibor(screen)
@@ -49,6 +52,7 @@ class Panel():
         b = fullscreen.fullscreen_rect(self.hp_bar_rect, screen, 'war', False)
         pygame.draw.rect(screen, [255, 255, 255], b)
         self.c = fullscreen.fullscreen_rect(self.slot_rect, screen, 'war', False)
+
         pygame.draw.rect(screen, [255, 255, 73], self.c)
         slor_art = fullscreen.fullscreen_surface(screen, self.slot_rect_art)
         screen.blit(slor_art, self.c)
@@ -75,13 +79,16 @@ class Panel():
         txt_knopka=fullscreen.fullscreen_surface(screen,self.txt_knopka)
         screen.blit(txt_knopka,self.n)
 
+        p=fullscreen.fullscreen_rect(self.exit,screen,'war',False)
+        pygame.draw.rect(screen,[80,57,45],p)
+
     def pereponel(self, x, y):
-        if self.c.collidepoint(x, y):
+        if self.c.collidepoint(x, y) and self.regim!='hod':
             self.regim = 'vibor'
-            self.slot_rect.y = 25
-        if self.n!=None and self.n.collidepoint(x,y):
+        if self.n!=None and self.n.collidepoint(x,y) and self.regim=='vibor':
             print('123')
-            self.regim='normal'
+            self.regim='hod'
+
 
 
 

@@ -25,7 +25,7 @@ def add_pole(col_x,col_y):
 
 
     igroc=igroc_war.Igroc_war(cletcas[x].x,cletcas[x].y,cletcas[0].w,cletcas[0].h)
-    do_prohod()
+
 
 
 def do_prohod():
@@ -38,16 +38,31 @@ def do_prohod():
         else:
             c.prohod=False
 
+def no_prohod():
+    for c in cletcas:
+        c.prohod=False
+
 def vibor_orugiy(realx,realy):
     panel.pereponel(realx,realy)
 
 
-def dvogenie_igroc(realx,realy):
+def hod():
+    if panel.regim=='hod':
+        igroc.mona_hodit=True
+        do_prohod()
 
+    else:
+        igroc.mona_hodit=False
+        no_prohod()
+
+
+
+def dvogenie_igroc(realx,realy):
     for c in cletcas:
         if c.prohod==True and c.cletca_fullscreen.collidepoint(realx,realy):
             igroc.sdvig(c.cletca.x,c.cletca.y)
-            do_prohod()
+            panel.regim='normal'
+
 
 
 
