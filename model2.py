@@ -3,10 +3,10 @@ import model,time,cletca,settings,igroc_war
 
 cletcas = []
 igroc=None
-panel=panelka.Panel([0,1000])
 def add_pole(col_x,col_y):
     global rect
     global igroc
+    global panel
     a=range(col_y)
     b=range(col_x)
     w=(1366-(settings.PANEL_SIZE_W+settings.PANEL_OTSTUP)*2)/col_x
@@ -24,7 +24,9 @@ def add_pole(col_x,col_y):
     x=a-col_x
 
 
-    igroc=igroc_war.Igroc_war(cletcas[x].x,cletcas[x].y,cletcas[0].w,cletcas[0].h)
+    igroc=igroc_war.Igroc_war(cletcas[x].x,cletcas[x].y,cletcas[0].w,cletcas[0].h,100)
+    panel=panelka.Panel([0,1000],igroc)
+
 
 
 
@@ -61,6 +63,7 @@ def dvogenie_igroc(realx,realy):
     for c in cletcas:
         if c.prohod==True and c.cletca_fullscreen.collidepoint(realx,realy):
             igroc.sdvig(c.cletca.x,c.cletca.y)
+            igroc.hp-=1
             panel.regim='normal'
 
 

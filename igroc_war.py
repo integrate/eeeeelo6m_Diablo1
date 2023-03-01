@@ -1,11 +1,9 @@
 import pygame,fullscreen
 
 class Igroc_war():
-    def __init__(self,x,y,w,h,mona_hodit=False):
-        self.x=x
-        self.y=y
-        self.w=w
-        self.h=h
+    def __init__(self,x,y,w,h,hp,mona_hodit=False):
+
+        self.hp=hp
         self.rect=pygame.Rect(x,y,w,h)
         self.stamina=3
         self.mona_hodit=mona_hodit
