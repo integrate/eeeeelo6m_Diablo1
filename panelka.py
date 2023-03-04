@@ -30,12 +30,12 @@ class Panel():
         self.damage_weapon_rect = pygame.Rect(self.slot_rect_vibor.x, self.slot_rect_vibor.bottom + 10,
                                               self.slot_rect_vibor.w, 50)
 
-        self.n = knopki.Knopka('использовать', 0,0, 'segoeui', 25)
-        self.n.rect.centerx=settings.PANEL_SIZE_W/2
-        self.n.rect.bottom=self.panel.bottom-10
+        self.kcopka = knopki.Knopka('использовать', 0, 0, 'segoeui', 25, self.on_button_click_hod)
+        self.kcopka.rect.centerx= settings.PANEL_SIZE_W / 2
+        self.kcopka.rect.bottom= self.panel.bottom - 10
 
-        self.exit = pygame.Rect(self.slot_rect_vibor.x - 63, self.slot_rect_vibor.y, 26, 26)
-        self.p = None
+        self.exit = knopki.Knopka(' X ',self.slot_rect_vibor.x - 63, self.slot_rect_vibor.y, 'segoeui', 25,self.on_button_click_normal)
+
 
     def draw(self, screen: pygame.surface.Surface):
         if self.regim == 'normal' or self.regim == 'hod':
@@ -74,19 +74,32 @@ class Panel():
         screen.blit(h, [0, b.bottom])
 
 
-        self.n.draw(screen)
+        self.kcopka.draw(screen)
 
 
-        self.p = fullscreen.fullscreen_rect(self.exit, screen, 'war', False)
-        pygame.draw.rect(screen, [80, 57, 45], self.p)
+        self.exit.draw(screen)
+
 
     def pereponel(self, x, y):
         if self.c.collidepoint(x, y) and self.regim != 'hod':
             self.regim = 'vibor'
         # if self.n != None and self.n.collidepoint(x, y) and self.regim == 'vibor':
         #     self.regim = 'hod'
-        if self.p != None and self.p.collidepoint(x, y) and self.regim == 'vibor':
-            self.regim = 'normal'
+        # if self.p != None and self.p.collidepoint(x, y) and self.regim == 'vibor':
+        #     self.regim = 'normal'
+
+
+    def on_button_click_hod(self):
+        self.regim='hod'
+
+    def on_button_click_normal(self):
+        self.regim='normal'
+
+
+
+    def init_event(self,event):
+        self.kcopka.nagatie(event)
+        self.exit.nagatie(event)
 
     @staticmethod
     def text(txt, font, w_panel):

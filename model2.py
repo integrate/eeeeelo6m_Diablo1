@@ -48,6 +48,7 @@ def vibor_orugiy(realx,realy):
     panel.pereponel(realx,realy)
 
 
+
 def hod():
     if panel.regim=='hod':
         igroc.mona_hodit=True
