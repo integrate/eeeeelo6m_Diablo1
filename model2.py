@@ -2,7 +2,7 @@ import pygame,panelka
 import model,time,cletca,settings,igroc_war
 
 cletcas = []
-igroc=None
+igroc=igroc_war.Igroc_war(0,0,0,0,0)
 def add_pole(col_x,col_y):
     global rect
     global igroc
@@ -51,6 +51,7 @@ def vibor_orugiy(realx,realy):
 
 def hod():
     if panel.regim=='hod':
+
         igroc.mona_hodit=True
         do_prohod()
 
@@ -74,4 +75,5 @@ def dvogenie_igroc(realx,realy):
 
 def step():
     pass
+
 add_pole(5,6)

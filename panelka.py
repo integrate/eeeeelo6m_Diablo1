@@ -1,12 +1,14 @@
 import pygame, settings, fullscreen, knopki
 from pygame import font
 
+import igroc_war
+
 font.init()
 print(font.get_fonts())
 
 
 class Panel():
-    def __init__(self, damage, igroc):
+    def __init__(self, damage, igroc:igroc_war.Igroc_war):
         self.igroc = igroc
 
         self.panel = pygame.Rect(1, 1, settings.PANEL_SIZE_W, 768)
@@ -91,9 +93,12 @@ class Panel():
 
     def on_button_click_hod(self):
         self.regim='hod'
+        self.igroc.mona_hodit=True
+
 
     def on_button_click_normal(self):
         self.regim='normal'
+
 
 
 

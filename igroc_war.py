@@ -1,7 +1,7 @@
 import pygame,fullscreen
 
 class Igroc_war():
-    def __init__(self,x,y,w,h,hp,mona_hodit=False):
+    def __init__(self,x,y,w,h,hp,mona_hodit=False,deystvie_hod=None):
 
         self.hp=hp
         self.rect=pygame.Rect(x,y,w,h)
