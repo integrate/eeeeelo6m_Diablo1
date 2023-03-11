@@ -24,13 +24,13 @@ def add_pole(col_x,col_y):
     x=a-col_x
 
 
-    igroc=igroc_war.Igroc_war(cletcas[x].x,cletcas[x].y,cletcas[0].w,cletcas[0].h,100)
+    igroc=igroc_war.Igroc_war(cletcas[x].x,cletcas[x].y,cletcas[0].w,cletcas[0].h,100,deystvie_hod=do_prohod)
     panel=panelka.Panel([0,1000],igroc)
 
 
 
 
-def do_prohod():
+def do_prohod(hod):
     global rect
     w=cletcas[0].w*(igroc.stamina*2+1)-2
     rect=pygame.Rect([igroc.rect.centerx-w/2,igroc.rect.centery-w/2,w,w])
@@ -39,6 +39,7 @@ def do_prohod():
             c.prohod=True
         else:
             c.prohod=False
+
 
 def no_prohod():
     for c in cletcas:
