@@ -24,13 +24,20 @@ def add_pole(col_x,col_y):
     x=a-col_x
 
 
-    igroc=igroc_war.Igroc_war(cletcas[x].x,cletcas[x].y,cletcas[0].w,cletcas[0].h,100,deystvie_hod=do_prohod)
+    igroc=igroc_war.Igroc_war(cletcas[x].x,cletcas[x].y,cletcas[0].w,cletcas[0].h,100,deystvie_hod=deystvie_hod)
     panel=panelka.Panel([0,1000],igroc)
 
 
+def deystvie_hod(hod):
+    if hod:
+        do_prohod()
+    else:
+        no_prohod()
 
 
-def do_prohod(hod):
+
+
+def do_prohod():
     global rect
     w=cletcas[0].w*(igroc.stamina*2+1)-2
     rect=pygame.Rect([igroc.rect.centerx-w/2,igroc.rect.centery-w/2,w,w])
@@ -41,24 +48,13 @@ def do_prohod(hod):
             c.prohod=False
 
 
+
 def no_prohod():
     for c in cletcas:
         c.prohod=False
 
-def vibor_orugiy(realx,realy):
-    panel.pereponel(realx,realy)
 
 
-
-def hod():
-    if panel.regim=='hod':
-
-        igroc.mona_hodit=True
-        do_prohod()
-
-    else:
-        igroc.mona_hodit=False
-        no_prohod()
 
 
 
@@ -68,6 +64,7 @@ def dvogenie_igroc(realx,realy):
             igroc.sdvig(c.cletca.x,c.cletca.y)
             igroc.hp-=1
             panel.regim='normal'
+            igroc.mona_hodit=False
 
 
 
