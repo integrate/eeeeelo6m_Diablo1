@@ -9,7 +9,7 @@ print(font.get_fonts())
 
 
 class Panel():
-    def __init__(self, damage, igroc:igroc_war.Igroc_war):
+    def __init__(self, damage, igroc: igroc_war.Igroc_war):
         self.igroc = igroc
 
         self.panel = pygame.Rect(1, 1, settings.PANEL_SIZE_W, 768)
@@ -19,27 +19,28 @@ class Panel():
         self.hp_bar = self.font.render(str(igroc.hp), True, [0, 0, 0])
         self.hp_bar_rect = pygame.Rect(self.panel.x + settings.PANEL_SIZE_W / 6, 25, settings.PANEL_SIZE_W / 3 * 2, 25)
 
-        self.slot_rect = pygame.Rect(self.panel.x + settings.PANEL_SIZE_W / 3, 200, settings.PANEL_SIZE_W / 3,
+        self.slot_rect = pygame.Rect(self.panel.x + settings.PANEL_SIZE_W / 3, 25, settings.PANEL_SIZE_W / 3,
                                      settings.PANEL_SIZE_W / 3)
 
         self.slot_rect_art = pygame.image.load('picture/топор.png')
         self.slot_rect_art = pygame.transform.scale(self.slot_rect_art, self.slot_rect.size)
-        self.slot_rect_vibor=knopki_kartinki.Knopka_kartinka(self.slot_rect_art,self.panel.x + settings.PANEL_SIZE_W / 3, 25,self.on_button_click_vibor)
-        # self.slot_rect_vibor = pygame.Rect(self.panel.x + settings.PANEL_SIZE_W / 3, 25, settings.PANEL_SIZE_W / 3,
-        #                                    settings.PANEL_SIZE_W / 3)
+        self.slot_rect_vibor = knopki_kartinki.Knopka_kartinka(self.slot_rect_art,
+                                                               self.panel.x + settings.PANEL_SIZE_W / 3, 200,
+                                                               self.on_button_click_vibor,[255, 255, 73])
+
 
         self.regim = 'normal'
 
         self.damage_weapon = self.font.render(str(damage[0]) + '-' + str(damage[1]), True, [255, 35, 50])
-        self.damage_weapon_rect = pygame.Rect(self.slot_rect_vibor.rect.x, self.slot_rect_vibor.rect.bottom + 10,
-                                              self.slot_rect_vibor.rect.w, 50)
+        self.damage_weapon_rect = pygame.Rect(self.slot_rect.x, self.slot_rect.bottom + 10,
+                                              self.slot_rect.w, 50)
 
-        self.kcopka = knopki.Knopka('использовать', 0, 0, 'segoeui', 25, self.on_button_click_hod)
-        self.kcopka.rect.centerx= settings.PANEL_SIZE_W / 2
-        self.kcopka.rect.bottom= self.panel.bottom - 10
+        self.kcopka = knopki.Knopka('использовать', 0, 0, 'segoeui', 25, self.on_button_click_hod,[124,45,1])
+        self.kcopka.rect.centerx = settings.PANEL_SIZE_W / 2
+        self.kcopka.rect.bottom = self.panel.bottom - 10
 
-        self.exit = knopki.Knopka(' X ',self.slot_rect_vibor.rect.x - 63, self.slot_rect_vibor.rect.y, 'segoeui', 25,self.on_button_click_normal)
-
+        self.exit = knopki.Knopka(' X ', self.slot_rect.x - 63, self.slot_rect.y, 'segoeui', 25,
+                                  self.on_button_click_normal,[124,45,1])
 
     def draw(self, screen: pygame.surface.Surface):
         if self.regim == 'normal' or self.regim == 'hod':
@@ -52,10 +53,7 @@ class Panel():
         pygame.draw.rect(screen, [134, 145, 221], a)
         b = fullscreen.fullscreen_rect(self.hp_bar_rect, screen, 'war', False)
         pygame.draw.rect(screen, [255, 255, 255], b)
-        # self.c = fullscreen.fullscreen_rect(self.slot_rect, screen, 'war', False)
-        # pygame.draw.rect(screen, [255, 255, 73], self.c)
-        # slor_art = fullscreen.fullscreen_surface(screen, self.slot_rect_art)
-        # screen.blit(slor_art, self.c)
+
         self.slot_rect_vibor.draw(screen)
         self.hp_bar = self.font.render(str(self.igroc.hp), True, [0, 0, 0])
 
@@ -65,10 +63,12 @@ class Panel():
     def draw_wibor(self, screen):
         a = fullscreen.fullscreen_rect(self.panel, screen, 'war', False)
         pygame.draw.rect(screen, [134, 145, 221], a)
-        # c = fullscreen.fullscreen_rect(self.slot_rect_vibor, screen, 'war', False)
-        # pygame.draw.rect(screen, [255, 255, 73], c)
-        # slor_art = fullscreen.fullscreen_surface(screen, self.slot_rect_art)
-        # screen.blit(slor_art, c)
+
+        # рисования орудия
+        slot_rect_fullscreen = fullscreen.fullscreen_rect(self.slot_rect, screen, 'war', False)
+        pygame.draw.rect(screen, [255, 255, 73], slot_rect_fullscreen)
+        slor_art = fullscreen.fullscreen_surface(screen, self.slot_rect_art)
+        screen.blit(slor_art, slot_rect_fullscreen)
 
         b = fullscreen.fullscreen_rect(self.damage_weapon_rect, screen, 'war', False)
         damage_weapon = fullscreen.fullscreen_surface(screen, self.damage_weapon)
@@ -77,30 +77,22 @@ class Panel():
         h = fullscreen.fullscreen_surface(screen, h)
         screen.blit(h, [0, b.bottom])
 
-
         self.kcopka.draw(screen)
-
 
         self.exit.draw(screen)
 
-
-
-
     def on_button_click_hod(self):
-        self.regim='hod'
-        self.igroc.mona_hodit=True
-
+        self.regim = 'hod'
+        self.igroc.mona_hodit = True
 
     def on_button_click_normal(self):
-        self.regim='normal'
+        self.regim = 'normal'
 
     def on_button_click_vibor(self):
-        self.regim='vibor'
+        if self.regim != 'hod':
+            self.regim = 'vibor'
 
-
-
-
-    def init_event(self,event):
+    def init_event(self, event):
         self.kcopka.nagatie(event)
         self.exit.nagatie(event)
         self.slot_rect_vibor.nagatie(event)
