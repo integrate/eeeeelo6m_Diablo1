@@ -1,13 +1,6 @@
-import fullscreen,pygame
+import pygame,draw_helper
 
 
-def draw_picture(screen,rect,cartinka,color):
-    rect=fullscreen.fullscreen_rect(rect,screen,'war',False)
-    picture=fullscreen.fullscreen_surface(screen,cartinka)
-    pygame.draw.rect(screen, color, rect)
-
-    screen.blit(picture, rect)
-    return rect
 
 
 class Knopka_kartinka():
@@ -19,7 +12,7 @@ class Knopka_kartinka():
         self.fullscreen_rect=pygame.Rect(0,0,0,0)
 
     def draw(self,screen:pygame.Surface):
-        self.fullscreen_rect=draw_picture(screen,self.rect,self.picture,self.color)
+        self.fullscreen_rect=draw_helper.draw_picture(screen,self.rect,self.picture,self.color)
 
 
     def nagatie(self,event):

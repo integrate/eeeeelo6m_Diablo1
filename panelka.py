@@ -1,4 +1,4 @@
-import pygame, settings, fullscreen, knopki
+import pygame, settings, fullscreen, knopki,draw_helper
 from pygame import font
 
 import igroc_war
@@ -16,7 +16,7 @@ class Panel():
 
         self.font = font.SysFont('segoeui', 25, True)
 
-        self.hp_bar = self.font.render(str(igroc.hp), True, [0, 0, 0])
+        # self.hp_bar = self.font.render(str(igroc.hp), True, [0, 0, 0])
         self.hp_bar_rect = pygame.Rect(self.panel.x + settings.PANEL_SIZE_W / 6, 25, settings.PANEL_SIZE_W / 3 * 2, 25)
 
         self.slot_rect = pygame.Rect(self.panel.x + settings.PANEL_SIZE_W / 3, 25, settings.PANEL_SIZE_W / 3,
@@ -51,14 +51,15 @@ class Panel():
     def draw_normal(self, screen):
         a = fullscreen.fullscreen_rect(self.panel, screen, 'war', False)
         pygame.draw.rect(screen, [134, 145, 221], a)
-        b = fullscreen.fullscreen_rect(self.hp_bar_rect, screen, 'war', False)
-        pygame.draw.rect(screen, [255, 255, 255], b)
+        # b = fullscreen.fullscreen_rect(self.hp_bar_rect, screen, 'war', False)
+        # pygame.draw.rect(screen, [255, 255, 255], b)
 
         self.slot_rect_vibor.draw(screen)
-        self.hp_bar = self.font.render(str(self.igroc.hp), True, [0, 0, 0])
+        hp_bar = self.font.render(str(self.igroc.hp), True, [0, 0, 0])
+        draw_helper.draw_picture(screen,self.hp_bar_rect,hp_bar,[255, 255, 255])
 
-        hp_bar = fullscreen.fullscreen_surface(screen, self.hp_bar)
-        screen.blit(hp_bar, [b.centerx - hp_bar.get_width() / 2, b.centery - hp_bar.get_height() / 2])
+        # hp_bar = fullscreen.fullscreen_surface(screen, self.hp_bar)
+        # screen.blit(hp_bar, [b.centerx - hp_bar.get_width() / 2, b.centery - hp_bar.get_height() / 2])
 
     def draw_wibor(self, screen):
         a = fullscreen.fullscreen_rect(self.panel, screen, 'war', False)
