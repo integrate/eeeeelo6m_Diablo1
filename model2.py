@@ -3,10 +3,14 @@ import model,time,cletca,settings,igroc_war
 
 cletcas = []
 igroc=igroc_war.Igroc_war(0,0,0,0,0)
+wrag=igroc_war.Igroc_war(0,0,0,0,0)
+
 def add_pole(col_x,col_y):
     global rect
     global igroc
     global panel
+    global wrag
+    global panel_wrag
     a=range(col_y)
     b=range(col_x)
     w=(1366-(settings.PANEL_SIZE_W+settings.PANEL_OTSTUP)*2)/col_x
@@ -26,7 +30,9 @@ def add_pole(col_x,col_y):
 
     igroc=igroc_war.Igroc_war(cletcas[x].x,cletcas[x].y,cletcas[0].w,cletcas[0].h,100,deystvie_hod=deystvie_hod)
     panel=panelka.Panel([0,1000],igroc)
-
+    x=col_x-1
+    wrag=igroc_war.Igroc_war(cletcas[x].x,cletcas[x].y,cletcas[0].w,cletcas[0].h,100,deystvie_hod=deystvie_hod)
+    panel_wrag=panelka.Panel([0,10],wrag,1366-settings.PANEL_SIZE_W)
 
 def deystvie_hod(hod):
     if hod:

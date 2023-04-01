@@ -9,10 +9,10 @@ print(font.get_fonts())
 
 
 class Panel():
-    def __init__(self, damage, igroc: igroc_war.Igroc_war):
+    def __init__(self, damage, igroc: igroc_war.Igroc_war,x=1):
         self.igroc = igroc
 
-        self.panel = pygame.Rect(1, 1, settings.PANEL_SIZE_W, 768)
+        self.panel = pygame.Rect(x, 1, settings.PANEL_SIZE_W, 768)
 
         self.font = font.SysFont('segoeui', 25, True)
 
