@@ -17,7 +17,7 @@ class Igroc_war():
     def mona_hodit(self, hod):
         self._mona_hodit = hod
         if callable(self._deystvie_hod):
-            self._deystvie_hod(hod)
+            self._deystvie_hod(hod,self)
 
     def draw(self, screen):
         a = fullscreen.fullscreen_rect(self.rect, screen, 'war', False)

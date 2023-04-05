@@ -35,7 +35,7 @@ class Panel():
                                               self.slot_rect.w, 50)
 
         self.kcopka = knopki.Knopka('использовать', 0, 0, 'segoeui', 25, self.on_button_click_hod, [124, 45, 1])
-        self.kcopka.rect.centerx = settings.PANEL_SIZE_W / 2
+        self.kcopka.rect.centerx = self.panel.right-settings.PANEL_SIZE_W / 2
         self.kcopka.rect.bottom = self.panel.bottom - 10
 
         self.exit = knopki.Knopka(' X ', self.slot_rect.x - 63, self.slot_rect.y, 'segoeui', 25,
@@ -45,7 +45,7 @@ class Panel():
                                                 settings.PANEL_SIZE_W)
 
 
-        self.opisanie_orugiy_rect = pygame.Rect(5, self.damage_weapon_rect.bottom, 0, 100)
+        self.opisanie_orugiy_rect = pygame.Rect(self.panel.x+5, self.damage_weapon_rect.bottom, 0, 100)
 
     def draw(self, screen: pygame.surface.Surface):
         if self.regim == 'normal' or self.regim == 'hod':
@@ -77,11 +77,13 @@ class Panel():
         self.exit.draw(screen)
 
     def on_button_click_hod(self):
-        self.regim = 'hod'
-        self.igroc.mona_hodit = True
+        if self.regim=='vibor':
+            self.regim = 'hod'
+            self.igroc.mona_hodit = True
 
     def on_button_click_normal(self):
-        self.regim = 'normal'
+        if self.regim!='hod':
+            self.regim = 'normal'
 
     def on_button_click_vibor(self):
         if self.regim != 'hod':

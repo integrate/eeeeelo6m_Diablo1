@@ -34,19 +34,19 @@ def add_pole(col_x,col_y):
     wrag=igroc_war.Igroc_war(cletcas[x].x,cletcas[x].y,cletcas[0].w,cletcas[0].h,100,deystvie_hod=deystvie_hod)
     panel_wrag=panelka.Panel([0,10],wrag,1366-settings.PANEL_SIZE_W)
 
-def deystvie_hod(hod):
+def deystvie_hod(hod,who):
     if hod:
-        do_prohod()
+        do_prohod(who)
     else:
         no_prohod()
 
 
 
 
-def do_prohod():
+def do_prohod(who):
     global rect
     w=cletcas[0].w*(igroc.stamina*2+1)-2
-    rect=pygame.Rect([igroc.rect.centerx-w/2,igroc.rect.centery-w/2,w,w])
+    rect=pygame.Rect([who.rect.centerx-w/2,who.rect.centery-w/2,w,w])
     for c in cletcas:
         if c.cletca.colliderect(rect):
             c.prohod=True
@@ -70,6 +70,7 @@ def dvogenie_igroc(realx,realy):
             igroc.sdvig(c.cletca.x,c.cletca.y)
             igroc.hp-=1
             panel.regim='normal'
+            panel_wrag.regim='normal'
             igroc.mona_hodit=False
 
 
