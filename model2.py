@@ -4,7 +4,7 @@ import model,time,cletca,settings,igroc_war
 cletcas = []
 igroc=igroc_war.Igroc_war(0,0,0,0,0)
 wrag=igroc_war.Igroc_war(0,0,0,0,0)
-
+chey_hod='igroc'
 def add_pole(col_x,col_y):
     global rect
     global igroc
@@ -29,7 +29,7 @@ def add_pole(col_x,col_y):
 
 
     igroc=igroc_war.Igroc_war(cletcas[x].x,cletcas[x].y,cletcas[0].w,cletcas[0].h,100,deystvie_hod=deystvie_hod)
-    panel=panelka.Panel([0,1000],igroc)
+    panel=panelka.Panel([0,1000],igroc,regim='normal')
     x=col_x-1
     wrag=igroc_war.Igroc_war(cletcas[x].x,cletcas[x].y,cletcas[0].w,cletcas[0].h,100,deystvie_hod=deystvie_hod)
     panel_wrag=panelka.Panel([0,10],wrag,1366-settings.PANEL_SIZE_W)
@@ -65,13 +65,26 @@ def no_prohod():
 
 
 def dvogenie_igroc(realx,realy):
+    global chey_hod
     for c in cletcas:
         if c.prohod==True and c.cletca_fullscreen.collidepoint(realx,realy):
-            igroc.sdvig(c.cletca.x,c.cletca.y)
-            igroc.hp-=1
-            panel.regim='normal'
-            panel_wrag.regim='normal'
-            igroc.mona_hodit=False
+            if chey_hod=='igroc':
+                igroc.sdvig(c.cletca.x,c.cletca.y)
+
+                panel.regim='bloc'
+                igroc.mona_hodit=False
+                chey_hod='wrag'
+                panel_wrag.regim='normal'
+            elif chey_hod=='wrag':
+                wrag.sdvig(c.cletca.x,c.cletca.y)
+
+                panel_wrag.regim='bloc'
+                wrag.mona_hodit=False
+                chey_hod='igroc'
+                panel.regim='normal'
+
+
+
 
 
 
@@ -79,6 +92,8 @@ def dvogenie_igroc(realx,realy):
 
 
 def step():
+    # if panel_wrag.regim in ['hod','vibor'] and panel.regim=='vibor':
+    #     panel.regim='normal'
     pass
 
 add_pole(5,6)

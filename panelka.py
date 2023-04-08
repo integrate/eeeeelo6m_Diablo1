@@ -9,7 +9,7 @@ print(font.get_fonts())
 
 
 class Panel():
-    def __init__(self, damage, igroc: igroc_war.Igroc_war,x=1):
+    def __init__(self, damage, igroc: igroc_war.Igroc_war,x=1,regim='bloc'):
         self.igroc = igroc
 
         self.panel = pygame.Rect(x, 1, settings.PANEL_SIZE_W, 768)
@@ -28,7 +28,7 @@ class Panel():
                                                                self.panel.x + settings.PANEL_SIZE_W / 3, 200,
                                                                self.on_button_click_vibor, [255, 255, 73])
 
-        self.regim = 'normal'
+        self.regim = regim
 
         self.damage_weapon = self.font.render(str(damage[0]) + '-' + str(damage[1]), True, [255, 35, 50])
         self.damage_weapon_rect = pygame.Rect(self.slot_rect.x, self.slot_rect.bottom + 10,
@@ -48,7 +48,7 @@ class Panel():
         self.opisanie_orugiy_rect = pygame.Rect(self.panel.x+5, self.damage_weapon_rect.bottom, 0, 100)
 
     def draw(self, screen: pygame.surface.Surface):
-        if self.regim == 'normal' or self.regim == 'hod':
+        if self.regim in ['normal','hod','bloc']:
             self.draw_normal(screen)
         if self.regim == 'vibor':
             self.draw_wibor(screen)
@@ -77,16 +77,16 @@ class Panel():
         self.exit.draw(screen)
 
     def on_button_click_hod(self):
-        if self.regim=='vibor':
+        if self.regim == 'vibor' :
             self.regim = 'hod'
             self.igroc.mona_hodit = True
 
     def on_button_click_normal(self):
-        if self.regim!='hod':
+        if self.regim=='vibor':
             self.regim = 'normal'
 
     def on_button_click_vibor(self):
-        if self.regim != 'hod':
+        if self.regim =='normal':
             self.regim = 'vibor'
 
     def init_event(self, event):
