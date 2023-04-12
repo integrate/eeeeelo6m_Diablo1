@@ -5,7 +5,7 @@ class Igroc_war():
     def __init__(self, x, y, w, h, hp, mona_hodit=False, deystvie_hod=None,color=[255, 24, 74]):
         self.hp = hp
         self.rect = pygame.Rect(x, y, w, h)
-        self.stamina = 3
+        self.stamina = 20
         self._mona_hodit = mona_hodit
         self._deystvie_hod=deystvie_hod
         self.color=color

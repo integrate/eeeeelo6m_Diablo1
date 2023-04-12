@@ -76,6 +76,8 @@ def dvogenie_igroc(realx,realy):
                 igroc.mona_hodit=False
                 chey_hod='wrag'
                 panel_wrag.regim='normal'
+                if igroc.rect.colliderect(wrag):
+                    wrag.hp-=10
             elif chey_hod=='wrag':
                 wrag.sdvig(c.cletca.x,c.cletca.y)
 
@@ -97,4 +99,4 @@ def step():
     #     panel.regim='normal'
     pass
 
-add_pole(40,40)
+add_pole(10,10)
