@@ -2,12 +2,13 @@ import pygame, fullscreen
 
 
 class Igroc_war():
-    def __init__(self, x, y, w, h, hp, mona_hodit=False, deystvie_hod=None):
+    def __init__(self, x, y, w, h, hp, mona_hodit=False, deystvie_hod=None,color=[255, 24, 74]):
         self.hp = hp
         self.rect = pygame.Rect(x, y, w, h)
         self.stamina = 3
         self._mona_hodit = mona_hodit
         self._deystvie_hod=deystvie_hod
+        self.color=color
 
     @property
     def mona_hodit(self):
@@ -21,7 +22,7 @@ class Igroc_war():
 
     def draw(self, screen):
         a = fullscreen.fullscreen_rect(self.rect, screen, 'war', False)
-        pygame.draw.rect(screen, [255, 24, 74], a)
+        pygame.draw.rect(screen, self.color, a)
 
     def sdvig(self, x, y):
         if self._mona_hodit == True:

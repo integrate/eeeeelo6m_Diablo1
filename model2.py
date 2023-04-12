@@ -1,4 +1,4 @@
-import pygame,panelka
+import pygame,panelka,random
 import model,time,cletca,settings,igroc_war
 
 cletcas = []
@@ -31,7 +31,7 @@ def add_pole(col_x,col_y):
     igroc=igroc_war.Igroc_war(cletcas[x].x,cletcas[x].y,cletcas[0].w,cletcas[0].h,100,deystvie_hod=deystvie_hod)
     panel=panelka.Panel([0,1000],igroc,regim='normal')
     x=col_x-1
-    wrag=igroc_war.Igroc_war(cletcas[x].x,cletcas[x].y,cletcas[0].w,cletcas[0].h,100,deystvie_hod=deystvie_hod)
+    wrag=igroc_war.Igroc_war(cletcas[x].x,cletcas[x].y,cletcas[0].w,cletcas[0].h,100,deystvie_hod=deystvie_hod,color=[34,195,98])
     panel_wrag=panelka.Panel([0,10],wrag,1366-settings.PANEL_SIZE_W)
 
 def deystvie_hod(hod,who):
@@ -48,6 +48,7 @@ def do_prohod(who):
     w=cletcas[0].w*(igroc.stamina*2+1)-2
     rect=pygame.Rect([who.rect.centerx-w/2,who.rect.centery-w/2,w,w])
     for c in cletcas:
+        c.color_hod=[255,255,255]
         if c.cletca.colliderect(rect):
             c.prohod=True
         else:
@@ -96,4 +97,4 @@ def step():
     #     panel.regim='normal'
     pass
 
-add_pole(5,6)
+add_pole(40,40)
