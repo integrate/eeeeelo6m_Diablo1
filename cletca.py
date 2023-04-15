@@ -13,10 +13,10 @@ class Cletca():
     def draw(self,screen):
         self.cletca_fullscreen = fullscreen.fullscreen_rect(self.cletca, screen, 'war', False)
         if self.prohod==False:
-            pygame.draw.rect(screen,[random.randint(0,255),random.randint(0,255),random.randint(0,255)],self.cletca_fullscreen)
+            pygame.draw.rect(screen,[255,255,255],self.cletca_fullscreen)
 
         else:
-            pygame.draw.rect(screen,self.color_hod,self.cletca_fullscreen)
+            pygame.draw.rect(screen,self.color,self.cletca_fullscreen)
 
         pygame.draw.rect(screen,[0,0,0],self.cletca_fullscreen,1)
 

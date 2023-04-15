@@ -22,7 +22,7 @@ class Panel():
         self.slot_rect = pygame.Rect(self.panel.x + settings.PANEL_SIZE_W / 3, 25, settings.PANEL_SIZE_W / 3,
                                      settings.PANEL_SIZE_W / 3)
 
-        self.slot_rect_art = pygame.image.load('picture/топор.png')
+        self.slot_rect_art = pygame.image.load(igroc.orugie.cartinca)
         self.slot_rect_art = pygame.transform.scale(self.slot_rect_art, self.slot_rect.size)
         self.slot_rect_vibor = knopki_kartinki.Knopka_kartinka(self.slot_rect_art,
                                                                self.panel.x + settings.PANEL_SIZE_W / 3, 200,
@@ -30,7 +30,7 @@ class Panel():
 
         self.regim = regim
 
-        self.damage_weapon = self.font.render(str(damage[0]) + '-' + str(damage[1]), True, [255, 35, 50])
+        self.damage_weapon = self.font.render(str(igroc.orugie.damage[0]) + '-' + str(igroc.orugie.damage[1]), True, [255, 35, 50])
         self.damage_weapon_rect = pygame.Rect(self.slot_rect.x, self.slot_rect.bottom + 10,
                                               self.slot_rect.w, 50)
 
@@ -41,7 +41,7 @@ class Panel():
         self.exit = knopki.Knopka(' X ', self.slot_rect.x - 63, self.slot_rect.y, 'segoeui', 25,
                                   self.on_button_click_normal, [124, 45, 1])
 
-        self.opisanie_orugiy = draw_helper.text('легендарный топор который претворяется молотом', self.font,
+        self.opisanie_orugiy = draw_helper.text(igroc.orugie.opisanie, self.font,
                                                 settings.PANEL_SIZE_W)
 
 
