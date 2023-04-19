@@ -6,7 +6,7 @@ class Igroc_war():
                  cletca_color=[255, 100, 100], orugie=None):
         self.hp = hp
         self.rect = pygame.Rect(x, y, w, h)
-        self.stamina = 20
+        self.stamina = 4
         self._mona_hodit = mona_hodit
         self._deystvie_hod = deystvie_hod
         self.color = color

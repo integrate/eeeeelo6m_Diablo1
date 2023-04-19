@@ -8,7 +8,6 @@ chey_hod = 'igroc'
 
 
 def add_pole(col_x, col_y):
-    global rect
     global igroc
     global panel
     global wrag
@@ -30,12 +29,12 @@ def add_pole(col_x, col_y):
             cletcas.append(pole)
     a = col_y * col_x
     x = a - col_x
-    orugie_igroc = orugie.Orugie([0, 100], 'легендарный топор который претворяется молотом', 'picture/топор.png', 0)
+    orugie_igroc = orugie.Orugie([0, 100], 'легендарный топор который претворяется молотом', 'picture/топор.png', 2)
     igroc = igroc_war.Igroc_war(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, deystvie_hod=deystvie_hod,
                                 orugie=orugie_igroc)
     panel = panelka.Panel([0, 1000], igroc, regim='normal')
     x = col_x - 1
-    orugie_wrag = orugie.Orugie([25, 250], 'легендарный молотом', 'picture/топор.png', 0)
+    orugie_wrag = orugie.Orugie([25, 250], 'легендарный молотом', 'picture/топор.png', 2)
 
     wrag = igroc_war.Igroc_war(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, deystvie_hod=deystvie_hod,
                                color=[38, 242, 29],
@@ -51,21 +50,33 @@ def deystvie_hod(hod, who):
         no_prohod()
 
 
+def add_zona_deystviy(center,rang):
+    wh = cletcas[0].w * (rang * 2 + 1) - 2
+    rect = pygame.Rect([center[0] - wh / 2, center[1] - wh / 2, wh, wh])
+    return rect
+
+
+
+
+
 def do_prohod(who):
-    global rect
-    w = cletcas[0].w * (igroc.stamina * 2 + 1) - 2
-    rect = pygame.Rect([who.rect.centerx - w / 2, who.rect.centery - w / 2, w, w])
+
+
+    zona_hod = add_zona_deystviy(who.rect.center,who.stamina)
+    zona_attack = add_zona_deystviy(who.rect.center,who.orugie.range)
+
     for c in cletcas:
         c.color = who.cletca_color
-        if c.cletca.colliderect(rect):
-            c.prohod = True
-        else:
-            c.prohod = False
+        c.prohod = c.cletca.colliderect(zona_hod)
+        c.attack= c.cletca.colliderect(zona_attack)
+
+
 
 
 def no_prohod():
     for c in cletcas:
         c.prohod = False
+        c.attack=False
 
 
 def dvogenie_igroc(realx, realy):
@@ -88,6 +99,8 @@ def dvogenie_igroc(realx, realy):
                 wrag.mona_hodit = False
                 chey_hod = 'igroc'
                 panel.regim = 'normal'
+
+
 
 
 def step():
