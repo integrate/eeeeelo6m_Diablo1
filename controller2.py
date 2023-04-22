@@ -7,7 +7,7 @@ def controller2():
         if r.type==pygame.QUIT:
             exit()
         if r.type==pygame.MOUSEBUTTONDOWN:
-            model2.dvogenie_igroc(r.pos[0],r.pos[1])
+            model2.attack_igroc(r.pos[0],r.pos[1])
         model2.panel.init_event(r)
         model2.panel_wrag.init_event(r)
 

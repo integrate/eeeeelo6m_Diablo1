@@ -17,6 +17,8 @@ class Cletca():
             color=self.color
         if self.attack:
             color=[82,222,255]
+        if self.attack and self.prohod:
+            color=[152,70,255]
         if self.prohod==False and self.attack==False:
             color=[255,255,255]
         pygame.draw.rect(screen, color, self.cletca_fullscreen)

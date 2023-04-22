@@ -50,62 +50,85 @@ def deystvie_hod(hod, who):
         no_prohod()
 
 
-def add_zona_deystviy(center,rang):
+def add_zona_deystviy(center, rang):
     wh = cletcas[0].w * (rang * 2 + 1) - 2
     rect = pygame.Rect([center[0] - wh / 2, center[1] - wh / 2, wh, wh])
     return rect
 
 
-
-
-
 def do_prohod(who):
-
-
-    zona_hod = add_zona_deystviy(who.rect.center,who.stamina)
-    zona_attack = add_zona_deystviy(who.rect.center,who.orugie.range)
+    zona_hod = add_zona_deystviy(who.rect.center, who.stamina)
+    zona_attack = add_zona_deystviy(who.rect.center, who.orugie.range)
 
     for c in cletcas:
         c.color = who.cletca_color
         c.prohod = c.cletca.colliderect(zona_hod)
-        c.attack= c.cletca.colliderect(zona_attack)
-
-
+        c.attack = c.cletca.colliderect(zona_attack)
 
 
 def no_prohod():
     for c in cletcas:
         c.prohod = False
-        c.attack=False
+        c.attack = False
 
 
-def dvogenie_igroc(realx, realy):
-    global chey_hod
+# def dvogenie_igroc(realx, realy):
+#     global chey_hod
+#     for c in cletcas:
+#         if c.prohod == True and c.cletca_fullscreen.collidepoint(realx, realy):
+#             if chey_hod == 'igroc':
+#                 igroc.sdvig(c.cletca.x, c.cletca.y)
+#                 smena_hoda()
+#             elif chey_hod == 'wrag':
+#                 wrag.sdvig(c.cletca.x, c.cletca.y)
+#                 smena_hoda()
+
+
+
+def find_cletca(realx, realy):
     for c in cletcas:
-        if c.prohod == True and c.cletca_fullscreen.collidepoint(realx, realy):
-            if chey_hod == 'igroc':
-                igroc.sdvig(c.cletca.x, c.cletca.y)
+        if c.cletca_fullscreen.collidepoint(realx, realy):
+            return c
+    return None
 
-                panel.regim = 'bloc'
-                igroc.mona_hodit = False
-                chey_hod = 'wrag'
-                panel_wrag.regim = 'normal'
-                if igroc.rect.colliderect(wrag):
-                    wrag.hp -= 10
-            elif chey_hod == 'wrag':
-                wrag.sdvig(c.cletca.x, c.cletca.y)
+def who_is_who():
+    if chey_hod=='igroc':
+        hero=igroc
+        bad_personag=wrag
+    if chey_hod=='wrag':
+        hero=wrag
+        bad_personag=igroc
+    return hero,bad_personag
 
-                panel_wrag.regim = 'bloc'
-                wrag.mona_hodit = False
-                chey_hod = 'igroc'
-                panel.regim = 'normal'
+def attack_igroc(realx, realy):
+    c=find_cletca(realx,realy)
+    if c==None: return
+
+    hero,bad=who_is_who()
+    if hero.rect.collidepoint(realx,realy): return
+    if bad.rect.collidepoint(realx,realy) and c.attack:
+        bad.hp -= hero.orugie.do_damage()
+        smena_hoda()
+    elif bad.rect.collidepoint(realx,realy)==False and c.prohod==True:
+        hero.sdvig(c.cletca.x, c.cletca.y)
+        smena_hoda()
 
 
+def smena_hoda():
+    global chey_hod
+    if chey_hod=='igroc':
+        chey_hod = 'wrag'
+        panel.regim = 'bloc'
+        panel_wrag.regim = 'normal'
+        igroc.mona_hodit = False
+    else:
+        chey_hod = 'igroc'
+        panel.regim = 'normal'
+        panel_wrag.regim = 'bloc'
+        wrag.mona_hodit = False
 
 
 def step():
-    # if panel_wrag.regim in ['hod','vibor'] and panel.regim=='vibor':
-    #     panel.regim='normal'
     pass
 
 

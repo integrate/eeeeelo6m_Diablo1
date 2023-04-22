@@ -38,24 +38,7 @@ def add_derevo():
         return derevo
 
     randomspawn.add_derevo(500,maker,obshie_nospawn,obshie,50)
-    # colder = 500
-    # colpowtor = 50
-    # while colder > 0:
-    #     if colpowtor == 0:
-    #         colpowtor = 50
-    #         colder -= 1
-    #     if colpowtor == 50:
-    #         derevo = derevy.Derevo(random.randint(-settings.MAP_SIZE / 2, settings.MAP_SIZE / 2 - 50),
-    #                                random.randint(-settings.MAP_SIZE / 2, settings.MAP_SIZE / 2), 50, 50, 100)
-    #     if derevo.rect.collidelist(obshie_nospawn) != -1 and colpowtor > 0:
-    #         derevo = derevy.Derevo(random.randint(-settings.MAP_SIZE / 2, settings.MAP_SIZE / 2 - 50),
-    #                                random.randint(-settings.MAP_SIZE / 2, settings.MAP_SIZE / 2), 50, 50, 100)
-    #         colpowtor -= 1
-    #     if derevo.rect.collidelist(obshie_nospawn) == -1:
-    #         obshie.append(derevo)
-    #         obshie_nospawn.append(derevo.rect_nospawn)
-    #         colder -= 1
-    #         colpowtor = 50
+
 
 
 def add_granici():
