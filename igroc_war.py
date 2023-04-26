@@ -3,7 +3,7 @@ import pygame, fullscreen
 
 class Igroc_war():
     def __init__(self, x, y, w, h, hp, mona_hodit=False, deystvie_hod=None, color=[255, 24, 74],
-                 cletca_color=[255, 100, 100], orugie=None):
+                 cletca_color=[255, 100, 100], orugie=None,orugie_2=None):
         self.hp = hp
         self.rect = pygame.Rect(x, y, w, h)
         self.stamina = 4
@@ -12,6 +12,7 @@ class Igroc_war():
         self.color = color
         self.cletca_color = cletca_color
         self.orugie=orugie
+        self.orugie_2=orugie_2
 
     @property
     def mona_hodit(self):

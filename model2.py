@@ -30,16 +30,18 @@ def add_pole(col_x, col_y):
     a = col_y * col_x
     x = a - col_x
     orugie_igroc = orugie.Orugie([0, 100], 'легендарный топор который претворяется молотом', 'picture/топор.png', 2)
+    orugie_igroc_2 = orugie.Orugie([-300, 300], 'может как и убить так и добавить здоровье врагу', 'picture/коса_исцеления.png', 2)
     igroc = igroc_war.Igroc_war(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, deystvie_hod=deystvie_hod,
-                                orugie=orugie_igroc)
+                                orugie=orugie_igroc,orugie_2=orugie_igroc_2)
     panel = panelka.Panel([0, 1000], igroc, regim='normal')
     x = col_x - 1
-    orugie_wrag = orugie.Orugie([25, 250], 'легендарный молотом', 'picture/топор.png', 2)
+    orugie_wrag = orugie.Orugie([-300, 300], 'легендарный молотом', 'picture/коса_исцеления.png', 2)
+    orugie_wrag_2 = orugie.Orugie([-300, 300], 'легендарный молотом', 'picture/коса_исцеления.png', 2)
 
     wrag = igroc_war.Igroc_war(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, deystvie_hod=deystvie_hod,
                                color=[38, 242, 29],
                                cletca_color=[random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)],
-                               orugie=orugie_wrag)
+                               orugie=orugie_wrag,orugie_2=orugie_wrag_2)
     panel_wrag = panelka.Panel([0, 10], wrag, 1366 - settings.PANEL_SIZE_W)
 
 

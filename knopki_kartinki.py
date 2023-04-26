@@ -18,6 +18,12 @@ class Knopka_kartinka():
     def nagatie(self,event):
         if event.type==pygame.MOUSEBUTTONDOWN and self.fullscreen_rect.collidepoint(event.pos):
             self.deystvie()
+    @staticmethod
+    def do_cnopca(load_picture,cnopca_size,x,y,deystvie,color):
+        picture = pygame.image.load(load_picture)
+        picture = pygame.transform.scale(picture,cnopca_size)
+        return Knopka_kartinka(picture,x,y,deystvie,color)
+
 
 
 

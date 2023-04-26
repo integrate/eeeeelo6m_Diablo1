@@ -22,10 +22,12 @@ class Panel():
         self.slot_rect = pygame.Rect(self.panel.x + settings.PANEL_SIZE_W / 3, 25, settings.PANEL_SIZE_W / 3,
                                      settings.PANEL_SIZE_W / 3)
 
-        self.slot_rect_art = pygame.image.load(igroc.orugie.cartinca)
-        self.slot_rect_art = pygame.transform.scale(self.slot_rect_art, self.slot_rect.size)
-        self.slot_rect_vibor = knopki_kartinki.Knopka_kartinka(self.slot_rect_art,
+
+        self.slot_rect_vibor = knopki_kartinki.Knopka_kartinka.do_cnopca(igroc.orugie.cartinca,self.slot_rect.size,
                                                                self.panel.x + settings.PANEL_SIZE_W / 3, 200,
+                                                               self.on_button_click_vibor, [255, 255, 73])
+        self.slot_rect_vibor_2 = knopki_kartinki.Knopka_kartinka.do_cnopca(igroc.orugie_2.cartinca,self.slot_rect.size,
+                                                               self.panel.x + settings.PANEL_SIZE_W / 3, 350,
                                                                self.on_button_click_vibor, [255, 255, 73])
 
         self.regim = regim
@@ -58,6 +60,8 @@ class Panel():
         pygame.draw.rect(screen, [134, 145, 221], a)
 
         self.slot_rect_vibor.draw(screen)
+        self.slot_rect_vibor_2.draw(screen)
+
         hp_bar = self.font.render(str(self.igroc.hp), True, [0, 0, 0])
         draw_helper.draw_picture(screen, self.hp_bar_rect, hp_bar, [255, 255, 255])
 
@@ -66,7 +70,7 @@ class Panel():
         pygame.draw.rect(screen, [134, 145, 221], a)
 
         # рисования орудия
-        draw_helper.draw_picture(screen, self.slot_rect, self.slot_rect_art, [255, 255, 73])
+        draw_helper.draw_picture(screen, self.slot_rect, self.orugie, [255, 255, 73])
 
         draw_helper.draw_picture(screen, self.damage_weapon_rect, self.damage_weapon, None)
 
@@ -88,8 +92,14 @@ class Panel():
     def on_button_click_vibor(self):
         if self.regim =='normal':
             self.regim = 'vibor'
+            self.orugie=self.igroc.orugie
+
 
     def init_event(self, event):
         self.kcopka.nagatie(event)
         self.exit.nagatie(event)
         self.slot_rect_vibor.nagatie(event)
+        self.slot_rect_vibor_2.nagatie(event)
+
+
+
