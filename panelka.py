@@ -28,11 +28,17 @@ class Panel():
                                                                self.on_button_click_vibor, [255, 255, 73])
         self.slot_rect_vibor_2 = knopki_kartinki.Knopka_kartinka.do_cnopca(igroc.orugie_2.cartinca,self.slot_rect.size,
                                                                self.panel.x + settings.PANEL_SIZE_W / 3, 350,
-                                                               self.on_button_click_vibor, [255, 255, 73])
+                                                               self.on_button_click_vibor_2, [255, 255, 73])
+
+        self.orugie_art_1=pygame.transform.scale(pygame.image.load(igroc.orugie.cartinca), self.slot_rect.size)
+        self.orugie_art_2=pygame.transform.scale(pygame.image.load(igroc.orugie_2.cartinca), self.slot_rect.size)
+
+
 
         self.regim = regim
 
         self.damage_weapon = self.font.render(str(igroc.orugie.damage[0]) + '-' + str(igroc.orugie.damage[1]), True, [255, 35, 50])
+        self.damage_weapon_2 = self.font.render(str(igroc.orugie_2.damage[0]) + '-' + str(igroc.orugie_2.damage[1]), True, [255, 35, 50])
         self.damage_weapon_rect = pygame.Rect(self.slot_rect.x, self.slot_rect.bottom + 10,
                                               self.slot_rect.w, 50)
 
@@ -70,9 +76,14 @@ class Panel():
         pygame.draw.rect(screen, [134, 145, 221], a)
 
         # рисования орудия
-        draw_helper.draw_picture(screen, self.slot_rect, self.orugie, [255, 255, 73])
+        a=self.orugie_art_1 if self.orugie is self.igroc.orugie else self.orugie_art_2
+        draw_helper.draw_picture(screen, self.slot_rect, a, [255, 255, 73])
 
-        draw_helper.draw_picture(screen, self.damage_weapon_rect, self.damage_weapon, None)
+        b=1
+        a='one' if b==1 else 'two'
+
+        a=self.damage_weapon if self.orugie is self.igroc.orugie else self.damage_weapon_2
+        draw_helper.draw_picture(screen, self.damage_weapon_rect, a, None)
 
         draw_helper.draw_picture(screen, self.opisanie_orugiy_rect, self.opisanie_orugiy, None,'topleft','topleft')
 
@@ -93,6 +104,13 @@ class Panel():
         if self.regim =='normal':
             self.regim = 'vibor'
             self.orugie=self.igroc.orugie
+
+
+
+    def on_button_click_vibor_2(self):
+        if self.regim =='normal':
+            self.regim = 'vibor'
+            self.orugie=self.igroc.orugie_2
 
 
     def init_event(self, event):
