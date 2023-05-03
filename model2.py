@@ -35,8 +35,8 @@ def add_pole(col_x, col_y):
                                 orugie=orugie_igroc,orugie_2=orugie_igroc_2)
     panel = panelka.Panel([0, 1000], igroc, regim='normal')
     x = col_x - 1
-    orugie_wrag = orugie.Orugie([-300, 300], 'легендарный молотом', 'picture/коса_исцеления.png', 2)
-    orugie_wrag_2 = orugie.Orugie([-300, 300], 'легендарный молотом', 'picture/коса_исцеления.png', 2)
+    orugie_wrag = orugie.Orugie([-300, 300], 'волшебная коса', 'picture/коса_исцеления.png', 2)
+    orugie_wrag_2 = orugie.Orugie([0, 100], 'легендарный топор который претворяется молотом', 'picture/топор.png', 2)
 
     wrag = igroc_war.Igroc_war(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, deystvie_hod=deystvie_hod,
                                color=[38, 242, 29],
@@ -107,11 +107,11 @@ def attack_igroc(realx, realy):
     if c==None: return
 
     hero,bad=who_is_who()
-    if hero.rect.collidepoint(realx,realy): return
-    if bad.rect.collidepoint(realx,realy) and c.attack:
-        bad.hp -= hero.orugie.do_damage()
+    if hero.rect_fullscren.collidepoint(realx,realy): return
+    if bad.rect_fullscren.collidepoint(realx,realy) and c.attack:
+        bad.hp -= hero.active_orugie.do_damage()
         smena_hoda()
-    elif bad.rect.collidepoint(realx,realy)==False and c.prohod==True:
+    elif bad.rect_fullscren.collidepoint(realx,realy)==False and c.prohod==True:
         hero.sdvig(c.cletca.x, c.cletca.y)
         smena_hoda()
 

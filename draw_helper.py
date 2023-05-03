@@ -18,12 +18,12 @@ def text(txt, font, w_panel):
     s = pygame.Surface([0, 0])
     j = []
     words = txt.split()
-
+    i= font.render(' ',True,[123,123,123])
     for r in words:
         e = font.render(r, True, [0, 0, 0])
         if a == '':
             a = r
-        elif e.get_width() + s.get_width() <= w_panel:
+        elif e.get_width() + s.get_width()+ i.get_width() <= w_panel:
             a = a + ' ' + r
         else:
             j.append(s)
