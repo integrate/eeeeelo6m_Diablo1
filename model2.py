@@ -59,6 +59,7 @@ def add_zona_deystviy(center, rang):
 
 
 def do_prohod(who):
+
     zona_hod = add_zona_deystviy(who.rect.center, who.stamina)
     zona_attack = add_zona_deystviy(who.rect.center, who.orugie.range)
 
@@ -113,7 +114,11 @@ def attack_igroc(realx, realy):
         smena_hoda()
     elif bad.rect_fullscren.collidepoint(realx,realy)==False and c.prohod==True:
         hero.sdvig(c.cletca.x, c.cletca.y)
+
+        if add_zona_deystviy(hero.rect.center, hero.orugie.range).colliderect(bad.rect):
+            bad.hp -= hero.active_orugie.do_damage()
         smena_hoda()
+
 
 
 def smena_hoda():
