@@ -1,11 +1,14 @@
-import pygame, panelka, random
+import pygame, panelka, random,model
 import model, time, cletca, settings, igroc_war, orugie
 
 cletcas = []
 igroc = igroc_war.Igroc_war(0, 0, 0, 0, 0)
 wrag = igroc_war.Igroc_war(0, 0, 0, 0, 0)
 chey_hod = 'igroc'
-
+panel_wrag=panelka.Panel([0, 10], None, 1366 - settings.PANEL_SIZE_W)
+TIMER_DO_VIBOR=pygame.event.custom_type()
+TIMER_DO_ISPL=pygame.event.custom_type()
+TIMER_DO_HOD=pygame.event.custom_type()
 
 def add_pole(col_x, col_y):
     global igroc
@@ -30,12 +33,12 @@ def add_pole(col_x, col_y):
     a = col_y * col_x
     x = a - col_x
     orugie_igroc = orugie.Orugie([0, 100], 'легендарный топор который претворяется молотом', 'picture/топор.png', 2)
-    orugie_igroc_2 = orugie.Orugie([-300, 300], 'может как и убить так и добавить здоровье врагу', 'picture/коса_исцеления.png', 2)
+    orugie_igroc_2 = orugie.Orugie([-300, 300], 'может как и убить так и добавить здоровье врагу', 'picture/коса_исцеления.png', 5)
     igroc = igroc_war.Igroc_war(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, deystvie_hod=deystvie_hod,
                                 orugie=orugie_igroc,orugie_2=orugie_igroc_2)
     panel = panelka.Panel([0, 1000], igroc, regim='normal')
     x = col_x - 1
-    orugie_wrag = orugie.Orugie([-300, 300], 'волшебная коса', 'picture/коса_исцеления.png', 2)
+    orugie_wrag = orugie.Orugie([-300, 300], 'волшебная коса', 'picture/коса_исцеления.png', 5)
     orugie_wrag_2 = orugie.Orugie([0, 100], 'легендарный топор который претворяется молотом', 'picture/топор.png', 2)
 
     wrag = igroc_war.Igroc_war(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, deystvie_hod=deystvie_hod,
@@ -61,7 +64,7 @@ def add_zona_deystviy(center, rang):
 def do_prohod(who):
 
     zona_hod = add_zona_deystviy(who.rect.center, who.stamina)
-    zona_attack = add_zona_deystviy(who.rect.center, who.orugie.range)
+    zona_attack = add_zona_deystviy(who.rect.center, who.active_orugie.range)
 
     for c in cletcas:
         c.color = who.cletca_color
@@ -108,9 +111,12 @@ def attack_igroc(realx, realy):
     if c==None: return
 
     hero,bad=who_is_who()
+    if hero is wrag: return
     if hero.rect_fullscren.collidepoint(realx,realy): return
     if bad.rect_fullscren.collidepoint(realx,realy) and c.attack:
         bad.hp -= hero.active_orugie.do_damage()
+        if bad.hp<=0:
+            model.sostoynie=model.SOSTOYNIE_POTEMNENIE
         smena_hoda()
     elif bad.rect_fullscren.collidepoint(realx,realy)==False and c.prohod==True:
         hero.sdvig(c.cletca.x, c.cletca.y)
@@ -118,6 +124,19 @@ def attack_igroc(realx, realy):
         if add_zona_deystviy(hero.rect.center, hero.orugie.range).colliderect(bad.rect):
             bad.hp -= hero.active_orugie.do_damage()
         smena_hoda()
+
+
+def do_vibor_vrag():
+    a=random.randint(1,2)
+    if a==1:
+        panel_wrag.on_button_click_vibor()
+    else:
+        panel_wrag.on_button_click_vibor_2()
+    pygame.time.set_timer(TIMER_DO_ISPL,1000)
+
+def ispl_orugie_vrag():
+    panel_wrag.kcopka.deystvie()
+
 
 
 
@@ -128,6 +147,7 @@ def smena_hoda():
         panel.regim = 'bloc'
         panel_wrag.regim = 'normal'
         igroc.mona_hodit = False
+        pygame.time.set_timer(TIMER_DO_VIBOR,1000)
     else:
         chey_hod = 'igroc'
         panel.regim = 'normal'

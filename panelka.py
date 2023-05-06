@@ -10,6 +10,8 @@ print(font.get_fonts())
 
 class Panel():
     def __init__(self, damage, igroc: igroc_war.Igroc_war, x=1, regim='bloc'):
+        if igroc==None:
+            return
         self.igroc = igroc
 
         self.panel = pygame.Rect(x, 1, settings.PANEL_SIZE_W, 768)
