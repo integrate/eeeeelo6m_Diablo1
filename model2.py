@@ -1,4 +1,4 @@
-import pygame, panelka, random,model
+import pygame, panelka, random,model,math
 import model, time, cletca, settings, igroc_war, orugie
 
 cletcas = []
@@ -32,14 +32,14 @@ def add_pole(col_x, col_y):
             cletcas.append(pole)
     a = col_y * col_x
     x = a - col_x
-    orugie_igroc = orugie.Orugie([0, 100], 'легендарный топор который претворяется молотом', 'picture/топор.png', 2)
-    orugie_igroc_2 = orugie.Orugie([-300, 300], 'может как и убить так и добавить здоровье врагу', 'picture/коса_исцеления.png', 5)
+    orugie_igroc = orugie.Orugie([0, 100], 'легендарный топор который претворяется молотом', 'picture/топор.png', 6)
+    orugie_igroc_2 = orugie.Orugie([-300, 300], 'может как и убить так и добавить здоровье врагу', 'picture/коса_исцеления.png', 2)
     igroc = igroc_war.Igroc_war(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, deystvie_hod=deystvie_hod,
                                 orugie=orugie_igroc,orugie_2=orugie_igroc_2)
     panel = panelka.Panel([0, 1000], igroc, regim='normal')
     x = col_x - 1
-    orugie_wrag = orugie.Orugie([-300, 300], 'волшебная коса', 'picture/коса_исцеления.png', 5)
-    orugie_wrag_2 = orugie.Orugie([0, 100], 'легендарный топор который претворяется молотом', 'picture/топор.png', 2)
+    orugie_wrag = orugie.Orugie([-300, 300], 'волшебная коса', 'picture/коса_исцеления.png', 2)
+    orugie_wrag_2 = orugie.Orugie([0, 100], 'легендарный топор который претворяется молотом', 'picture/топор.png', 6)
 
     wrag = igroc_war.Igroc_war(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, deystvie_hod=deystvie_hod,
                                color=[38, 242, 29],
@@ -115,8 +115,6 @@ def attack_igroc(realx, realy):
     if hero.rect_fullscren.collidepoint(realx,realy): return
     if bad.rect_fullscren.collidepoint(realx,realy) and c.attack:
         bad.hp -= hero.active_orugie.do_damage()
-        if bad.hp<=0:
-            model.sostoynie=model.SOSTOYNIE_POTEMNENIE
         smena_hoda()
     elif bad.rect_fullscren.collidepoint(realx,realy)==False and c.prohod==True:
         hero.sdvig(c.cletca.x, c.cletca.y)
@@ -132,10 +130,38 @@ def do_vibor_vrag():
         panel_wrag.on_button_click_vibor()
     else:
         panel_wrag.on_button_click_vibor_2()
-    pygame.time.set_timer(TIMER_DO_ISPL,1000)
+    pygame.time.set_timer(TIMER_DO_ISPL,1500,1)
 
 def ispl_orugie_vrag():
     panel_wrag.kcopka.deystvie()
+    pygame.time.set_timer(TIMER_DO_HOD,1500,1)
+
+
+def which_cletca():
+
+    best = None
+    a=find_cletca(igroc.rect_fullscren.x,igroc.rect_fullscren.y)
+    if igroc.rect_fullscren.colliderect(a.cletca_fullscreen) and a.attack:
+        return a
+    for y in cletcas:
+        now=math.dist(y.cletca_fullscreen.center,igroc.rect_fullscren.center)
+
+        if (best==None or now<best) and y.prohod:
+            best=now
+            best_cletca=y
+    return best_cletca
+
+def hod_wrag():
+    cletca=which_cletca()
+    if cletca.attack and igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft):
+        igroc.hp -= wrag.active_orugie.do_damage()
+        smena_hoda()
+    elif igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft)==False and cletca.prohod==True:
+        wrag.sdvig(cletca.cletca.x,cletca.cletca.y)
+        smena_hoda()
+
+
+
 
 
 
@@ -147,7 +173,7 @@ def smena_hoda():
         panel.regim = 'bloc'
         panel_wrag.regim = 'normal'
         igroc.mona_hodit = False
-        pygame.time.set_timer(TIMER_DO_VIBOR,1000)
+        pygame.time.set_timer(TIMER_DO_VIBOR,1500,1)
     else:
         chey_hod = 'igroc'
         panel.regim = 'normal'
@@ -155,8 +181,9 @@ def smena_hoda():
         wrag.mona_hodit = False
 
 
+
 def step():
     pass
 
 
-add_pole(10, 10)
+add_pole(15, 15)

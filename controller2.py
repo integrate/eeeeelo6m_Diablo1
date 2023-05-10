@@ -17,6 +17,8 @@ def controller2():
             model2.do_vibor_vrag()
         if r.type==model2.TIMER_DO_ISPL:
             model2.ispl_orugie_vrag()
+        if r.type==model2.TIMER_DO_HOD:
+            model2.hod_wrag()
 
         controller.f11(r)
 
