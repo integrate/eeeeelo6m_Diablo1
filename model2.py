@@ -32,14 +32,14 @@ def add_pole(col_x, col_y):
             cletcas.append(pole)
     a = col_y * col_x
     x = a - col_x
-    orugie_igroc = orugie.Orugie([0, 100], 'легендарный топор который претворяется молотом', 'picture/топор.png', 6)
-    orugie_igroc_2 = orugie.Orugie([-300, 300], 'может как и убить так и добавить здоровье врагу', 'picture/коса_исцеления.png', 2)
+    orugie_igroc = orugie.Orugie([8, 9], 'легендарный топор который претворяется молотом', 'picture/топор.png', 6)
+    orugie_igroc_2 = orugie.Orugie([-5, 5], 'может как и убить так и добавить здоровье врагу', 'picture/коса_исцеления.png', 2)
     igroc = igroc_war.Igroc_war(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, deystvie_hod=deystvie_hod,
                                 orugie=orugie_igroc,orugie_2=orugie_igroc_2)
     panel = panelka.Panel([0, 1000], igroc, regim='normal')
     x = col_x - 1
-    orugie_wrag = orugie.Orugie([-300, 300], 'волшебная коса', 'picture/коса_исцеления.png', 2)
-    orugie_wrag_2 = orugie.Orugie([0, 100], 'легендарный топор который претворяется молотом', 'picture/топор.png', 6)
+    orugie_wrag = orugie.Orugie([-5, 5], 'волшебная коса', 'picture/коса_исцеления.png', 2)
+    orugie_wrag_2 = orugie.Orugie([0, 3], 'легендарный топор который претворяется молотом', 'picture/топор.png', 6)
 
     wrag = igroc_war.Igroc_war(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, deystvie_hod=deystvie_hod,
                                color=[38, 242, 29],
@@ -137,22 +137,34 @@ def ispl_orugie_vrag():
     pygame.time.set_timer(TIMER_DO_HOD,1500,1)
 
 
-def which_cletca():
+def which_cletca(distant):
 
     best = None
     a=find_cletca(igroc.rect_fullscren.x,igroc.rect_fullscren.y)
-    if igroc.rect_fullscren.colliderect(a.cletca_fullscreen) and a.attack:
+    if a.attack and distant=='min':
         return a
     for y in cletcas:
         now=math.dist(y.cletca_fullscreen.center,igroc.rect_fullscren.center)
 
-        if (best==None or now<best) and y.prohod:
+        if (best==None or now<best) and y.prohod and distant=='min':
             best=now
             best_cletca=y
+        elif (best==None or now>best) and y.prohod and distant=='max':
+            best = now
+            best_cletca = y
+
     return best_cletca
 
 def hod_wrag():
-    cletca=which_cletca()
+    if wrag.hp <= wrag.max_hp * 0.2:
+        cletca=which_cletca('max')
+        wrag.sdvig(cletca.cletca.x, cletca.cletca.y)
+        smena_hoda()
+        return
+    else:
+        cletca = which_cletca('min')
+
+
     if cletca.attack and igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft):
         igroc.hp -= wrag.active_orugie.do_damage()
         smena_hoda()

@@ -4,7 +4,10 @@ import pygame, fullscreen
 class Igroc_war():
     def __init__(self, x, y, w, h, hp, mona_hodit=False, deystvie_hod=None, color=[255, 24, 74],
                  cletca_color=[255, 100, 100], orugie=None,orugie_2=None):
-        self.hp = hp
+        self._hp = hp
+        self.max_hp=10
+        if self._hp>self.max_hp:
+            self._hp=self.max_hp
         self.rect = pygame.Rect(x, y, w, h)
         self.stamina = 4
         self._mona_hodit = mona_hodit
@@ -25,6 +28,24 @@ class Igroc_war():
         self._mona_hodit = hod
         if callable(self._deystvie_hod):
             self._deystvie_hod(hod, self)
+
+
+    @property
+    def hp(self):
+        return self._hp
+
+
+    @hp.setter
+    def hp(self,hp_now):
+        if hp_now>self.max_hp:
+            self._hp=self.max_hp
+        else:
+            self._hp=hp_now
+
+
+
+
+
 
     def draw(self, screen):
         self.rect_fullscren = fullscreen.fullscreen_rect(self.rect, screen, 'war', False)
