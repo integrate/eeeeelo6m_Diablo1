@@ -3,6 +3,7 @@ from pygame import font
 
 import igroc_war
 import knopki_kartinki
+import model2
 
 font.init()
 print(font.get_fonts())
@@ -10,7 +11,7 @@ print(font.get_fonts())
 
 class Panel():
     def __init__(self, damage, igroc: igroc_war.Igroc_war, x=1, regim='bloc'):
-        if igroc==None:
+        if igroc == None:
             return
         self.igroc = igroc
 
@@ -58,6 +59,10 @@ class Panel():
 
         self.opisanie_orugiy_rect = pygame.Rect(self.panel.x + 5, self.damage_weapon_rect.bottom, 0, 100)
 
+        self.ultimat = knopki.Knopka(str(igroc.point) + ' / ' + str(igroc.need_point),
+                                     self.panel.right - 200 -50, self.panel.bottom - 100, 'pmingliuextb', 70,
+                                     model2.ulta,[255,86,0])
+
     def draw(self, screen: pygame.surface.Surface):
         if self.regim in ['normal', 'hod', 'bloc']:
             self.draw_normal(screen)
@@ -73,6 +78,8 @@ class Panel():
 
         hp_bar = self.font.render(str(self.igroc.hp), True, [0, 0, 0])
         draw_helper.draw_picture(screen, self.hp_bar_rect, hp_bar, [255, 255, 255])
+
+        self.ultimat.draw(screen)
 
     def draw_wibor(self, screen):
         a = fullscreen.fullscreen_rect(self.panel, screen, 'war', False)

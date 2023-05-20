@@ -36,7 +36,7 @@ def add_pole(col_x, col_y):
     orugie_igroc = orugie.Orugie([8, 9], 'легендарный топор который претворяется молотом', 'picture/топор.png', 6)
     orugie_igroc_2 = orugie.Orugie([-5, 5], 'может как и убить так и добавить здоровье врагу',
                                    'picture/коса_исцеления.png', 2)
-    igroc = igroc_war.Igroc_war(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 1, deystvie_hod=deystvie_hod,
+    igroc = igroc_war.Igroc_war(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 1,point=0,need_point=10, deystvie_hod=deystvie_hod,
                                 orugie=orugie_igroc, orugie_2=orugie_igroc_2)
     panel = panelka.Panel([0, 1000], igroc, regim='normal')
     x = col_x - 1
@@ -201,6 +201,12 @@ def smena_hoda():
         panel.regim = 'normal'
         panel_wrag.regim = 'bloc'
         wrag.mona_hodit = False
+
+
+def ulta():
+    igroc.orugie.damage[0]+=2
+    igroc.orugie_2.damage[0] += 2
+
 
 
 def step():

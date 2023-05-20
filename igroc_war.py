@@ -2,10 +2,12 @@ import pygame, fullscreen
 
 
 class Igroc_war():
-    def __init__(self, x, y, w, h, hp, mona_hodit=False, deystvie_hod=None, color=[255, 24, 74],
+    def __init__(self, x, y, w, h, hp,point=None,need_point=None,mona_hodit=False, deystvie_hod=None, color=[255, 24, 74],
                  cletca_color=[255, 100, 100], orugie=None,orugie_2=None):
         self._hp = hp
         self.max_hp=10
+        self.point=point
+        self.need_point=need_point
         if self._hp>self.max_hp:
             self._hp=self.max_hp
         self.rect = pygame.Rect(x, y, w, h)
