@@ -1,4 +1,6 @@
-import pygame, panelka, random, model, math
+import pygame, panelka, random, model, math,button_change
+
+import button_change
 import model, time, cletca, settings, igroc_war, orugie
 
 cletcas = []
@@ -9,6 +11,7 @@ panel_wrag = panelka.Panel([0, 10], None, 1366 - settings.PANEL_SIZE_W)
 TIMER_DO_VIBOR = pygame.event.custom_type()
 TIMER_DO_ISPL = pygame.event.custom_type()
 TIMER_DO_HOD = pygame.event.custom_type()
+a=button_change.Button_change(200,200,200,200,'abvg','yugothicuiregular',[0,0,0])
 
 
 def add_pole(col_x, col_y):
@@ -53,8 +56,11 @@ def add_pole(col_x, col_y):
 def deystvie_hod(hod, who):
     if hod:
         do_prohod(who)
+        a.smena_txt('hi')
     else:
         no_prohod()
+        a.smena_txt(color=[200,200,200])
+        a.smena_txt(fonta='segoeuiblack')
 
 
 def add_zona_deystviy(center, rang):
@@ -124,6 +130,7 @@ def attack_igroc(realx, realy):
         if add_zona_deystviy(hero.rect.center, hero.orugie.range).colliderect(bad.rect):
             bad.hp -= hero.active_orugie.do_damage()
         smena_hoda()
+
 
 
 def do_vibor_vrag():
