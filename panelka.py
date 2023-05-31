@@ -1,6 +1,7 @@
 import pygame, settings, fullscreen, knopki, draw_helper
 from pygame import font
 
+import button_change
 import igroc_war
 import knopki_kartinki
 import model2
@@ -59,10 +60,11 @@ class Panel():
 
         self.opisanie_orugiy_rect = pygame.Rect(self.panel.x + 5, self.damage_weapon_rect.bottom, 0, 100)
 
-        self.ultimat = knopki.Knopka(str(igroc.point) + ' / ' + str(igroc.need_point),
-                                     self.panel.right - 200 -50, self.panel.bottom - 100, 'pmingliuextb', 70,
-                                     model2.ulta,[255,86,0])
-
+        self.ultimat = button_change.Button_change(self.panel.centerx-settings.PANEL_SIZE_W/3,
+                                                   self.panel.bottom - 100, 200, 70,
+                                                   str(igroc.point) + ' / ' + str(igroc.need_point),
+                                                   'yugothicuiregular', [255, 86, 0], model2.ulta)
+        self.ultimat.rect.centerx=self.panel.centerx
     def draw(self, screen: pygame.surface.Surface):
         if self.regim in ['normal', 'hod', 'bloc']:
             self.draw_normal(screen)
@@ -79,6 +81,7 @@ class Panel():
         hp_bar = self.font.render(str(self.igroc.hp), True, [0, 0, 0])
         draw_helper.draw_picture(screen, self.hp_bar_rect, hp_bar, [255, 255, 255])
 
+        self.ultimat.smena_txt(str(self.igroc.point) + ' / ' + str(self.igroc.need_point))
         self.ultimat.draw(screen)
 
     def draw_wibor(self, screen):

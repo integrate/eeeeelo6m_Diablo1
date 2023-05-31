@@ -12,7 +12,7 @@ def view2():
     model2.panel.draw(screen)
     model2.wrag.draw(screen)
     model2.panel_wrag.draw(screen)
-    model2.a.draw(screen)
+
 
 
 

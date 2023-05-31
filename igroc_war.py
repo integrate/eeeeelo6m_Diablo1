@@ -55,5 +55,6 @@ class Igroc_war():
 
     def sdvig(self, x, y):
         if self._mona_hodit == True:
+            self.point+=1
             self.rect.x = x
             self.rect.y = y

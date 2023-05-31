@@ -1,22 +1,25 @@
-import pygame
+import pygame,fullscreen
 from pygame import font
 
 
 class Button_change():
-    def __init__(self, x, y, w, h, txt, fonta, color):
+    def __init__(self, x, y, w, h, txt, fonta, color,deystvie):
         self.x = x
         self.y = y
         self.w = w
         self.h = h
         self.rect = pygame.Rect(x, y, w, h)
+
         self.color = color
         self.fonta = fonta
         self.text=txt
         self.txt=self.wirawnivonie_txt(self.fonta,self.color,txt)
 
     def draw(self, screen: pygame.Surface):
-        pygame.draw.rect(screen, [55, 155, 255], self.rect)
-        screen.blit(self.txt, self.rect)
+        fullscreen_rect=fullscreen.fullscreen_rect(self.rect,screen,'war',False)
+        pygame.draw.rect(screen, [55, 155, 255], fullscreen_rect)
+        fullscreen_txt=fullscreen.fullscreen_surface(screen,self.txt)
+        screen.blit(fullscreen_txt,[fullscreen_rect.centerx-fullscreen_txt.get_width()/2, fullscreen_rect.centery-fullscreen_txt.get_height()/2])
 
     def smena_txt(self, txt=None, color=None, fonta=None):
         if txt is None: txt = self.text
