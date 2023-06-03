@@ -1,4 +1,4 @@
-import pygame, panelka, random, model, math,button_change
+import pygame, panelka, random, model, math, button_change
 
 import button_change
 import model, time, cletca, settings, igroc_war, orugie
@@ -11,7 +11,6 @@ panel_wrag = panelka.Panel([0, 10], None, 1366 - settings.PANEL_SIZE_W)
 TIMER_DO_VIBOR = pygame.event.custom_type()
 TIMER_DO_ISPL = pygame.event.custom_type()
 TIMER_DO_HOD = pygame.event.custom_type()
-
 
 
 def add_pole(col_x, col_y):
@@ -36,10 +35,11 @@ def add_pole(col_x, col_y):
             cletcas.append(pole)
     a = col_y * col_x
     x = a - col_x
-    orugie_igroc = orugie.Orugie([8, 9], 'легендарный топор который претворяется молотом', 'picture/топор.png', 6)
+    orugie_igroc = orugie.Orugie([0, 3], 'легендарный топор который претворяется молотом', 'picture/топор.png', 6)
     orugie_igroc_2 = orugie.Orugie([-5, 5], 'может как и убить так и добавить здоровье врагу',
                                    'picture/коса_исцеления.png', 2)
-    igroc = igroc_war.Igroc_war(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 1,point=0,need_point=10, deystvie_hod=deystvie_hod,
+    igroc = igroc_war.Igroc_war(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 10, point=9, need_point=10,
+                                deystvie_hod=deystvie_hod,
                                 orugie=orugie_igroc, orugie_2=orugie_igroc_2)
     panel = panelka.Panel([0, 1000], igroc, regim='normal')
     x = col_x - 1
@@ -49,7 +49,7 @@ def add_pole(col_x, col_y):
     wrag = igroc_war.Igroc_war(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, deystvie_hod=deystvie_hod,
                                color=[38, 242, 29],
                                cletca_color=[random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)],
-                               orugie=orugie_wrag, orugie_2=orugie_wrag_2)
+                               orugie=orugie_wrag, orugie_2=orugie_wrag_2, point=0, need_point=10)
     panel_wrag = panelka.Panel([0, 10], wrag, 1366 - settings.PANEL_SIZE_W)
 
 
@@ -59,7 +59,6 @@ def deystvie_hod(hod, who):
 
     else:
         no_prohod()
-
 
 
 def add_zona_deystviy(center, rang):
@@ -122,7 +121,9 @@ def attack_igroc(realx, realy):
     if hero.rect_fullscren.collidepoint(realx, realy): return
     if bad.rect_fullscren.collidepoint(realx, realy) and c.attack:
         bad.hp -= hero.active_orugie.do_damage()
+        igroc.point += 2
         smena_hoda()
+
     elif bad.rect_fullscren.collidepoint(realx, realy) == False and c.prohod == True:
         hero.sdvig(c.cletca.x, c.cletca.y)
 
@@ -162,7 +163,9 @@ def which_cletca(distant):
     for y in cletcas:
         now = math.dist(y.cletca_fullscreen.center, igroc.rect_fullscren.center)
 
-        if (best == None or now < best) and y.prohod and distant == 'min':
+        if now==0:
+            pass
+        elif (best == None or now < best) and y.prohod and distant == 'min':
             best = now
             best_cletca = y
         elif (best == None or now > best) and y.prohod and distant == 'max':
@@ -175,7 +178,7 @@ def which_cletca(distant):
 def hod_wrag():
     if wrag.hp <= wrag.max_hp * 0.2:
         if find_cletca(igroc.rect_fullscren.x,
-                       igroc.rect_fullscren.y).attack == True and wrag.active_orugie.find_avg_damage()>=igroc.hp:
+                       igroc.rect_fullscren.y).attack == True and wrag.active_orugie.find_avg_damage() >= igroc.hp:
             igroc.hp -= wrag.active_orugie.do_damage()
             smena_hoda()
             return
@@ -188,10 +191,13 @@ def hod_wrag():
 
     if cletca.attack and igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft):
         igroc.hp -= wrag.active_orugie.do_damage()
+        wrag.point+=2
         smena_hoda()
     elif igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft) == False and cletca.prohod == True:
         wrag.sdvig(cletca.cletca.x, cletca.cletca.y)
         smena_hoda()
+    else:
+        print('123')
 
 
 def smena_hoda():
@@ -210,13 +216,16 @@ def smena_hoda():
 
 
 def ulta():
-    igroc.orugie.damage[0]+=2
-    igroc.orugie_2.damage[0] += 2
-
+    if igroc.point == igroc.need_point:
+        igroc.orugie.damage[0] += 2
+        igroc.orugie_2.damage[0] += 2
+        igroc.orugie.damage[1] += 2
+        igroc.orugie_2.damage[1] += 2
+        igroc.point=0
 
 
 def step():
     pass
 
 
-add_pole(5, 5)
+add_pole(10, 10)

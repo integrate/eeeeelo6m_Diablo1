@@ -6,7 +6,7 @@ class Igroc_war():
                  cletca_color=[255, 100, 100], orugie=None,orugie_2=None):
         self._hp = hp
         self.max_hp=10
-        self.point=point
+        self._point=point
         self.need_point=need_point
         if self._hp>self.max_hp:
             self._hp=self.max_hp
@@ -43,6 +43,16 @@ class Igroc_war():
             self._hp=self.max_hp
         else:
             self._hp=hp_now
+
+    @property
+    def point(self):
+        return self._point
+    @point.setter
+    def point(self,new_point):
+        self._point=new_point
+        if self._point>=self.need_point:
+            self._point=self.need_point
+
 
 
 

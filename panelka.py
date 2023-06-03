@@ -82,6 +82,9 @@ class Panel():
         draw_helper.draw_picture(screen, self.hp_bar_rect, hp_bar, [255, 255, 255])
 
         self.ultimat.smena_txt(str(self.igroc.point) + ' / ' + str(self.igroc.need_point))
+
+        if self.igroc.point== self.igroc.need_point:
+            self.ultimat.smena_txt('ГОТОВО')
         self.ultimat.draw(screen)
 
     def draw_wibor(self, screen):
@@ -128,3 +131,4 @@ class Panel():
         self.exit.nagatie(event)
         self.slot_rect_vibor.nagatie(event)
         self.slot_rect_vibor_2.nagatie(event)
+        self.ultimat.nagatie(event)

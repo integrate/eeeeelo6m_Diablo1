@@ -9,17 +9,21 @@ class Button_change():
         self.w = w
         self.h = h
         self.rect = pygame.Rect(x, y, w, h)
-
+        self.deystvie=deystvie
         self.color = color
         self.fonta = fonta
         self.text=txt
         self.txt=self.wirawnivonie_txt(self.fonta,self.color,txt)
 
+    def nagatie(self,event):
+        if event.type==pygame.MOUSEBUTTONDOWN and self.fullscreen_rect.collidepoint(event.pos):
+            self.deystvie()
+
     def draw(self, screen: pygame.Surface):
-        fullscreen_rect=fullscreen.fullscreen_rect(self.rect,screen,'war',False)
-        pygame.draw.rect(screen, [55, 155, 255], fullscreen_rect)
+        self.fullscreen_rect=fullscreen.fullscreen_rect(self.rect,screen,'war',False)
+        pygame.draw.rect(screen, [55, 155, 255], self.fullscreen_rect)
         fullscreen_txt=fullscreen.fullscreen_surface(screen,self.txt)
-        screen.blit(fullscreen_txt,[fullscreen_rect.centerx-fullscreen_txt.get_width()/2, fullscreen_rect.centery-fullscreen_txt.get_height()/2])
+        screen.blit(fullscreen_txt,[self.fullscreen_rect.centerx-fullscreen_txt.get_width()/2, self.fullscreen_rect.centery-fullscreen_txt.get_height()/2])
 
     def smena_txt(self, txt=None, color=None, fonta=None):
         if txt is None: txt = self.text
@@ -44,5 +48,4 @@ class Button_change():
             text = pygame.transform.scale(text, [text.get_width() / a, text.get_height() / a])
         return text
 
-    def _smena_size_txt(self):
-        pass
+
