@@ -1,6 +1,7 @@
 import pygame, panelka, random, model, math, button_change
 
 import button_change
+import guardian
 import model, time, cletca, settings, igroc_war, orugie
 
 cletcas = []
@@ -38,7 +39,7 @@ def add_pole(col_x, col_y):
     orugie_igroc = orugie.Orugie([0, 3], 'легендарный топор который претворяется молотом', 'picture/топор.png', 6)
     orugie_igroc_2 = orugie.Orugie([-5, 5], 'может как и убить так и добавить здоровье врагу',
                                    'picture/коса_исцеления.png', 2)
-    igroc = igroc_war.Igroc_war(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 10, point=9, need_point=10,
+    igroc = guardian.Guardian(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 10, point=9, need_point=10,
                                 deystvie_hod=deystvie_hod,
                                 orugie=orugie_igroc, orugie_2=orugie_igroc_2)
     panel = panelka.Panel([0, 1000], igroc, regim='normal')

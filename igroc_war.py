@@ -19,6 +19,7 @@ class Igroc_war():
         self.orugie=orugie
         self.orugie_2=orugie_2
         self.active_orugie=None
+        self.clas='none'
 
 
     @property
