@@ -63,7 +63,7 @@ class Panel():
         self.ultimat = button_change.Button_change(self.panel.centerx-settings.PANEL_SIZE_W/3,
                                                    self.panel.bottom - 100, 200, 70,
                                                    str(igroc.point) + ' / ' + str(igroc.need_point),
-                                                   'yugothicuiregular', [255, 86, 0], model2.ulta)
+                                                   'yugothicuiregular', [255, 86, 0], igroc.ulta)
         self.ultimat.rect.centerx=self.panel.centerx
     def draw(self, screen: pygame.surface.Surface):
         if self.regim in ['normal', 'hod', 'bloc']:
@@ -102,6 +102,16 @@ class Panel():
         draw_helper.draw_picture(screen, self.damage_weapon_rect, a, None)
         a = self.opisanie_orugiy if self.igroc.active_orugie is self.igroc.orugie else self.opisanie_orugiy_2
         draw_helper.draw_picture(screen, self.opisanie_orugiy_rect, a, None, 'topleft', 'topleft')
+        print(self.igroc.active_orugie.damage,self.igroc.active_orugie.damage_base)
+        if self.igroc.active_orugie.damage!= self.igroc.active_orugie.damage_base:
+
+            self.damage_weapon = self.font.render(str(self.igroc.orugie.damage[0]) + '-' + str(self.igroc.orugie.damage[1]), True,
+                                                  [255, 35, 50])
+            self.damage_weapon_2 = self.font.render(str(self.igroc.orugie_2.damage[0]) + '-' + str(self.igroc.orugie_2.damage[1]),
+                                                    True, [255, 35, 50])
+            a = self.damage_weapon if self.igroc.active_orugie is self.igroc.orugie else self.damage_weapon_2
+            draw_helper.draw_picture(screen, self.damage_weapon_rect, a, None)
+
 
         self.kcopka.draw(screen)
 

@@ -47,7 +47,7 @@ def add_pole(col_x, col_y):
     orugie_wrag = orugie.Orugie([-5, 5], 'волшебная коса', 'picture/коса_исцеления.png', 2)
     orugie_wrag_2 = orugie.Orugie([0, 3], 'легендарный топор который претворяется молотом', 'picture/топор.png', 6)
 
-    wrag = igroc_war.Igroc_war(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, deystvie_hod=deystvie_hod,
+    wrag = guardian.Guardian(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, deystvie_hod=deystvie_hod,
                                color=[38, 242, 29],
                                cletca_color=[random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)],
                                orugie=orugie_wrag, orugie_2=orugie_wrag_2, point=0, need_point=10)
@@ -216,13 +216,7 @@ def smena_hoda():
         wrag.mona_hodit = False
 
 
-def ulta():
-    if igroc.point == igroc.need_point:
-        igroc.orugie.damage[0] += 2
-        igroc.orugie_2.damage[0] += 2
-        igroc.orugie.damage[1] += 2
-        igroc.orugie_2.damage[1] += 2
-        igroc.point=0
+
 
 
 def step():
