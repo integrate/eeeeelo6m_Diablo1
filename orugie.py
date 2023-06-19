@@ -3,8 +3,8 @@ import random
 
 class Orugie():
     def __init__(self, damage, opisanie, cartinca, range):
-        self.damage = damage
-        self.damage_base = damage
+        self.damage = damage.copy()
+        self.damage_base = damage.copy()
         self.opisanie = opisanie
         self.cartinca = cartinca
         self.range = range

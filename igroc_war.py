@@ -1,5 +1,6 @@
 import pygame, fullscreen
 
+import observer
 import orugie
 
 
@@ -23,6 +24,7 @@ class Igroc_war():
         self.orugie_2 = orugie_2
         self.active_orugie = None
         self.clas = 'none'
+        self.observ=observer.Observer()
 
     @property
     def mona_hodit(self):

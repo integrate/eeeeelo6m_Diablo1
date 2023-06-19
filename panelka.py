@@ -15,6 +15,7 @@ class Panel():
         if igroc == None:
             return
         self.igroc = igroc
+        self.igroc.observ.subscribe(1,'panel')
 
         self.panel = pygame.Rect(x, 1, settings.PANEL_SIZE_W, 768)
 
