@@ -4,10 +4,13 @@ import observer
 import orugie
 
 
-class Igroc_war():
+class Igroc_war(observer.Observer):
+    EVENT_HP_CHANGE=1
+    EVENT_POINT_CHANGE=2
     def __init__(self, x, y, w, h, hp, point=None, need_point=None, mona_hodit=False, deystvie_hod=None,
                  color=[255, 24, 74],
                  cletca_color=[255, 100, 100], orugie: orugie.Orugie = None, orugie_2: orugie.Orugie = None):
+        observer.Observer.__init__(self)
         self._hp = hp
         self.max_hp = 10
         self._point = point
@@ -24,7 +27,6 @@ class Igroc_war():
         self.orugie_2 = orugie_2
         self.active_orugie = None
         self.clas = 'none'
-        self.observ=observer.Observer()
 
     @property
     def mona_hodit(self):
@@ -46,6 +48,7 @@ class Igroc_war():
             self._hp = self.max_hp
         else:
             self._hp = hp_now
+        self.notify(self.EVENT_HP_CHANGE, self._hp)
 
     @property
     def point(self):
@@ -56,6 +59,7 @@ class Igroc_war():
         self._point = new_point
         if self._point >= self.need_point:
             self._point = self.need_point
+        self.notify(self.EVENT_POINT_CHANGE)
 
     def draw(self, screen):
         self.rect_fullscren = fullscreen.fullscreen_rect(self.rect, screen, 'war', False)

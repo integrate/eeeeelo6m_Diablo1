@@ -40,17 +40,17 @@ def add_pole(col_x, col_y):
     orugie_igroc_2 = orugie.Orugie([-5, 5], 'может как и убить так и добавить здоровье врагу',
                                    'picture/коса_исцеления.png', 2)
     igroc = guardian.Guardian(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 10, point=9, need_point=10,
-                                deystvie_hod=deystvie_hod,
-                                orugie=orugie_igroc, orugie_2=orugie_igroc_2)
+                              deystvie_hod=deystvie_hod,
+                              orugie=orugie_igroc, orugie_2=orugie_igroc_2)
     panel = panelka.Panel([0, 1000], igroc, regim='normal')
     x = col_x - 1
     orugie_wrag = orugie.Orugie([-5, 5], 'волшебная коса', 'picture/коса_исцеления.png', 2)
     orugie_wrag_2 = orugie.Orugie([0, 3], 'легендарный топор который претворяется молотом', 'picture/топор.png', 6)
 
     wrag = guardian.Guardian(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, deystvie_hod=deystvie_hod,
-                               color=[38, 242, 29],
-                               cletca_color=[random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)],
-                               orugie=orugie_wrag, orugie_2=orugie_wrag_2, point=0, need_point=10)
+                             color=[38, 242, 29],
+                             cletca_color=[random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)],
+                             orugie=orugie_wrag, orugie_2=orugie_wrag_2, point=0, need_point=10)
     panel_wrag = panelka.Panel([0, 10], wrag, 1366 - settings.PANEL_SIZE_W)
 
 
@@ -133,7 +133,6 @@ def attack_igroc(realx, realy):
         smena_hoda()
 
 
-
 def do_vibor_vrag():
     if wrag.hp <= wrag.max_hp * 0.2:
         if wrag.orugie_2.find_avg_damage() >= wrag.orugie.find_avg_damage():
@@ -164,7 +163,7 @@ def which_cletca(distant):
     for y in cletcas:
         now = math.dist(y.cletca_fullscreen.center, igroc.rect_fullscren.center)
 
-        if now==0:
+        if now == 0:
             pass
         elif (best == None or now < best) and y.prohod and distant == 'min':
             best = now
@@ -192,7 +191,7 @@ def hod_wrag():
 
     if cletca.attack and igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft):
         igroc.hp -= wrag.active_orugie.do_damage()
-        wrag.point+=2
+        wrag.point += 2
         smena_hoda()
     elif igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft) == False and cletca.prohod == True:
         wrag.sdvig(cletca.cletca.x, cletca.cletca.y)
@@ -214,9 +213,6 @@ def smena_hoda():
         panel.regim = 'normal'
         panel_wrag.regim = 'bloc'
         wrag.mona_hodit = False
-
-
-
 
 
 def step():

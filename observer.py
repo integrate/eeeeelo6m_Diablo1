@@ -1,12 +1,14 @@
-
-
 class Observer():
     def __init__(self):
-        self.subscribers={}
-    def reg_event(self,cod_event):
-        self.cod_event=cod_event
+        self.subscrib = []
 
+    def subscribe(self, who, cod_event):
+        self.subscrib.append({'who': who, 'event': cod_event})
 
-    def subscribe(self,cod_event,who):
-        self.subscribers['subscr']=who
+    def notify(self, cod_event, value=None):
+        for a in self.subscrib:
+            if a['event'] == cod_event:
+                a['who'](self, value,cod_event)
 
+# [{'who':model2,'cod_event':2}]
+# [{'event':2,'sub':[]}]

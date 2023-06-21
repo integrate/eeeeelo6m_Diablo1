@@ -15,13 +15,14 @@ class Panel():
         if igroc == None:
             return
         self.igroc = igroc
-        self.igroc.observ.subscribe(1,'panel')
+        self.igroc.subscribe(self.smena_hp_igroc, igroc.EVENT_HP_CHANGE)
+        self.igroc.subscribe(self.smena_ultimat_point, igroc.EVENT_POINT_CHANGE)
 
         self.panel = pygame.Rect(x, 1, settings.PANEL_SIZE_W, 768)
 
         self.font = font.SysFont('segoeui', 25, True)
 
-        # self.hp_bar = self.font.render(str(igroc.hp), True, [0, 0, 0])
+        self.hp_bar_pic = self.font.render(str(igroc.hp), True, [0, 0, 0])
         self.hp_bar_rect = pygame.Rect(self.panel.x + settings.PANEL_SIZE_W / 6, 25, settings.PANEL_SIZE_W / 3 * 2, 25)
 
         self.slot_rect = pygame.Rect(self.panel.x + settings.PANEL_SIZE_W / 3, 25, settings.PANEL_SIZE_W / 3,
@@ -61,11 +62,12 @@ class Panel():
 
         self.opisanie_orugiy_rect = pygame.Rect(self.panel.x + 5, self.damage_weapon_rect.bottom, 0, 100)
 
-        self.ultimat = button_change.Button_change(self.panel.centerx-settings.PANEL_SIZE_W/3,
+        self.ultimat = button_change.Button_change(self.panel.centerx - settings.PANEL_SIZE_W / 3,
                                                    self.panel.bottom - 100, 200, 70,
                                                    str(igroc.point) + ' / ' + str(igroc.need_point),
                                                    'yugothicuiregular', [255, 86, 0], igroc.ulta)
-        self.ultimat.rect.centerx=self.panel.centerx
+        self.ultimat.rect.centerx = self.panel.centerx
+
     def draw(self, screen: pygame.surface.Surface):
         if self.regim in ['normal', 'hod', 'bloc']:
             self.draw_normal(screen)
@@ -79,13 +81,8 @@ class Panel():
         self.slot_rect_vibor.draw(screen)
         self.slot_rect_vibor_2.draw(screen)
 
-        hp_bar = self.font.render(str(self.igroc.hp), True, [0, 0, 0])
-        draw_helper.draw_picture(screen, self.hp_bar_rect, hp_bar, [255, 255, 255])
+        draw_helper.draw_picture(screen, self.hp_bar_rect, self.hp_bar_pic, [255, 255, 255])
 
-        self.ultimat.smena_txt(str(self.igroc.point) + ' / ' + str(self.igroc.need_point))
-
-        if self.igroc.point== self.igroc.need_point:
-            self.ultimat.smena_txt('ГОТОВО')
         self.ultimat.draw(screen)
 
     def draw_wibor(self, screen):
@@ -103,16 +100,16 @@ class Panel():
         draw_helper.draw_picture(screen, self.damage_weapon_rect, a, None)
         a = self.opisanie_orugiy if self.igroc.active_orugie is self.igroc.orugie else self.opisanie_orugiy_2
         draw_helper.draw_picture(screen, self.opisanie_orugiy_rect, a, None, 'topleft', 'topleft')
-        print(self.igroc.active_orugie.damage,self.igroc.active_orugie.damage_base)
-        if self.igroc.active_orugie.damage!= self.igroc.active_orugie.damage_base:
-
-            self.damage_weapon = self.font.render(str(self.igroc.orugie.damage[0]) + '-' + str(self.igroc.orugie.damage[1]), True,
-                                                  [255, 35, 50])
-            self.damage_weapon_2 = self.font.render(str(self.igroc.orugie_2.damage[0]) + '-' + str(self.igroc.orugie_2.damage[1]),
-                                                    True, [255, 35, 50])
+        # print(self.igroc.active_orugie.damage, self.igroc.active_orugie.damage_base)
+        if self.igroc.active_orugie.damage != self.igroc.active_orugie.damage_base:
+            self.damage_weapon = self.font.render(
+                str(self.igroc.orugie.damage[0]) + '-' + str(self.igroc.orugie.damage[1]), True,
+                [255, 35, 50])
+            self.damage_weapon_2 = self.font.render(
+                str(self.igroc.orugie_2.damage[0]) + '-' + str(self.igroc.orugie_2.damage[1]),
+                True, [255, 35, 50])
             a = self.damage_weapon if self.igroc.active_orugie is self.igroc.orugie else self.damage_weapon_2
             draw_helper.draw_picture(screen, self.damage_weapon_rect, a, None)
-
 
         self.kcopka.draw(screen)
 
@@ -136,6 +133,15 @@ class Panel():
         if self.regim == 'normal':
             self.regim = 'vibor'
             self.igroc.active_orugie = self.igroc.orugie_2
+
+    def smena_hp_igroc(self, observ, value,ced_event):
+        self.hp_bar_pic = self.font.render(str(self.igroc.hp), True, [0, 0, 0])
+
+    def smena_ultimat_point(self, observ, value,cod_event):
+        if self.igroc.point == self.igroc.need_point:
+            self.ultimat.smena_txt('ГОТОВО')
+        else:
+            self.ultimat.smena_txt(str(self.igroc.point) + ' / ' + str(self.igroc.need_point))
 
     def init_event(self, event):
         self.kcopka.nagatie(event)
