@@ -1,8 +1,7 @@
-import pygame, panelka, random, model, math, button_change
+import pygame, panelka, random, math
 
-import button_change
 import guardian
-import model, time, cletca, settings, igroc_war, orugie
+import cletca, settings, igroc_war, orugie
 
 cletcas = []
 igroc = igroc_war.Igroc_war(0, 0, 0, 0, 0)
@@ -40,21 +39,21 @@ def add_pole(col_x, col_y):
     orugie_igroc_2 = orugie.Orugie([-5, 5], 'может как и убить так и добавить здоровье врагу',
                                    'picture/коса_исцеления.png', 2)
     igroc = guardian.Guardian(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 10, point=9, need_point=10,
-                              deystvie_hod=deystvie_hod,
                               orugie=orugie_igroc, orugie_2=orugie_igroc_2)
     panel = panelka.Panel([0, 1000], igroc, regim='normal')
     x = col_x - 1
     orugie_wrag = orugie.Orugie([-5, 5], 'волшебная коса', 'picture/коса_исцеления.png', 2)
     orugie_wrag_2 = orugie.Orugie([0, 3], 'легендарный топор который претворяется молотом', 'picture/топор.png', 6)
 
-    wrag = guardian.Guardian(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, deystvie_hod=deystvie_hod,
-                             color=[38, 242, 29],
+    wrag = guardian.Guardian(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, color=[38, 242, 29],
                              cletca_color=[random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)],
                              orugie=orugie_wrag, orugie_2=orugie_wrag_2, point=0, need_point=10)
     panel_wrag = panelka.Panel([0, 10], wrag, 1366 - settings.PANEL_SIZE_W)
+    igroc.subscribe(deystvie_hod, igroc.EVENT_SMENA_MONA_HODIT)
+    wrag.subscribe(deystvie_hod, igroc.EVENT_SMENA_MONA_HODIT)
 
 
-def deystvie_hod(hod, who):
+def deystvie_hod(who, hod, cod_event):
     if hod:
         do_prohod(who)
 

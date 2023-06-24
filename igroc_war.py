@@ -7,7 +7,8 @@ import orugie
 class Igroc_war(observer.Observer):
     EVENT_HP_CHANGE=1
     EVENT_POINT_CHANGE=2
-    def __init__(self, x, y, w, h, hp, point=None, need_point=None, mona_hodit=False, deystvie_hod=None,
+    EVENT_SMENA_MONA_HODIT=3
+    def __init__(self, x, y, w, h, hp, point=None, need_point=None, mona_hodit=False,
                  color=[255, 24, 74],
                  cletca_color=[255, 100, 100], orugie: orugie.Orugie = None, orugie_2: orugie.Orugie = None):
         observer.Observer.__init__(self)
@@ -20,7 +21,6 @@ class Igroc_war(observer.Observer):
         self.rect = pygame.Rect(x, y, w, h)
         self.stamina = 4
         self._mona_hodit = mona_hodit
-        self._deystvie_hod = deystvie_hod
         self.color = color
         self.cletca_color = cletca_color
         self.orugie = orugie
@@ -35,8 +35,7 @@ class Igroc_war(observer.Observer):
     @mona_hodit.setter
     def mona_hodit(self, hod):
         self._mona_hodit = hod
-        if callable(self._deystvie_hod):
-            self._deystvie_hod(hod, self)
+        self.notify(self.EVENT_SMENA_MONA_HODIT,self._mona_hodit)
 
     @property
     def hp(self):

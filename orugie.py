@@ -1,8 +1,10 @@
-import random
+import random,observer
 
 
-class Orugie():
+class Orugie(observer.Observer):
+    EVENT_SMENA_DAMAGE=1
     def __init__(self, damage, opisanie, cartinca, range):
+        observer.Observer.__init__(self)
         self.damage = damage.copy()
         self.damage_base = damage.copy()
         self.opisanie = opisanie
@@ -19,3 +21,4 @@ class Orugie():
     def smena_damage(self, min, max):
         self.damage[0] += min
         self.damage[1] += max
+        self.notify(self.EVENT_SMENA_DAMAGE)

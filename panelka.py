@@ -17,6 +17,8 @@ class Panel():
         self.igroc = igroc
         self.igroc.subscribe(self.smena_hp_igroc, igroc.EVENT_HP_CHANGE)
         self.igroc.subscribe(self.smena_ultimat_point, igroc.EVENT_POINT_CHANGE)
+        self.igroc.orugie.subscribe(self.smena_damage, self.igroc.orugie.EVENT_SMENA_DAMAGE)
+        self.igroc.orugie_2.subscribe(self.smena_damage, self.igroc.orugie_2.EVENT_SMENA_DAMAGE)
 
         self.panel = pygame.Rect(x, 1, settings.PANEL_SIZE_W, 768)
 
@@ -101,15 +103,8 @@ class Panel():
         a = self.opisanie_orugiy if self.igroc.active_orugie is self.igroc.orugie else self.opisanie_orugiy_2
         draw_helper.draw_picture(screen, self.opisanie_orugiy_rect, a, None, 'topleft', 'topleft')
         # print(self.igroc.active_orugie.damage, self.igroc.active_orugie.damage_base)
-        if self.igroc.active_orugie.damage != self.igroc.active_orugie.damage_base:
-            self.damage_weapon = self.font.render(
-                str(self.igroc.orugie.damage[0]) + '-' + str(self.igroc.orugie.damage[1]), True,
-                [255, 35, 50])
-            self.damage_weapon_2 = self.font.render(
-                str(self.igroc.orugie_2.damage[0]) + '-' + str(self.igroc.orugie_2.damage[1]),
-                True, [255, 35, 50])
-            a = self.damage_weapon if self.igroc.active_orugie is self.igroc.orugie else self.damage_weapon_2
-            draw_helper.draw_picture(screen, self.damage_weapon_rect, a, None)
+        a = self.damage_weapon if self.igroc.active_orugie is self.igroc.orugie else self.damage_weapon_2
+        draw_helper.draw_picture(screen, self.damage_weapon_rect, a, None)
 
         self.kcopka.draw(screen)
 
@@ -134,14 +129,22 @@ class Panel():
             self.regim = 'vibor'
             self.igroc.active_orugie = self.igroc.orugie_2
 
-    def smena_hp_igroc(self, observ, value,ced_event):
+    def smena_hp_igroc(self, observ, value, cod_event):
         self.hp_bar_pic = self.font.render(str(self.igroc.hp), True, [0, 0, 0])
 
-    def smena_ultimat_point(self, observ, value,cod_event):
+    def smena_ultimat_point(self, observ, value, cod_event):
         if self.igroc.point == self.igroc.need_point:
             self.ultimat.smena_txt('ГОТОВО')
         else:
             self.ultimat.smena_txt(str(self.igroc.point) + ' / ' + str(self.igroc.need_point))
+
+    def smena_damage(self, observ, value, cod_event):
+        self.damage_weapon = self.font.render(
+            str(self.igroc.orugie.damage[0]) + '-' + str(self.igroc.orugie.damage[1]), True,
+            [255, 35, 50])
+        self.damage_weapon_2 = self.font.render(
+            str(self.igroc.orugie_2.damage[0]) + '-' + str(self.igroc.orugie_2.damage[1]),
+            True, [255, 35, 50])
 
     def init_event(self, event):
         self.kcopka.nagatie(event)
