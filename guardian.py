@@ -1,3 +1,5 @@
+import effect
+import effect_ulta_guardian
 import igroc_war
 
 
@@ -7,10 +9,9 @@ class Guardian(igroc_war.Igroc_war):
         self.clas='Guardian'
 
     def ulta(self):
+        ultimat=effect_ulta_guardian.Effect_ulta()
         if self.point == self.need_point:
-            self.orugie.smena_damage(1,1)
-            self.orugie_2.smena_damage(1,1)
-            self.orugie.range+=1
-            self.orugie_2.range+=1
             self.point = 0
+
+
 

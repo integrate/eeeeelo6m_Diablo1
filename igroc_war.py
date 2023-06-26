@@ -27,6 +27,7 @@ class Igroc_war(observer.Observer):
         self.orugie_2 = orugie_2
         self.active_orugie = None
         self.clas = 'none'
+        effects=[]
 
     @property
     def mona_hodit(self):
@@ -61,6 +62,7 @@ class Igroc_war(observer.Observer):
         self.notify(self.EVENT_POINT_CHANGE)
 
     def draw(self, screen):
+
         self.rect_fullscren = fullscreen.fullscreen_rect(self.rect, screen, 'war', False)
         pygame.draw.rect(screen, self.color, self.rect_fullscren)
 
