@@ -86,6 +86,9 @@ class Panel():
         draw_helper.draw_picture(screen, self.hp_bar_rect, self.hp_bar_pic, [255, 255, 255])
 
         self.ultimat.draw(screen)
+        for a in self.igroc.effects:
+            a.draw(screen)
+
 
     def draw_wibor(self, screen):
         a = fullscreen.fullscreen_rect(self.panel, screen, 'war', False)

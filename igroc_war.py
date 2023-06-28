@@ -27,7 +27,7 @@ class Igroc_war(observer.Observer):
         self.orugie_2 = orugie_2
         self.active_orugie = None
         self.clas = 'none'
-        effects=[]
+        self.effects=[]
 
     @property
     def mona_hodit(self):
