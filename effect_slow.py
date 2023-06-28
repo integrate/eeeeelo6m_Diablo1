@@ -8,5 +8,6 @@ class Effect_slow(effect.Effect):
         self.strong=strong
         self.deystvie()
 
+
     def deystvie(self):
         self.igroc.stamina-=self.strong
