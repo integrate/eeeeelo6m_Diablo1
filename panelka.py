@@ -86,7 +86,18 @@ class Panel():
         draw_helper.draw_picture(screen, self.hp_bar_rect, self.hp_bar_pic, [255, 255, 255])
 
         self.ultimat.draw(screen)
+        element=0
+        line=1
         for a in self.igroc.effects:
+            if element>3:
+                element=0
+                line+=1
+
+            a.effect_rect.y=50*line
+            a.effect_rect.x=self.panel.x+50+50*element
+            element += 1
+
+
             a.draw(screen)
 
 

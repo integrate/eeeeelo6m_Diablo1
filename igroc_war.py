@@ -73,4 +73,4 @@ class Igroc_war(observer.Observer):
             self.rect.y = y
 
     def ulta(self):
-        raise Exception('нельзя создавать играков с этим классом')
+        raise Exception('нельзя создавать игроков с этим классом')
