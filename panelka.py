@@ -143,6 +143,16 @@ class Panel():
             self.regim = 'vibor'
             self.igroc.active_orugie = self.igroc.orugie_2
 
+    def bloc(self):
+        self.regim='bloc'
+        self.igroc.mona_hodit=False
+    def normal(self):
+        self.regim='normal'
+        self.igroc.sort()
+
+
+
+
     def smena_hp_igroc(self, observ, value, cod_event):
         self.hp_bar_pic = self.font.render(str(self.igroc.hp), True, [0, 0, 0])
 

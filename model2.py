@@ -207,15 +207,13 @@ def smena_hoda():
     global chey_hod
     if chey_hod == 'igroc':
         chey_hod = 'wrag'
-        panel.regim = 'bloc'
-        panel_wrag.regim = 'normal'
-        igroc.mona_hodit = False
+        panel.bloc()
+        panel_wrag.normal()
         pygame.time.set_timer(TIMER_DO_VIBOR, 1500, 1)
     else:
         chey_hod = 'igroc'
-        panel.regim = 'normal'
-        panel_wrag.regim = 'bloc'
-        wrag.mona_hodit = False
+        panel.normal()
+        panel_wrag.bloc()
 
 
 def step():

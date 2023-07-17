@@ -20,6 +20,7 @@ class Igroc_war(observer.Observer):
             self._hp = self.max_hp
         self.rect = pygame.Rect(x, y, w, h)
         self.stamina = 4
+        self.stamina_orig= 4
         self._mona_hodit = mona_hodit
         self.color = color
         self.cletca_color = cletca_color
@@ -71,6 +72,17 @@ class Igroc_war(observer.Observer):
             self.point += 1
             self.rect.x = x
             self.rect.y = y
+
+    def sort(self):
+        self.stamina=self.stamina_orig
+        self.orugie.base_stat()
+        self.orugie_2.base_stat()
+        for a in self.effects.copy():
+            a.long-=1
+            if a.long<=0:
+                self.effects.remove(a)
+            else:
+                a.deystvie()
 
     def ulta(self):
         raise Exception('нельзя создавать игроков с этим классом')

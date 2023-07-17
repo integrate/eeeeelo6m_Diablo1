@@ -22,3 +22,8 @@ class Orugie(observer.Observer):
         self.damage[0] += min
         self.damage[1] += max
         self.notify(self.EVENT_SMENA_DAMAGE)
+
+    def base_stat(self):
+        self.damage=self.damage_base.copy()
+        self.range=self.range_base
+        self.notify(self.EVENT_SMENA_DAMAGE)
