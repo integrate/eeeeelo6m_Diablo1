@@ -5,6 +5,7 @@ import veiw,model,controller,time,controller2,view2,model2
 # sjd('ку','a','a','s','f','r','x','n')
 # exit()
 
+
 while True:
     time.sleep(1/100)
 
