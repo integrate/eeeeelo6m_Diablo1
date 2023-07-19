@@ -175,4 +175,5 @@ class Panel():
         self.exit.nagatie(event)
         self.slot_rect_vibor.nagatie(event)
         self.slot_rect_vibor_2.nagatie(event)
-        self.ultimat.nagatie(event)
+        if self.regim=='normal':
+            self.ultimat.nagatie(event)

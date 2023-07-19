@@ -12,8 +12,11 @@ class Orugie(observer.Observer):
         self.range = range
         self.range_base = range
 
-    def do_damage(self):
-        return random.randint(self.damage[0], self.damage[1])
+    def do_attack(self,wrag):
+        wrag.hp-=random.randint(self.damage[0],self.damage[1])
+
+
+
 
     def find_avg_damage(self):
         return (self.damage[0] + self.damage[1]) / 2

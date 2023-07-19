@@ -1,8 +1,11 @@
 import pygame, panelka, random, math
 
+import axe_energi
 import guardian
 import cletca, settings, igroc_war, orugie
 import effect_slow
+import kosa_iscileniy
+import multi_orugie_effects
 
 cletcas = []
 igroc = igroc_war.Igroc_war(0, 0, 0, 0, 0)
@@ -36,9 +39,8 @@ def add_pole(col_x, col_y):
             cletcas.append(pole)
     a = col_y * col_x
     x = a - col_x
-    orugie_igroc = orugie.Orugie([0, 3], 'легендарный топор который претворяется молотом', 'picture/топор.png', 6)
-    orugie_igroc_2 = orugie.Orugie([-5, 5], 'может как и убить так и добавить здоровье врагу',
-                                   'picture/коса_исцеления.png', 2)
+    orugie_igroc = axe_energi.Axe_energi()
+    orugie_igroc_2 = multi_orugie_effects.Multi_orugie_effects()
     igroc = guardian.Guardian(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 10, point=0, need_point=0,
                               orugie=orugie_igroc, orugie_2=orugie_igroc_2)
     panel = panelka.Panel([0, 1000], igroc, regim='normal')
@@ -124,7 +126,7 @@ def attack_igroc(realx, realy):
     if hero is wrag: return
     if hero.rect_fullscren.collidepoint(realx, realy): return
     if bad.rect_fullscren.collidepoint(realx, realy) and c.attack:
-        bad.hp -= hero.active_orugie.do_damage()
+        hero.active_orugie.do_attack(bad)
         igroc.point += 2
         smena_hoda()
 
@@ -132,7 +134,7 @@ def attack_igroc(realx, realy):
         hero.sdvig(c.cletca.x, c.cletca.y)
 
         if add_zona_deystviy(hero.rect.center, hero.orugie.range).colliderect(bad.rect):
-            bad.hp -= hero.active_orugie.do_damage()
+            hero.active_orugie.do_attack(bad)
         smena_hoda()
 
 
@@ -182,7 +184,7 @@ def hod_wrag():
     if wrag.hp <= wrag.max_hp * 0.2:
         if find_cletca(igroc.rect_fullscren.x,
                        igroc.rect_fullscren.y).attack == True and wrag.active_orugie.find_avg_damage() >= igroc.hp:
-            igroc.hp -= wrag.active_orugie.do_damage()
+            wrag.active_orugie.do_attack(igroc)
             smena_hoda()
             return
         cletca = which_cletca('max')
@@ -193,7 +195,7 @@ def hod_wrag():
         cletca = which_cletca('min')
 
     if cletca.attack and igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft):
-        igroc.hp -= wrag.active_orugie.do_damage()
+        wrag.active_orugie.do_attack(igroc)
         wrag.point += 2
         smena_hoda()
     elif igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft) == False and cletca.prohod == True:
