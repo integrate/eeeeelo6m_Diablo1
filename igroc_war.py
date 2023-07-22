@@ -13,7 +13,8 @@ class Igroc_war(observer.Observer):
                  cletca_color=[255, 100, 100], orugie: orugie.Orugie = None, orugie_2: orugie.Orugie = None):
         observer.Observer.__init__(self)
         self._hp = hp
-        self.max_hp = 10
+        self._max_hp = 10
+        self.max_hp_orig = 10
         self._point = point
         self.need_point = need_point
         if self._hp > self.max_hp:
@@ -45,11 +46,20 @@ class Igroc_war(observer.Observer):
 
     @hp.setter
     def hp(self, hp_now):
-        if hp_now > self.max_hp:
-            self._hp = self.max_hp
+        if hp_now > self._max_hp:
+            self._hp = self._max_hp
         else:
             self._hp = hp_now
         self.notify(self.EVENT_HP_CHANGE, self._hp)
+    @property
+    def max_hp(self):
+        return self._max_hp
+    @max_hp.setter
+    def max_hp(self, max_hp_now):
+        if max_hp_now<self._hp:
+            self._hp=max_hp_now
+            self.notify(self.EVENT_HP_CHANGE, self._hp)
+        self._max_hp = max_hp_now
 
     @property
     def point(self):
@@ -75,6 +85,7 @@ class Igroc_war(observer.Observer):
 
     def sort(self):
         self.stamina=self.stamina_orig
+        self._max_hp=self.max_hp_orig
         self.orugie.base_stat()
         self.orugie_2.base_stat()
         for a in self.effects.copy():

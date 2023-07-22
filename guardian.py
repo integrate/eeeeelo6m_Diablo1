@@ -1,5 +1,4 @@
-import effect
-import effect_ulta_guardian
+from effects import effect_ulta_guardian
 import igroc_war
 
 

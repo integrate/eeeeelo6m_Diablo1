@@ -3,8 +3,7 @@ import pygame, panelka, random, math
 import axe_energi
 import guardian
 import cletca, settings, igroc_war, orugie
-import effect_slow
-import kosa_iscileniy
+from effects import effect_slow
 import multi_orugie_effects
 
 cletcas = []
@@ -54,7 +53,7 @@ def add_pole(col_x, col_y):
     panel_wrag = panelka.Panel([0, 10], wrag, 1366 - settings.PANEL_SIZE_W)
     igroc.subscribe(deystvie_hod, igroc.EVENT_SMENA_MONA_HODIT)
     wrag.subscribe(deystvie_hod, igroc.EVENT_SMENA_MONA_HODIT)
-    efect_slow=effect_slow.Effect_slow(wrag,3)
+    efect_slow= effect_slow.Effect_slow(wrag, 3)
     wrag.effects.append(efect_slow)
 
 
