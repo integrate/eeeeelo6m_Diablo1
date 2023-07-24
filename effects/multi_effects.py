@@ -3,12 +3,12 @@ import random,igroc_war
 
 class Multi_effects(effect.Effect):
     def __init__(self,igroc:igroc_war.Igroc_war):
-        effect.Effect.__init__(self,self.deystvie,"picture/img.png",2)
+        effect.Effect.__init__(self,self.deystvie,"picture/img.png",3)
         self.igroc=igroc
 
 
     def deystvie(self):
-        a=random.randint(29,29)
+        a=random.randint(1,30)
         if 1<=a<=4:
             self.igroc.stamina-=2
         elif 5<=a<=8:

@@ -19,6 +19,9 @@ def controller2():
             model2.ispl_orugie_vrag()
         if r.type==model2.TIMER_DO_HOD:
             model2.hod_wrag()
+        if r.type== pygame.MOUSEBUTTONDOWN:
+            model2.effect_statistik(r.pos[0],r.pos[1])
+
 
         controller.f11(r)
 
