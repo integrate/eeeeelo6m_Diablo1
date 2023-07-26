@@ -3,10 +3,12 @@ from effects import effect
 
 class Effect_ulta_guardian(effect.Effect):
     def __init__(self, orugie, orugie_2,long=1):
-        effect.Effect.__init__(self, self.deystvie, 'picture/эфект_силы.png', long)
+        statistic='damage'+'+1'+' '+'range'+'1'
+        effect.Effect.__init__(self, self.deystvie, 'picture/эфект_силы.png', long,statistic)
         self.orugie = orugie
         self.orugie_2 = orugie_2
         self.deystvie()
+
 
 
     def deystvie(self):

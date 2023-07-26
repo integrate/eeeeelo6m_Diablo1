@@ -21,7 +21,6 @@ def add_pole(col_x, col_y):
     global panel
     global wrag
     global panel_wrag
-    global what_effect
 
     a = range(col_y)
     b = range(col_x)
@@ -56,7 +55,6 @@ def add_pole(col_x, col_y):
     wrag.subscribe(deystvie_hod, igroc.EVENT_SMENA_MONA_HODIT)
     efect_slow= effect_slow.Effect_slow(wrag, 3)
     wrag.effects.append(efect_slow)
-    what_effect=None
 
 
 
@@ -220,13 +218,12 @@ def smena_hoda():
 
 
 def effect_statistik(realx,realy):
-    global what_effect
-    for a in wrag.effects:
+    for a in wrag.effects+igroc.effects:
         if a.fullscreen_rect.collidepoint(realx,realy):
-            what_effect=a
-            break
-        else:
-            what_effect=None
+            a.show_statistic=True
+        # else:
+        #     a.show_statistic = False
+
 
 
 
