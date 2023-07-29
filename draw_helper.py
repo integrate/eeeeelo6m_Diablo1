@@ -13,14 +13,14 @@ def draw_picture(screen,rect,cartinka:pygame.Surface,color,point_pic='center',po
     return rect
 
 
-def text(txt, font, w_panel):
+def text(txt, font, w_panel,color=(0,0,0)):
     a = ''
     s = pygame.Surface([0, 0])
     j = []
     words = txt.split()
-    i= font.render(' ',True,[123,123,123])
+    i= font.render(' ',True,color)
     for r in words:
-        e = font.render(r, True, [0, 0, 0])
+        e = font.render(r, True, color)
         if a == '':
             a = r
         elif e.get_width() + s.get_width()+ i.get_width() <= w_panel:
@@ -28,7 +28,7 @@ def text(txt, font, w_panel):
         else:
             j.append(s)
             a = r
-        s = font.render(a, True, [0, 0, 0])
+        s = font.render(a, True,color)
     j.append(s)
     o = 0
     for v in j:

@@ -12,6 +12,9 @@ def view2():
     model2.panel.draw(screen)
     model2.wrag.draw(screen)
     model2.panel_wrag.draw(screen)
+    if model2.lose==True:
+        screen.fill([0,0,0])
+
 
 
 

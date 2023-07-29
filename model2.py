@@ -21,7 +21,8 @@ def add_pole(col_x, col_y):
     global panel
     global wrag
     global panel_wrag
-
+    global lose
+    global win
     a = range(col_y)
     b = range(col_x)
     w = (1366 - (settings.PANEL_SIZE_W + settings.PANEL_OTSTUP) * 2) / col_x
@@ -55,6 +56,8 @@ def add_pole(col_x, col_y):
     wrag.subscribe(deystvie_hod, igroc.EVENT_SMENA_MONA_HODIT)
     efect_slow= effect_slow.Effect_slow(wrag, 3)
     wrag.effects.append(efect_slow)
+    win=False
+    lose=False
 
 
 
@@ -221,8 +224,14 @@ def effect_statistik(realx,realy):
     for a in wrag.effects+igroc.effects:
         if a.fullscreen_rect.collidepoint(realx,realy):
             a.show_statistic=True
-        # else:
-        #     a.show_statistic = False
+        else:
+            a.show_statistic = False
+
+
+def win_or_lose(wrag,igroc):
+    global lose
+    if igroc.hp<=0:
+        lose=True
 
 
 
@@ -231,4 +240,4 @@ def step():
     pass
 
 
-add_pole(20, 20)
+add_pole(random.randint(5,25), random.randint(5,25))

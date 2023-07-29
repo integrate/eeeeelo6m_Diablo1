@@ -26,7 +26,7 @@ class Effect():
 
         self._statistic=new
         if new is not None:
-            self.txt_statistic = self.font_statistik.render(self._statistic, True, [255, 255, 255])
+            self.txt_statistic=draw_helper.text(self._statistic,self.font_statistik,150,[255,255,255])
             self.txt_statistic = self.txt_statistic.convert_alpha()
             self.txt_statistic.set_alpha(200)
             self.rect_statistic = pygame.rect.Rect(self.effect_rect.bottomright, self.txt_statistic.get_size())
@@ -40,8 +40,7 @@ class Effect():
         self.fullscreen_rect = draw_helper.draw_picture(screen, self.effect_rect, self.pic, [0, 255, 16])
 
         if self.show_statistic==True and self._statistic is not None:
-
-
+            self.rect_statistic.topleft=self.effect_rect.bottomright
 
             draw_helper.draw_picture(screen, self.rect_statistic, self.pic_statistic, None)
             draw_helper.draw_picture(screen, self.rect_statistic, self.txt_statistic, None)
