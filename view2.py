@@ -1,3 +1,4 @@
+import draw_helper
 import model2,pygame,cletca as cleta
 from pygame import display
 screen=pygame.display.get_surface()
@@ -13,8 +14,11 @@ def view2():
     model2.wrag.draw(screen)
     model2.panel_wrag.draw(screen)
     if model2.lose==True:
-        screen.fill([0,0,0])
+        # screen.fill([10,10,10])
+        # draw_helper.draw_txt(screen, 'GAME OVER', 'arial', 100, [190, 0, 0])
 
+        screen.fill([0,0,0])
+        draw_helper.draw_txt(screen, 'GAME OVER', 'arial', 100, [250, 70, 70])
 
 
 

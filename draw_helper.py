@@ -1,4 +1,6 @@
 import fullscreen,pygame
+import settings
+
 
 def draw_picture(screen,rect,cartinka:pygame.Surface,color,point_pic='center',point_rect='center'):
     rect=fullscreen.fullscreen_rect(rect,screen,'war',False)
@@ -41,3 +43,12 @@ def text(txt, font, w_panel,color=(0,0,0)):
         o += font.get_height()
 
     return k
+
+def draw_txt(screen:pygame.surface.Surface,txt,font_name,size,color):
+    font=pygame.font.SysFont(font_name,size,True)
+    a=font.render(txt,True,color)
+    rect=pygame.rect.Rect(0,0,settings.BASE_W,settings.BASE_H)
+    draw_picture(screen,rect,a,None)
+
+
+

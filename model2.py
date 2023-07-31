@@ -41,14 +41,14 @@ def add_pole(col_x, col_y):
     x = a - col_x
     orugie_igroc = axe_energi.Axe_energi()
     orugie_igroc_2 = multi_orugie_effects.Multi_orugie_effects()
-    igroc = guardian.Guardian(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 10, point=0, need_point=0,
+    igroc = guardian.Guardian(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 0, point=0, need_point=0,
                               orugie=orugie_igroc, orugie_2=orugie_igroc_2)
     panel = panelka.Panel([0, 1000], igroc, regim='normal')
     x = col_x - 1
     orugie_wrag = orugie.Orugie([-5, 5], 'волшебная коса', 'picture/коса_исцеления.png', 2)
     orugie_wrag_2 = orugie.Orugie([0, 3], 'легендарный топор который претворяется молотом', 'picture/топор.png', 6)
 
-    wrag = guardian.Guardian(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, color=[38, 242, 29],
+    wrag = guardian.Guardian(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 10, color=[38, 242, 29],
                              cletca_color=[random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)],
                              orugie=orugie_wrag, orugie_2=orugie_wrag_2, point=0, need_point=10)
     panel_wrag = panelka.Panel([0, 10], wrag, 1366 - settings.PANEL_SIZE_W)
@@ -138,6 +138,7 @@ def attack_igroc(realx, realy):
         if add_zona_deystviy(hero.rect.center, hero.orugie.range).colliderect(bad.rect):
             hero.active_orugie.do_attack(bad)
         smena_hoda()
+    win_or_lose(wrag,igroc)
 
 
 def do_vibor_vrag():
@@ -232,6 +233,8 @@ def win_or_lose(wrag,igroc):
     global lose
     if igroc.hp<=0:
         lose=True
+    if wrag.hp<=0:
+        pass
 
 
 

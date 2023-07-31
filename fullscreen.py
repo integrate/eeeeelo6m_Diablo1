@@ -1,8 +1,8 @@
 import model,settings,pygame
 
 def fulscren(screen,w, h,x, y,mul,sdvig=True):
-    base_w = 1366*settings.MUL[mul]
-    base_h = 768*settings.MUL[mul]
+    base_w = settings.BASE_W*settings.MUL[mul]
+    base_h = settings.BASE_H*settings.MUL[mul]
 
     wp=screen.get_width() * model.igroc.rect_igroc.width / base_w
     hp=screen.get_height() * model.igroc.rect_igroc.height / base_h
