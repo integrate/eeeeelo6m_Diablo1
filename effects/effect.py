@@ -39,10 +39,13 @@ class Effect():
     def draw(self, screen):
         self.fullscreen_rect = draw_helper.draw_picture(screen, self.effect_rect, self.pic, [0, 255, 16])
 
+
+    def draw_statistik(self,screen):
         if self.show_statistic==True and self._statistic is not None:
             self.rect_statistic.topleft=self.effect_rect.bottomright
 
             draw_helper.draw_picture(screen, self.rect_statistic, self.pic_statistic, None)
             draw_helper.draw_picture(screen, self.rect_statistic, self.txt_statistic, None)
+
 
 

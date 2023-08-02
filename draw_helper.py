@@ -1,5 +1,6 @@
 import fullscreen,pygame
 import settings
+from pygame import font
 
 
 def draw_picture(screen,rect,cartinka:pygame.Surface,color,point_pic='center',point_rect='center'):
@@ -49,6 +50,23 @@ def draw_txt(screen:pygame.surface.Surface,txt,font_name,size,color):
     a=font.render(txt,True,color)
     rect=pygame.rect.Rect(0,0,settings.BASE_W,settings.BASE_H)
     draw_picture(screen,rect,a,None)
+
+
+def wirawnivonie_txt(fonta, color, txt,rect):
+    txt_size = 1
+    fonti = font.SysFont(fonta, txt_size, True)
+    text = fonti.render(txt, True, color)
+    while text.get_height() < rect.h:
+        txt_size += 1
+        fonti = font.SysFont(fonta, txt_size, True)
+        text = fonti.render(txt, True, color)
+    if txt_size > 1: txt_size -= 1
+    fonti = font.SysFont(fonta, txt_size, True)
+    text = fonti.render(txt, True, color)
+    if text.get_width() > rect.w:
+        a = text.get_width() / rect.w
+        text = pygame.transform.scale(text, [text.get_width() / a, text.get_height() / a])
+    return text
 
 
 

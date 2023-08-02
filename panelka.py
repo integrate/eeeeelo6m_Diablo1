@@ -97,8 +97,10 @@ class Panel():
             a.effect_rect.x=self.panel.x+50+50*element
             element += 1
 
-
             a.draw(screen)
+
+        for a in self.igroc.effects:
+            a.draw_statistik(screen)
 
 
     def draw_wibor(self, screen):
