@@ -123,6 +123,9 @@ def step():
         go_to_next_lvl=time.time()
     elif sostoynie==SOSTOYNIE_OSVETLENIE  and 2.5-(time.time()-go_to_next_lvl)<0:
         sostoynie=SOSTOYNIE_NORMAL
+    elif sostoynie==SOSTOYNIE_WIN_WAR:
+        pass
+
 
 
 
@@ -136,8 +139,9 @@ SOSTOYNIE_POTEMNENIE=2
 SOSTOYNIE_PEREGENERACIY=3
 SOSTOYNIE_OSVETLENIE=4
 SOSTOYNIE_POTEMNENIE_WAR=5
-SOSTOYNIE_OSVETLENIE_WAR=6
+SOSTOYNIE_WIN_WAR=6
 SOSTOYNIE_START_WAR=7
+
 exit=None
 sostoynie = SOSTOYNIE_START_WAR
 # potemnenie,peregeneraciy,osvetlenie,
@@ -145,16 +149,3 @@ add_stena_puti()
 add_granici()
 add_derevo()
 add_vrag()
-
-
-
-
-
-
-
-
-
-
-
-
-

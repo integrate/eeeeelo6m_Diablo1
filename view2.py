@@ -37,3 +37,4 @@ def lose():
         draw_helper.draw_txt(screen, 'GAME OVER', 'arial', 100, [190, 0, 0])
     else:
         a = time.time()
+    model2.knopka_lose.draw(screen)

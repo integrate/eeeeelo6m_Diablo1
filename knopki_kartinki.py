@@ -7,10 +7,11 @@ class Knopka_kartinka():
     def __init__(self,picture,x,y,deystvie,color,border_width=2,border_color=[0,0,0],w=None,h=None):
         self.picture=picture
         self.color=color
+        self.x=x
         if w==None and h==None:
-            self.rect=pygame.Rect(x,y,self.picture.get_width(),self.picture.get_height())
+            self.rect=pygame.Rect(self.x,y,self.picture.get_width(),self.picture.get_height())
         else:
-            self.rect = pygame.Rect(x, y, w, h)
+            self.rect = pygame.Rect(self.x, y, w, h)
         self.deystvie=deystvie
         self.fullscreen_rect=pygame.Rect(0,0,0,0)
         self.border_color=border_color

@@ -3,6 +3,7 @@ import pygame, panelka, random, math
 import axe_energi
 import guardian
 import cletca, settings, igroc_war, orugie
+import knopki
 from effects import effect_slow
 import multi_orugie_effects
 
@@ -14,7 +15,8 @@ panel_wrag = panelka.Panel([0, 10], None, 1366 - settings.PANEL_SIZE_W)
 TIMER_DO_VIBOR = pygame.event.custom_type()
 TIMER_DO_ISPL = pygame.event.custom_type()
 TIMER_DO_HOD = pygame.event.custom_type()
-
+knopka_lose = knopki.Knopka('ВЫХОД', settings.BASE_W / 2, settings.BASE_H / 1.5, 'leelawadeeuisemilight', 30,
+                            'deystvie_lose', [255, 115, 0], [255, 190, 0], border_color=[255, 190, 0])
 
 def add_pole(col_x, col_y):
     global igroc
@@ -23,6 +25,7 @@ def add_pole(col_x, col_y):
     global panel_wrag
     global lose
     global win
+    global knopka_lose
     a = range(col_y)
     b = range(col_x)
     w = (1366 - (settings.PANEL_SIZE_W + settings.PANEL_OTSTUP) * 2) / col_x
@@ -54,11 +57,13 @@ def add_pole(col_x, col_y):
     panel_wrag = panelka.Panel([0, 10], wrag, 1366 - settings.PANEL_SIZE_W)
     igroc.subscribe(deystvie_hod, igroc.EVENT_SMENA_MONA_HODIT)
     wrag.subscribe(deystvie_hod, igroc.EVENT_SMENA_MONA_HODIT)
-    efect_slow= effect_slow.Effect_slow(wrag, 3)
+    efect_slow = effect_slow.Effect_slow(wrag, 3)
     wrag.effects.append(efect_slow)
-    win=False
-    lose=False
-
+    win = False
+    lose = False
+    knopka_lose = knopki.Knopka('EXIT', settings.BASE_W / 2, settings.BASE_H / 1.5, 'leelawadeeuisemilight', 100,
+                                deystvie_lose, [255, 115, 0],[255, 190, 0], border_color=[255, 190, 0])
+    knopka_lose.rect.x -= knopka_lose.picture.get_width()/2
 
 
 def deystvie_hod(who, hod, cod_event):
@@ -138,7 +143,7 @@ def attack_igroc(realx, realy):
         if add_zona_deystviy(hero.rect.center, hero.orugie.range).colliderect(bad.rect):
             hero.active_orugie.do_attack(bad)
         smena_hoda()
-    win_or_lose(wrag,igroc)
+    win_or_lose(wrag, igroc)
 
 
 def do_vibor_vrag():
@@ -221,26 +226,31 @@ def smena_hoda():
         panel_wrag.bloc()
 
 
-def effect_statistik(realx,realy):
-    for a in wrag.effects+igroc.effects:
-        if a.fullscreen_rect.collidepoint(realx,realy):
-            a.show_statistic=True
+def effect_statistik(realx, realy):
+    for a in wrag.effects + igroc.effects:
+        if a.fullscreen_rect.collidepoint(realx, realy):
+            a.show_statistic = True
         else:
             a.show_statistic = False
 
 
-def win_or_lose(wrag,igroc):
+def win_or_lose(wrag, igroc):
     global lose
-    if igroc.hp<=0:
-        lose=True
-    if wrag.hp<=0:
+    if igroc.hp <= 0:
+        lose = True
+    if wrag.hp <= 0:
         pass
 
 
+def deystvie_lose():
+    if lose:
+        exit()
+    elif win:
+        pass
 
 
 def step():
     pass
 
 
-add_pole(random.randint(5,25), random.randint(5,25))
+add_pole(random.randint(5, 25), random.randint(5, 25))
