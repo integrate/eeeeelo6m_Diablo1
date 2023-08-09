@@ -1,4 +1,4 @@
-import orugie
+from Orugie import orugie
 
 
 class Kosa_iscileniy(orugie.Orugie):

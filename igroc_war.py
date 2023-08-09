@@ -1,7 +1,7 @@
 import pygame, fullscreen
 
 import observer
-import orugie
+from Orugie import orugie
 
 
 class Igroc_war(observer.Observer):

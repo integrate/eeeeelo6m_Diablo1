@@ -1,11 +1,11 @@
 import pygame, panelka, random, math
 
-import axe_energi
+from Orugie import axe_energi, orugie, multi_orugie_effects
 import guardian
-import cletca, settings, igroc_war, orugie
+import cletca, settings, igroc_war
 import knopki
+import model
 from effects import effect_slow
-import multi_orugie_effects
 
 cletcas = []
 igroc = igroc_war.Igroc_war(0, 0, 0, 0, 0)
@@ -15,8 +15,22 @@ panel_wrag = panelka.Panel([0, 10], None, 1366 - settings.PANEL_SIZE_W)
 TIMER_DO_VIBOR = pygame.event.custom_type()
 TIMER_DO_ISPL = pygame.event.custom_type()
 TIMER_DO_HOD = pygame.event.custom_type()
+
+# def deystvie_lose_win():
+#     global win
+#     if lose:
+#         exit()
+#     elif win:
+#         model.sostoynie = model.SOSTOYNIE_WIN_WAR
+#         win=False
+
 knopka_lose = knopki.Knopka('ВЫХОД', settings.BASE_W / 2, settings.BASE_H / 1.5, 'leelawadeeuisemilight', 30,
                             'deystvie_lose', [255, 115, 0], [255, 190, 0], border_color=[255, 190, 0])
+knopka_win = knopki.Knopka('NEXT', settings.BASE_W / 2, settings.BASE_H / 1.5, 'leelawadeeuisemilight', 100,
+                           'deystvie_lose_win', [255, 115, 0], [255, 190, 0], border_color=[255, 190, 0])
+
+
+
 
 def add_pole(col_x, col_y):
     global igroc
@@ -26,6 +40,8 @@ def add_pole(col_x, col_y):
     global lose
     global win
     global knopka_lose
+    global knopka_win
+    global win_rect
     a = range(col_y)
     b = range(col_x)
     w = (1366 - (settings.PANEL_SIZE_W + settings.PANEL_OTSTUP) * 2) / col_x
@@ -44,14 +60,14 @@ def add_pole(col_x, col_y):
     x = a - col_x
     orugie_igroc = axe_energi.Axe_energi()
     orugie_igroc_2 = multi_orugie_effects.Multi_orugie_effects()
-    igroc = guardian.Guardian(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 0, point=0, need_point=0,
+    igroc = guardian.Guardian(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, point=0, need_point=0,
                               orugie=orugie_igroc, orugie_2=orugie_igroc_2)
     panel = panelka.Panel([0, 1000], igroc, regim='normal')
     x = col_x - 1
     orugie_wrag = orugie.Orugie([-5, 5], 'волшебная коса', 'picture/коса_исцеления.png', 2)
     orugie_wrag_2 = orugie.Orugie([0, 3], 'легендарный топор который претворяется молотом', 'picture/топор.png', 6)
 
-    wrag = guardian.Guardian(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 10, color=[38, 242, 29],
+    wrag = guardian.Guardian(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 1, color=[38, 242, 29],
                              cletca_color=[random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)],
                              orugie=orugie_wrag, orugie_2=orugie_wrag_2, point=0, need_point=10)
     panel_wrag = panelka.Panel([0, 10], wrag, 1366 - settings.PANEL_SIZE_W)
@@ -62,8 +78,15 @@ def add_pole(col_x, col_y):
     win = False
     lose = False
     knopka_lose = knopki.Knopka('EXIT', settings.BASE_W / 2, settings.BASE_H / 1.5, 'leelawadeeuisemilight', 100,
-                                deystvie_lose, [255, 115, 0],[255, 190, 0], border_color=[255, 190, 0])
-    knopka_lose.rect.x -= knopka_lose.picture.get_width()/2
+                                deystvie_lose_win, [255, 115, 0], [255, 190, 0], border_color=[255, 190, 0])
+    knopka_win = knopki.Knopka('NEXT', settings.BASE_W / 2, settings.BASE_H / 1.5, 'leelawadeeuisemilight', 100,
+                               deystvie_lose_win, [255, 115, 0], [255, 190, 0], border_color=[255, 190, 0])
+    knopka_lose.rect.x -= knopka_lose.picture.get_width() / 2
+    knopka_win.rect.x -= knopka_win.picture.get_width() / 2
+    # win_rect = pygame.rect.Rect(settings.PANEL_SIZE_W + settings.PANEL_OTSTUP, 250,
+    #                             (1366 - (settings.PANEL_SIZE_W + settings.PANEL_OTSTUP)),
+    #                             (768 - settings.POLE_OTSTUP_Y * 2))
+    # win_rect.centery=768/2
 
 
 def deystvie_hod(who, hod, cod_event):
@@ -189,41 +212,43 @@ def which_cletca(distant):
 
 
 def hod_wrag():
-    if wrag.hp <= wrag.max_hp * 0.2:
-        if find_cletca(igroc.rect_fullscren.x,
-                       igroc.rect_fullscren.y).attack == True and wrag.active_orugie.find_avg_damage() >= igroc.hp:
-            wrag.active_orugie.do_attack(igroc)
+    if win is not True and lose is not True:
+        if wrag.hp <= wrag.max_hp * 0.2:
+            if find_cletca(igroc.rect_fullscren.x,
+                           igroc.rect_fullscren.y).attack == True and wrag.active_orugie.find_avg_damage() >= igroc.hp:
+                wrag.active_orugie.do_attack(igroc)
+                smena_hoda()
+                return
+            cletca = which_cletca('max')
+            wrag.sdvig(cletca.cletca.x, cletca.cletca.y)
             smena_hoda()
             return
-        cletca = which_cletca('max')
-        wrag.sdvig(cletca.cletca.x, cletca.cletca.y)
-        smena_hoda()
-        return
-    else:
-        cletca = which_cletca('min')
+        else:
+            cletca = which_cletca('min')
 
-    if cletca.attack and igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft):
-        wrag.active_orugie.do_attack(igroc)
-        wrag.point += 2
-        smena_hoda()
-    elif igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft) == False and cletca.prohod == True:
-        wrag.sdvig(cletca.cletca.x, cletca.cletca.y)
-        smena_hoda()
-    else:
-        print('123')
+        if cletca.attack and igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft):
+            wrag.active_orugie.do_attack(igroc)
+            wrag.point += 2
+            smena_hoda()
+        elif igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft) == False and cletca.prohod == True:
+            wrag.sdvig(cletca.cletca.x, cletca.cletca.y)
+            smena_hoda()
+        else:
+            print('123')
 
 
 def smena_hoda():
     global chey_hod
-    if chey_hod == 'igroc':
-        chey_hod = 'wrag'
-        panel.bloc()
-        panel_wrag.normal()
-        pygame.time.set_timer(TIMER_DO_VIBOR, 1500, 1)
-    else:
-        chey_hod = 'igroc'
-        panel.normal()
-        panel_wrag.bloc()
+    if lose is not True and win is not True:
+        if chey_hod == 'igroc':
+            chey_hod = 'wrag'
+            panel.bloc()
+            panel_wrag.normal()
+            pygame.time.set_timer(TIMER_DO_VIBOR, 1500, 1)
+        else:
+            chey_hod = 'igroc'
+            panel.normal()
+            panel_wrag.bloc()
 
 
 def effect_statistik(realx, realy):
@@ -235,18 +260,25 @@ def effect_statistik(realx, realy):
 
 
 def win_or_lose(wrag, igroc):
-    global lose
+    global lose, win
     if igroc.hp <= 0:
         lose = True
     if wrag.hp <= 0:
-        pass
+        win = True
+    if win or lose:
+        panel_wrag.regim='bloc'
+        panel.regim='bloc'
 
 
-def deystvie_lose():
+
+def deystvie_lose_win():
+    global win
     if lose:
         exit()
     elif win:
-        pass
+        model.sostoynie = model.SOSTOYNIE_WIN_WAR
+        win=False
+
 
 
 def step():

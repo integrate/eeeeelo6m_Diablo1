@@ -1,5 +1,7 @@
 import model,settings,pygame
 
+now_screen=None
+pictures=[]
 def fulscren(screen,w, h,x, y,mul,sdvig=True):
     base_w = settings.BASE_W*settings.MUL[mul]
     base_h = settings.BASE_H*settings.MUL[mul]
@@ -29,5 +31,10 @@ def fullscreen_rect(rect,screen,mul,sdvig=True):
 
 
 def fullscreen_surface(screen,cartinka:pygame.Surface,mul='war'):
-    a=fulscren(screen,cartinka.get_width(),cartinka.get_height(),0,0,mul,False)
-    return pygame.transform.scale(cartinka,[a[2],a[3]])
+    for a in pictures:
+        if a[2]==cartinka.get_width() and a[3]== cartinka.get_height():
+            return cartinka
+    if now_screen!=screen:
+        a=fulscren(screen,cartinka.get_width(),cartinka.get_height(),0,0,mul,False)
+        pictures.append(a)
+        return pygame.transform.scale(cartinka,[a[2],a[3]])

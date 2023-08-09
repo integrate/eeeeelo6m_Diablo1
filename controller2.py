@@ -13,6 +13,7 @@ def controller2():
             model2.attack_igroc(r.pos[0],r.pos[1])
             model2.effect_statistik(r.pos[0], r.pos[1])
             model2.knopka_lose.nagatie(r)
+            model2.knopka_win.nagatie(r)
         model2.panel.init_event(r)
         model2.panel_wrag.init_event(r)
         if r.type==model2.TIMER_DO_VIBOR:

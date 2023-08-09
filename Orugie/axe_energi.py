@@ -1,6 +1,5 @@
 import random
-
-import orugie
+from Orugie import orugie
 
 
 class Axe_energi(orugie.Orugie):

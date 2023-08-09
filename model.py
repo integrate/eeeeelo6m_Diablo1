@@ -68,44 +68,52 @@ def next_lvl():
 
 
 def go_right():
+    global fight_wrag
     global sostoynie,go_to_next_lvl
     if sostoynie == SOSTOYNIE_NORMAL:
         a=igroc.dvigenie_right()
         if type(a) is vrag.Vrag:
+            fight_wrag=a
             sostoynie=SOSTOYNIE_POTEMNENIE_WAR
             go_to_next_lvl = time.time()
 
 
 def go_left():
+    global fight_wrag
     global sostoynie,go_to_next_lvl
     if sostoynie == SOSTOYNIE_NORMAL:
         a=igroc.dvigenie_left()
         if type(a)is vrag.Vrag:
+            fight_wrag = a
             sostoynie=SOSTOYNIE_POTEMNENIE_WAR
             go_to_next_lvl = time.time()
 
 
 def go_down():
+    global fight_wrag
     global sostoynie,go_to_next_lvl
     if sostoynie == SOSTOYNIE_NORMAL:
         a=igroc.dvigenie_bottom()
         if type(a) is vrag.Vrag:
+            fight_wrag = a
             sostoynie=SOSTOYNIE_POTEMNENIE_WAR
             go_to_next_lvl = time.time()
 
 
 def go_top():
+    global fight_wrag
     global sostoynie,go_to_next_lvl
     if sostoynie == SOSTOYNIE_NORMAL:
         a=igroc.dvigenie_top()
         if type(a) is vrag.Vrag:
+            fight_wrag = a
             sostoynie=SOSTOYNIE_POTEMNENIE_WAR
             go_to_next_lvl = time.time()
 
 
 
 def step():
-    global sostoynie,go_to_next_lvl
+    global sostoynie,go_to_next_lvl,fight_wrag
     if time.time() - go_to_next_lvl > 2.5 and sostoynie == SOSTOYNIE_POTEMNENIE_WAR:
         sostoynie=SOSTOYNIE_START_WAR
     if time.time()-go_to_next_lvl>2.5 and sostoynie==SOSTOYNIE_POTEMNENIE:
@@ -124,7 +132,13 @@ def step():
     elif sostoynie==SOSTOYNIE_OSVETLENIE  and 2.5-(time.time()-go_to_next_lvl)<0:
         sostoynie=SOSTOYNIE_NORMAL
     elif sostoynie==SOSTOYNIE_WIN_WAR:
-        pass
+        obshie.remove(fight_wrag)
+        sostoynie=SOSTOYNIE_OSVETLENIE
+        go_to_next_lvl = time.time()
+
+
+
+
 
 
 
@@ -143,7 +157,7 @@ SOSTOYNIE_WIN_WAR=6
 SOSTOYNIE_START_WAR=7
 
 exit=None
-sostoynie = SOSTOYNIE_START_WAR
+sostoynie = SOSTOYNIE_NORMAL
 # potemnenie,peregeneraciy,osvetlenie,
 add_stena_puti()
 add_granici()

@@ -1,12 +1,12 @@
 import random
 from effects import multi_effects
 
-import orugie
+from Orugie import orugie
 
 
 class Multi_orugie_effects(orugie.Orugie):
     def __init__(self, modification=None):
-        orugie.Orugie.__init__(self, [1,1 ], 'реликвия господина алхимика', 'picture/мульти_оружие_эфектов.png', 5)
+        orugie.Orugie.__init__(self, [1, 1], 'реликвия господина алхимика', 'picture/мульти_оружие_эфектов.png', 5)
 
 
     def do_attack(self,wrag):

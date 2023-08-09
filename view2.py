@@ -2,16 +2,21 @@ import draw_helper
 import model2,pygame,cletca as cleta
 import time
 from pygame import display
+
+import settings
+
 screen=pygame.display.get_surface()
 a=time.time()
 def view2():
 
 
 
-    if model2.lose==False:
+    if model2.lose==False and model2.win==False:
         fight()
     if model2.lose==True:
         lose()
+    if model2.win == True:
+        win()
 
 
 
@@ -38,3 +43,8 @@ def lose():
     else:
         a = time.time()
     model2.knopka_lose.draw(screen)
+
+
+def win():
+    model2.knopka_win.draw(screen)
+    # pygame.draw.rect(screen,[0,0,0],model2.win_rect)

@@ -11,7 +11,8 @@ import model, stenaputi, fullscreen, settings, time,model_view
 from pygame import display, draw
 
 
-perehod = pygame.Surface([screen.get_width(), screen.get_height()], pygame.SRCALPHA)
+perehod = pygame.Surface((screen.get_size()), pygame.SRCALPHA)
+
 perehod.fill([0, 0, 0, 0])
 
 
@@ -33,6 +34,7 @@ def veiw():
     world(model_view.minimap, True)
     screen.blit(model_view.minimap, model_view.rect_minimap)
 
+
     if model.sostoynie == model.SOSTOYNIE_POTEMNENIE or model.sostoynie == model.SOSTOYNIE_POTEMNENIE_WAR  and time.time() - model.go_to_next_lvl < 2.5:
         screen.blit(perehod, [0, 0])
 
@@ -48,5 +50,7 @@ def veiw():
     if model.sostoynie == model.SOSTOYNIE_PEREGENERACIY:
         perehod.fill([0, 0, 0, 255])
         screen.blit(perehod, [0, 0])
+    if model.sostoynie == model.SOSTOYNIE_WIN_WAR:
+        perehod.fill([0, 0, 0])
 
     display.flip()
