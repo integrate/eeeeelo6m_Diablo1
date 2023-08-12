@@ -7,7 +7,7 @@ import veiw,model,controller,time,controller2,view2,model2
 
 
 while True:
-    time.sleep(1/100)
+    # time.sleep(1/300)
 
     if model.sostoynie==model.SOSTOYNIE_START_WAR:
         controller2.controller2()
