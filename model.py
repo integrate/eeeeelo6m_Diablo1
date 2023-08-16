@@ -1,8 +1,7 @@
 import pygame, settings, stenaputi as osnovnay_stena, igroc as igroc_mod, derevy, random, \
     time,vrag,randomspawn,exit as exit_mod
 
-
-
+import model2
 
 
 def add_stena_puti():
@@ -116,6 +115,8 @@ def step():
     global sostoynie,go_to_next_lvl,fight_wrag
     if time.time() - go_to_next_lvl > 2.5 and sostoynie == SOSTOYNIE_POTEMNENIE_WAR:
         sostoynie=SOSTOYNIE_START_WAR
+        model2.add_pole(random.randint(5, 25), random.randint(5, 25))
+        # model2.add_pole(2, 2)
     if time.time()-go_to_next_lvl>2.5 and sostoynie==SOSTOYNIE_POTEMNENIE:
         sostoynie=SOSTOYNIE_PEREGENERACIY
 

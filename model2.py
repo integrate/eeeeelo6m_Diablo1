@@ -42,6 +42,8 @@ def add_pole(col_x, col_y):
     global knopka_lose
     global knopka_win
     global win_rect
+    global chey_hod
+    cletcas.clear()
     a = range(col_y)
     b = range(col_x)
     w = (1366 - (settings.PANEL_SIZE_W + settings.PANEL_OTSTUP) * 2) / col_x
@@ -83,11 +85,15 @@ def add_pole(col_x, col_y):
                                deystvie_lose_win, [255, 115, 0], [255, 190, 0], border_color=[255, 190, 0])
     knopka_lose.rect.x -= knopka_lose.picture.get_width() / 2
     knopka_win.rect.x -= knopka_win.picture.get_width() / 2
+    chey_hod = 'igroc'
     # win_rect = pygame.rect.Rect(settings.PANEL_SIZE_W + settings.PANEL_OTSTUP, 250,
     #                             (1366 - (settings.PANEL_SIZE_W + settings.PANEL_OTSTUP)),
     #                             (768 - settings.POLE_OTSTUP_Y * 2))
     # win_rect.centery=768/2
 
+
+def stop_war():
+    pass
 
 def deystvie_hod(who, hod, cod_event):
     if hod:
@@ -281,8 +287,8 @@ def deystvie_lose_win():
 
 
 
+
 def step():
     pass
 
 
-add_pole(random.randint(5, 25), random.randint(5, 25))

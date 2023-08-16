@@ -7,6 +7,7 @@ class Guardian(igroc_war.Igroc_war):
         igroc_war.Igroc_war.__init__(self, *args, **kwargs)
         self.clas = 'Guardian'
 
+
     def ulta(self):
         if self.point == self.need_point:
             ultimat = effect_ulta_guardian.Effect_ulta_guardian(self.orugie, self.orugie_2)
