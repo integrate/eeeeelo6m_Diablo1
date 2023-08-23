@@ -1,12 +1,11 @@
 from effects import effect_ulta_guardian
 import igroc_war
+import full_igroc
 
 
-class Guardian(igroc_war.Igroc_war):
-    def __init__(self, *args, **kwargs):
-        igroc_war.Igroc_war.__init__(self, *args, **kwargs)
-        self.clas = 'Guardian'
-
+class Guardian(full_igroc.Full_igroc):
+    def __init__(self, x,y,rects,orugie,orugie_2):
+        full_igroc.Full_igroc.__init__(self,x,y,120,120,rects,15,0,7,orugie=orugie,orugie_2=orugie_2)
 
     def ulta(self):
         if self.point == self.need_point:

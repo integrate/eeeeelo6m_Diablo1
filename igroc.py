@@ -2,12 +2,10 @@ import pygame, fullscreen
 
 
 class Igroc:
-    def __init__(self, x, y, hp, dmg, deff, speedx, speedy, rects):
+    def __init__(self, x, y, speedx, speedy, rects):
         self.x = x
         self.y = y
-        self.hp = hp
-        self.dmg = dmg
-        self.deff = deff
+
         self.speedx = speedx
         self.speedy = speedy
         self.rects = rects

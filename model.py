@@ -1,6 +1,8 @@
-import pygame, settings, stenaputi as osnovnay_stena, igroc as igroc_mod, derevy, random, \
+import  pygame, settings, stenaputi as osnovnay_stena, igroc as igroc_mod, derevy, random, \
     time,vrag,randomspawn,exit as exit_mod
-
+from Orugie import axe_energi,multi_orugie_effects
+import full_igroc
+import guardian
 import model2
 
 
@@ -115,7 +117,7 @@ def step():
     global sostoynie,go_to_next_lvl,fight_wrag
     if time.time() - go_to_next_lvl > 2.5 and sostoynie == SOSTOYNIE_POTEMNENIE_WAR:
         sostoynie=SOSTOYNIE_START_WAR
-        model2.add_pole(random.randint(5, 25), random.randint(5, 25))
+        model2.add_pole(random.randint(5, 25), random.randint(5, 25),igroc,igroc_2)
         # model2.add_pole(2, 2)
     if time.time()-go_to_next_lvl>2.5 and sostoynie==SOSTOYNIE_POTEMNENIE:
         sostoynie=SOSTOYNIE_PEREGENERACIY
@@ -146,7 +148,11 @@ def step():
 
 obshie_nospawn = []
 obshie = []
-igroc = igroc_mod.Igroc(0, 1000, 100, 10, 3, 100, 100, obshie)
+# igroc = igroc_mod.Igroc(0, 1000, 100, 100, obshie)
+orugie_igroc = axe_energi.Axe_energi()
+orugie_igroc_2 = multi_orugie_effects.Multi_orugie_effects()
+igroc=guardian.Guardian(0, 1000, obshie,orugie_igroc,orugie_igroc_2)
+igroc_2=guardian.Guardian(0, 1000, obshie,orugie_igroc,orugie_igroc_2)
 lvl = 5
 go_to_next_lvl = 0
 SOSTOYNIE_NORMAL=1

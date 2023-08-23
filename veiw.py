@@ -22,6 +22,7 @@ def world(what, minimap):
     for stenaputi in model.obshie:
         stenaputi.draw(what, minimap)
     model.igroc.draw(what, minimap)
+    model.igroc_2.draw(what, minimap)
 
 
 # def smena_minimap():
@@ -35,8 +36,7 @@ def veiw():
     world(model_view.minimap, True)
     screen.blit(model_view.minimap, model_view.rect_minimap)
     perehod_2=fullscreen.fullscreen_surface(screen,perehod,'1')
-    print(perehod.get_size())
-    print(perehod_2.get_size())
+
 
 
     if model.sostoynie == model.SOSTOYNIE_POTEMNENIE or model.sostoynie == model.SOSTOYNIE_POTEMNENIE_WAR  and time.time() - model.go_to_next_lvl < 2.5:

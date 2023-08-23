@@ -11,7 +11,7 @@ print(font.get_fonts())
 
 
 class Panel():
-    def __init__(self, damage, igroc: igroc_war.Igroc_war, x=1, regim='bloc'):
+    def __init__(self, igroc: igroc_war.Igroc_war, x=1, regim='bloc'):
         if igroc == None:
             return
         self.igroc = igroc

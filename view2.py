@@ -1,8 +1,10 @@
 import draw_helper
+import full_igroc
+import igroc_war
 import model2,pygame,cletca as cleta
 import time
 from pygame import display
-
+import igroc
 import settings
 
 screen=pygame.display.get_surface()
@@ -27,9 +29,15 @@ def fight():
     screen.fill([10, 90, 100])
     for cletca in model2.cletcas:
         cletca.draw(screen)
-    model2.igroc.draw(screen)
+    import guardian
+    print("MRO:", [x.__name__ for x in guardian.Guardian.__mro__])
+    a=super(igroc.Igroc,model2.igroc).draw(screen)
+    a=super(igroc.Igroc,model2.wrag).draw(screen)
+
+    # model2.igroc.draw(screen)
+
     model2.panel.draw(screen)
-    model2.wrag.draw(screen)
+    # model2.wrag.draw(screen)
     model2.panel_wrag.draw(screen)
 
 def lose():

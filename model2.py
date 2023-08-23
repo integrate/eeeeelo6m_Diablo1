@@ -5,13 +5,11 @@ import guardian
 import cletca, settings, igroc_war
 import knopki
 import model
-from effects import effect_slow
-
 cletcas = []
-igroc = igroc_war.Igroc_war(0, 0, 0, 0, 0)
-wrag = igroc_war.Igroc_war(0, 0, 0, 0, 0)
-chey_hod = 'igroc'
-panel_wrag = panelka.Panel([0, 10], None, 1366 - settings.PANEL_SIZE_W)
+# wrag = igroc_war.Igroc_war(0, 0, 0, 0, 0)
+# igroc = igroc_war.Igroc_war(0, 0, 0, 0, 0)
+# chey_hod = 'igroc'
+# panel_wrag = panelka.Panel( None, 1366 - settings.PANEL_SIZE_W)
 TIMER_DO_VIBOR = pygame.event.custom_type()
 TIMER_DO_ISPL = pygame.event.custom_type()
 TIMER_DO_HOD = pygame.event.custom_type()
@@ -32,7 +30,7 @@ knopka_win = knopki.Knopka('NEXT', settings.BASE_W / 2, settings.BASE_H / 1.5, '
 
 
 
-def add_pole(col_x, col_y):
+def add_pole(col_x, col_y,base_igroc:igroc_war.Igroc_war,base_wrag):
     global igroc
     global panel
     global wrag
@@ -43,6 +41,8 @@ def add_pole(col_x, col_y):
     global knopka_win
     global win_rect
     global chey_hod
+
+    #подготовка к созданию
     cletcas.clear()
     a = range(col_y)
     b = range(col_x)
@@ -52,31 +52,37 @@ def add_pole(col_x, col_y):
     h = min(w, h)
     x = 1366 / 2 - w * col_x / 2
     y = 768 / 2 - h * col_y / 2
+    chey_hod = 'igroc'
+    igroc=base_igroc
+    wrag=base_wrag
 
+
+    #создание поля
     for coly in a:
         for colx in b:
             # pole = cletca.Cletca(750, 250,1366/2, 768/2)
             pole = cletca.Cletca(x + w * colx, y + h * coly, w, h)
             cletcas.append(pole)
+
+    #активация игрока
     a = col_y * col_x
     x = a - col_x
-    orugie_igroc = axe_energi.Axe_energi()
-    orugie_igroc_2 = multi_orugie_effects.Multi_orugie_effects()
-    igroc = guardian.Guardian(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 100, point=0, need_point=0,
-                              orugie=orugie_igroc, orugie_2=orugie_igroc_2)
-    panel = panelka.Panel([0, 1000], igroc, regim='normal')
-    x = col_x - 1
-    orugie_wrag = orugie.Orugie([-5, 5], 'волшебная коса', 'picture/коса_исцеления.png', 2)
-    orugie_wrag_2 = orugie.Orugie([0, 3], 'легендарный топор который претворяется молотом', 'picture/топор.png', 6)
+    base_igroc.activate(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h)
 
-    wrag = guardian.Guardian(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h, 1, color=[38, 242, 29],
-                             cletca_color=[random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)],
-                             orugie=orugie_wrag, orugie_2=orugie_wrag_2, point=0, need_point=10)
-    panel_wrag = panelka.Panel([0, 10], wrag, 1366 - settings.PANEL_SIZE_W)
+
+    #активация врага
+    x = col_x - 1
+    base_wrag.activate(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h)
+
+    #создание панелей
+    panel = panelka.Panel( base_igroc, regim='normal')
+    panel_wrag = panelka.Panel( wrag, 1366 - settings.PANEL_SIZE_W)
+
+    #подписки
     igroc.subscribe(deystvie_hod, igroc.EVENT_SMENA_MONA_HODIT)
     wrag.subscribe(deystvie_hod, igroc.EVENT_SMENA_MONA_HODIT)
-    efect_slow = effect_slow.Effect_slow(wrag, 3)
-    wrag.effects.append(efect_slow)
+
+    #победа/поражение
     win = False
     lose = False
     knopka_lose = knopki.Knopka('EXIT', settings.BASE_W / 2, settings.BASE_H / 1.5, 'leelawadeeuisemilight', 100,
@@ -85,11 +91,9 @@ def add_pole(col_x, col_y):
                                deystvie_lose_win, [255, 115, 0], [255, 190, 0], border_color=[255, 190, 0])
     knopka_lose.rect.x -= knopka_lose.picture.get_width() / 2
     knopka_win.rect.x -= knopka_win.picture.get_width() / 2
-    chey_hod = 'igroc'
-    # win_rect = pygame.rect.Rect(settings.PANEL_SIZE_W + settings.PANEL_OTSTUP, 250,
-    #                             (1366 - (settings.PANEL_SIZE_W + settings.PANEL_OTSTUP)),
-    #                             (768 - settings.POLE_OTSTUP_Y * 2))
-    # win_rect.centery=768/2
+
+
+
 
 
 def stop_war():
