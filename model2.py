@@ -238,6 +238,7 @@ def hod_wrag():
 
         if cletca.attack and igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft):
             wrag.active_orugie.do_attack(igroc)
+
             wrag.point += 2
             smena_hoda()
         elif igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft) == False and cletca.prohod == True:

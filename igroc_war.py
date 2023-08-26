@@ -9,26 +9,26 @@ class Igroc_war(observer.Observer):
     EVENT_POINT_CHANGE = 2
     EVENT_SMENA_MONA_HODIT = 3
 
-    def __init__(self, hp, point=None, need_point=None,
+    def __init__(self, hp,max_hp , stamina, point=None, need_point=None,
                  color=[255, 24, 74],
                  cletca_color=[255, 100, 100], orugie: orugie.Orugie = None, orugie_2: orugie.Orugie = None):
         observer.Observer.__init__(self)
         self._hp = hp
-        self._max_hp = 10
+        self._max_hp = max_hp
 
         self._point = point
         self.need_point = need_point
         if self._hp > self.max_hp:
             self._hp = self.max_hp
-        self.stamina = 4
+        self.stamina = stamina
 
         self.orugie = orugie
         self.orugie_2 = orugie_2
 
-        self.stamina_orig = 4
-        self.max_hp_orig = 10
+        self.stamina_orig = stamina
+        self.max_hp_orig = max_hp
 
-        self.clas = 'none'
+
         self.effects = []
         self.active_orugie = None
 
@@ -84,6 +84,7 @@ class Igroc_war(observer.Observer):
 
     @point.setter
     def point(self, new_point):
+        if self._point is None: return
         self._point = new_point
         if self._point >= self.need_point:
             self._point = self.need_point
@@ -96,7 +97,8 @@ class Igroc_war(observer.Observer):
 
     def sdvig(self, x, y):
         if self._mona_hodit == True:
-            self.point += 1
+            if self.point is not None:
+                self.point += 1
             self.rect.x = x
             self.rect.y = y
 

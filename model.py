@@ -1,5 +1,7 @@
 import  pygame, settings, stenaputi as osnovnay_stena, igroc as igroc_mod, derevy, random, \
     time,vrag,randomspawn,exit as exit_mod
+
+import wrag_skelet
 from Orugie import axe_energi,multi_orugie_effects
 import full_igroc
 import guardian
@@ -152,7 +154,7 @@ obshie = []
 orugie_igroc = axe_energi.Axe_energi()
 orugie_igroc_2 = multi_orugie_effects.Multi_orugie_effects()
 igroc=guardian.Guardian(0, 1000, obshie,orugie_igroc,orugie_igroc_2)
-igroc_2=guardian.Guardian(0, 1000, obshie,orugie_igroc,orugie_igroc_2)
+igroc_2=wrag_skelet.Wrag_skelet(1000, 2000)
 lvl = 5
 go_to_next_lvl = 0
 SOSTOYNIE_NORMAL=1
