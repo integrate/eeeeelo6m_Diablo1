@@ -84,7 +84,6 @@ class Igroc_war(observer.Observer):
 
     @point.setter
     def point(self, new_point):
-        if self._point is None: return
         self._point = new_point
         if self._point >= self.need_point:
             self._point = self.need_point

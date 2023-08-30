@@ -5,6 +5,7 @@ import guardian
 import cletca, settings, igroc_war
 import knopki
 import model
+
 cletcas = []
 # wrag = igroc_war.Igroc_war(0, 0, 0, 0, 0)
 # igroc = igroc_war.Igroc_war(0, 0, 0, 0, 0)
@@ -28,9 +29,7 @@ knopka_win = knopki.Knopka('NEXT', settings.BASE_W / 2, settings.BASE_H / 1.5, '
                            'deystvie_lose_win', [255, 115, 0], [255, 190, 0], border_color=[255, 190, 0])
 
 
-
-
-def add_pole(col_x, col_y,base_igroc:igroc_war.Igroc_war,base_wrag):
+def add_pole(col_x, col_y, base_igroc: igroc_war.Igroc_war, base_wrag):
     global igroc
     global panel
     global wrag
@@ -42,7 +41,7 @@ def add_pole(col_x, col_y,base_igroc:igroc_war.Igroc_war,base_wrag):
     global win_rect
     global chey_hod
 
-    #подготовка к созданию
+    # подготовка к созданию
     cletcas.clear()
     a = range(col_y)
     b = range(col_x)
@@ -53,36 +52,34 @@ def add_pole(col_x, col_y,base_igroc:igroc_war.Igroc_war,base_wrag):
     x = 1366 / 2 - w * col_x / 2
     y = 768 / 2 - h * col_y / 2
     chey_hod = 'igroc'
-    igroc=base_igroc
-    wrag=base_wrag
+    igroc = base_igroc
+    wrag = base_wrag
 
-
-    #создание поля
+    # создание поля
     for coly in a:
         for colx in b:
             # pole = cletca.Cletca(750, 250,1366/2, 768/2)
             pole = cletca.Cletca(x + w * colx, y + h * coly, w, h)
             cletcas.append(pole)
 
-    #активация игрока
+    # активация игрока
     a = col_y * col_x
     x = a - col_x
     base_igroc.activate(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h)
 
-
-    #активация врага
+    # активация врага
     x = col_x - 1
     base_wrag.activate(cletcas[x].x, cletcas[x].y, cletcas[0].w, cletcas[0].h)
 
-    #создание панелей
-    panel = panelka.Panel( base_igroc, regim='normal')
-    panel_wrag = panelka.Panel( wrag, 1366 - settings.PANEL_SIZE_W)
+    # создание панелей
+    panel = panelka.Panel(base_igroc, regim='normal')
+    panel_wrag = panelka.Panel(wrag, 1366 - settings.PANEL_SIZE_W)
 
-    #подписки
+    # подписки
     igroc.subscribe(deystvie_hod, igroc.EVENT_SMENA_MONA_HODIT)
     wrag.subscribe(deystvie_hod, igroc.EVENT_SMENA_MONA_HODIT)
 
-    #победа/поражение
+    # победа/поражение
     win = False
     lose = False
     knopka_lose = knopki.Knopka('EXIT', settings.BASE_W / 2, settings.BASE_H / 1.5, 'leelawadeeuisemilight', 100,
@@ -93,11 +90,9 @@ def add_pole(col_x, col_y,base_igroc:igroc_war.Igroc_war,base_wrag):
     knopka_win.rect.x -= knopka_win.picture.get_width() / 2
 
 
-
-
-
 def stop_war():
     pass
+
 
 def deystvie_hod(who, hod, cod_event):
     if hod:
@@ -202,6 +197,14 @@ def ispl_orugie_vrag():
 
 
 def which_cletca(distant):
+    """
+    команда находит клетку, дальнейшую или ближайшую к игроку.
+    если min, то ближайшая, на которую можно ходить. Или клетку с играком, если его можно атаковать
+    если max, то дальнейшая, на которую можно пойти
+
+    :param distant: min / max
+    :return: сletca
+    """
     best = None
     a = find_cletca(igroc.rect_fullscren.x, igroc.rect_fullscren.y)
     if a.attack and distant == 'min':
@@ -222,30 +225,33 @@ def which_cletca(distant):
 
 
 def hod_wrag():
-    if win is not True and lose is not True:
-        if wrag.hp <= wrag.max_hp * 0.2:
-            if find_cletca(igroc.rect_fullscren.x,
-                           igroc.rect_fullscren.y).attack == True and wrag.active_orugie.find_avg_damage() >= igroc.hp:
-                wrag.active_orugie.do_attack(igroc)
-                smena_hoda()
-                return
-            cletca = which_cletca('max')
-            wrag.sdvig(cletca.cletca.x, cletca.cletca.y)
-            smena_hoda()
-            return
-        else:
-            cletca = which_cletca('min')
+    if win is True or lose is True: return
 
-        if cletca.attack and igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft):
+    if wrag.hp <= wrag.max_hp * 0.2:
+
+        if find_cletca(igroc.rect_fullscren.x,
+                       igroc.rect_fullscren.y).attack == True and wrag.active_orugie.find_avg_damage() >= igroc.hp:
             wrag.active_orugie.do_attack(igroc)
-
+            smena_hoda()
             wrag.point += 2
-            smena_hoda()
-        elif igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft) == False and cletca.prohod == True:
-            wrag.sdvig(cletca.cletca.x, cletca.cletca.y)
-            smena_hoda()
-        else:
-            print('123')
+            return
+        cletca = which_cletca('max')
+        wrag.sdvig(cletca.cletca.x, cletca.cletca.y)
+        wrag.point += 1
+
+        smena_hoda()
+        return
+
+    cletca = which_cletca('min')
+    if cletca.attack and igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft):
+        wrag.active_orugie.do_attack(igroc)
+
+        wrag.point += 2
+        smena_hoda()
+    elif igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft) == False and cletca.prohod == True:
+        wrag.sdvig(cletca.cletca.x, cletca.cletca.y)
+        wrag.point += 1
+        smena_hoda()
 
 
 def smena_hoda():
@@ -277,9 +283,8 @@ def win_or_lose(wrag, igroc):
     if wrag.hp <= 0:
         win = True
     if win or lose:
-        panel_wrag.regim='bloc'
-        panel.regim='bloc'
-
+        panel_wrag.regim = 'bloc'
+        panel.regim = 'bloc'
 
 
 def deystvie_lose_win():
@@ -288,12 +293,8 @@ def deystvie_lose_win():
         exit()
     elif win:
         model.sostoynie = model.SOSTOYNIE_WIN_WAR
-        win=False
-
-
+        win = False
 
 
 def step():
     pass
-
-
