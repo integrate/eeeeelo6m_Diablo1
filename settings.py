@@ -1,7 +1,7 @@
 
 
 
-MUL={'war':1,'map':2,'minimap':5,'1':1}
+MUL={'war':1,'map':2,'minimap':7,'1':1}
 PERCENTMINIMAP=2.572
 MAP_SIZE=10000
 MAP_FAT=50

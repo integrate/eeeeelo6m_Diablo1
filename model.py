@@ -30,7 +30,7 @@ def stena(x, y, w, h, nospawn=200):
 
 def add_vrag():
     def maker(x, y):
-        derevo = vrag.Vrag(x, y)
+        derevo = vrag.Vrag(x,y)
         return derevo
     randomspawn.add_derevo(10,maker,obshie_nospawn,obshie,50)
 

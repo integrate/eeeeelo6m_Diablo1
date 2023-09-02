@@ -9,7 +9,7 @@ class Multi_effects(effect.Effect):
 
 
     def deystvie(self):
-        a=random.randint(31,31)
+        a=random.randint(1,31)
         if 1<=a<=4:
             self.igroc.stamina-=2
             self.statistic='stamina -2'

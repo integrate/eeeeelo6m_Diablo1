@@ -1,16 +1,10 @@
 import pygame,fullscreen,nospawn as modul_nospawn
 
-class Vrag(modul_nospawn.Nospawn):
+import wrag_skelet
+
+
+class Vrag(modul_nospawn.Nospawn,wrag_skelet.Wrag_skelet):
     def __init__(self,x,y,hp=10):
         modul_nospawn.Nospawn.__init__(self,x,y,150,150,25)
-        self.x=x
-        self.y=y
-        self.hp=hp
-        self.rect=pygame.Rect(x,y,150,150)
-
-
-    def draw(self,screen,minimap):
-        mul='minimap' if minimap else 'map'
-
-        vrag_fullscreen=fullscreen.fullscreen_rect(self.rect,screen,mul)
-        pygame.draw.rect(screen,[23,124,45],vrag_fullscreen)
+        wrag_skelet.Wrag_skelet.__init__(self,x,y)
+        self.rect=pygame.Rect(x,y,100,100)

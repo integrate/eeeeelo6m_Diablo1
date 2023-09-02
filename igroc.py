@@ -2,14 +2,16 @@ import pygame, fullscreen
 
 
 class Igroc:
-    def __init__(self, x, y, speedx, speedy, rects):
+    def __init__(self, x, y, speedx, speedy, rects,w,h,color):
         self.x = x
         self.y = y
-
+        self.w=w
+        self.h=h
+        self.color=color
         self.speedx = speedx
         self.speedy = speedy
         self.rects = rects
-        self.rect_igroc = pygame.Rect(self.x, self.y, 100, 100)
+        self.rect_igroc = pygame.Rect(self.x, self.y, self.w, self.h)
 
     def draw(self, screen, minimap=False):
         # igroc = pygame.Rect(
@@ -18,7 +20,7 @@ class Igroc:
         mul='minimap' if minimap else 'map'
 
         igroc = fullscreen.fullscreen_rect(self.rect_igroc, screen, mul)
-        pygame.draw.rect(screen, [255, 30, 30], igroc)
+        pygame.draw.rect(screen, self.color, igroc)
 
     def dvigenie_left(self):
         b=self.correct_wall_left()

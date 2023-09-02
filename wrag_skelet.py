@@ -10,5 +10,5 @@ class Wrag_skelet(full_igroc.Full_igroc):
 
         orugie_igroc = axe_energi.Axe_energi()
         orugie_igroc_2 = multi_orugie_effects.Multi_orugie_effects()
-        full_igroc.Full_igroc.__init__(self, x, y, 0, 0, [], hp,hp,stamina,0,0, color=[220, 160, 255], cletca_color=[255, 92, 75],
+        full_igroc.Full_igroc.__init__(self, x, y, 0, 0, [], hp,hp,stamina, color=[220, 160, 255], cletca_color=[255, 92, 75],
                                        orugie=orugie_igroc_2, orugie_2=orugie_igroc)

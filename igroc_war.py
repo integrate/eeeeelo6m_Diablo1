@@ -18,6 +18,8 @@ class Igroc_war(observer.Observer):
 
         self._point = point
         self.need_point = need_point
+        self.need_ulta= self.need_point is not None
+
         if self._hp > self.max_hp:
             self._hp = self.max_hp
         self.stamina = stamina
@@ -115,3 +117,7 @@ class Igroc_war(observer.Observer):
 
     def ulta(self):
         raise Exception('нельзя создавать игроков с этим классом')
+
+    def plus_point(self,count):
+        if self.need_ulta:
+            self._point+=count

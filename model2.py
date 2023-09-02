@@ -29,7 +29,7 @@ knopka_win = knopki.Knopka('NEXT', settings.BASE_W / 2, settings.BASE_H / 1.5, '
                            'deystvie_lose_win', [255, 115, 0], [255, 190, 0], border_color=[255, 190, 0])
 
 
-def add_pole(col_x, col_y, base_igroc: igroc_war.Igroc_war, base_wrag):
+def add_pole(col_x, col_y, base_igroc: igroc_war.Igroc_war, base_wrag:igroc_war.Igroc_war):
     global igroc
     global panel
     global wrag
@@ -171,7 +171,7 @@ def attack_igroc(realx, realy):
         if add_zona_deystviy(hero.rect.center, hero.orugie.range).colliderect(bad.rect):
             hero.active_orugie.do_attack(bad)
         smena_hoda()
-    win_or_lose(wrag, igroc)
+
 
 
 def do_vibor_vrag():
@@ -233,11 +233,11 @@ def hod_wrag():
                        igroc.rect_fullscren.y).attack == True and wrag.active_orugie.find_avg_damage() >= igroc.hp:
             wrag.active_orugie.do_attack(igroc)
             smena_hoda()
-            wrag.point += 2
+            wrag.plus_point(2)
             return
         cletca = which_cletca('max')
         wrag.sdvig(cletca.cletca.x, cletca.cletca.y)
-        wrag.point += 1
+        wrag.plus_point(1)
 
         smena_hoda()
         return
@@ -246,16 +246,22 @@ def hod_wrag():
     if cletca.attack and igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft):
         wrag.active_orugie.do_attack(igroc)
 
-        wrag.point += 2
+        wrag.plus_point(2)
         smena_hoda()
     elif igroc.rect_fullscren.collidepoint(cletca.cletca_fullscreen.topleft) == False and cletca.prohod == True:
         wrag.sdvig(cletca.cletca.x, cletca.cletca.y)
-        wrag.point += 1
+        wrag.plus_point(1)
         smena_hoda()
+
+
+
+
+
 
 
 def smena_hoda():
     global chey_hod
+    win_or_lose(wrag, igroc)
     if lose is not True and win is not True:
         if chey_hod == 'igroc':
             chey_hod = 'wrag'

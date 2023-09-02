@@ -63,12 +63,12 @@ class Panel():
                                                   settings.PANEL_SIZE_W)
 
         self.opisanie_orugiy_rect = pygame.Rect(self.panel.x + 5, self.damage_weapon_rect.bottom, 0, 100)
-
-        self.ultimat = button_change.Button_change(self.panel.centerx - settings.PANEL_SIZE_W / 3,
-                                                   self.panel.bottom - 100, 200, 70,
-                                                   str(igroc.point) + ' / ' + str(igroc.need_point),
-                                                   'yugothicuiregular', [255, 86, 0], igroc.ulta)
-        self.ultimat.rect.centerx = self.panel.centerx
+        if igroc.need_ulta:
+            self.ultimat = button_change.Button_change(self.panel.centerx - settings.PANEL_SIZE_W / 3,
+                                                       self.panel.bottom - 100, 200, 70,
+                                                       str(igroc.point) + ' / ' + str(igroc.need_point),
+                                                       'yugothicuiregular', [255, 86, 0], igroc.ulta)
+            self.ultimat.rect.centerx = self.panel.centerx
 
     def draw(self, screen: pygame.surface.Surface):
         if self.regim in ['normal', 'hod', 'bloc']:
@@ -84,8 +84,8 @@ class Panel():
         self.slot_rect_vibor_2.draw(screen)
 
         draw_helper.draw_picture(screen, self.hp_bar_rect, self.hp_bar_pic, [255, 255, 255])
-
-        self.ultimat.draw(screen)
+        if self.igroc.need_ulta:
+            self.ultimat.draw(screen)
         element=0
         line=1
         for a in self.igroc.effects:
@@ -177,5 +177,5 @@ class Panel():
         self.exit.nagatie(event)
         self.slot_rect_vibor.nagatie(event)
         self.slot_rect_vibor_2.nagatie(event)
-        if self.regim=='normal':
+        if self.regim=='normal' and self.igroc.need_ulta:
             self.ultimat.nagatie(event)
