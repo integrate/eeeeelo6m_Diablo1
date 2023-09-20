@@ -6,6 +6,7 @@ import time
 from pygame import display
 import igroc
 import settings
+import wrag_skelet
 
 screen=pygame.display.get_surface()
 a=time.time()
@@ -30,9 +31,9 @@ def fight():
     for cletca in model2.cletcas:
         cletca.draw(screen)
     import guardian
-    print("MRO:", [x.__name__ for x in guardian.Guardian.__mro__])
-    a=super(igroc.Igroc,model2.igroc).draw(screen)
-    a=super(igroc.Igroc,model2.wrag).draw(screen)
+    print("MRO:", [x.__name__ for x in wrag_skelet.Wrag_skelet.__mro__])
+    super(igroc.Igroc,model2.igroc).draw(screen)
+    # super(model2.wrag).draw(screen)
 
     # model2.igroc.draw(screen)
 

@@ -1,6 +1,7 @@
-import  pygame, settings, stenaputi as osnovnay_stena, igroc as igroc_mod, derevy, random, \
-    time,vrag,randomspawn,exit as exit_mod
+import  pygame, settings, stenaputi as osnovnay_stena, igroc as igroc_mod, real_world_object, random, \
+    time,randomspawn,exit as exit_mod
 
+import full_wrag
 import wrag_skelet
 from Orugie import axe_energi,multi_orugie_effects
 import full_igroc
@@ -30,14 +31,14 @@ def stena(x, y, w, h, nospawn=200):
 
 def add_vrag():
     def maker(x, y):
-        derevo = vrag.Vrag(x,y)
-        return derevo
+        wrag = wrag_skelet.Wrag_skelet(x,y)
+        return wrag
     randomspawn.add_derevo(10,maker,obshie_nospawn,obshie,50)
 
 
 def add_derevo():
     def maker(x,y):
-        derevo = derevy.Derevo(x,y,250)
+        derevo = real_world_object.Real_world_object(x, y,150,150,250)
         return derevo
 
     randomspawn.add_derevo(100,maker,obshie_nospawn,obshie,50)
@@ -75,7 +76,7 @@ def go_right():
     global sostoynie,go_to_next_lvl
     if sostoynie == SOSTOYNIE_NORMAL:
         a=igroc.dvigenie_right()
-        if type(a) is vrag.Vrag:
+        if issubclass(type(a),full_wrag.Full_wrag):
             fight_wrag=a
             sostoynie=SOSTOYNIE_POTEMNENIE_WAR
             go_to_next_lvl = time.time()
@@ -86,7 +87,7 @@ def go_left():
     global sostoynie,go_to_next_lvl
     if sostoynie == SOSTOYNIE_NORMAL:
         a=igroc.dvigenie_left()
-        if type(a)is vrag.Vrag:
+        if issubclass(type(a),full_wrag.Full_wrag):
             fight_wrag = a
             sostoynie=SOSTOYNIE_POTEMNENIE_WAR
             go_to_next_lvl = time.time()
@@ -97,7 +98,7 @@ def go_down():
     global sostoynie,go_to_next_lvl
     if sostoynie == SOSTOYNIE_NORMAL:
         a=igroc.dvigenie_bottom()
-        if type(a) is vrag.Vrag:
+        if issubclass(type(a),full_wrag.Full_wrag):
             fight_wrag = a
             sostoynie=SOSTOYNIE_POTEMNENIE_WAR
             go_to_next_lvl = time.time()
@@ -108,7 +109,7 @@ def go_top():
     global sostoynie,go_to_next_lvl
     if sostoynie == SOSTOYNIE_NORMAL:
         a=igroc.dvigenie_top()
-        if type(a) is vrag.Vrag:
+        if issubclass(type(a),full_wrag.Full_wrag):
             fight_wrag = a
             sostoynie=SOSTOYNIE_POTEMNENIE_WAR
             go_to_next_lvl = time.time()
