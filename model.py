@@ -38,7 +38,7 @@ def add_vrag():
 
 def add_derevo():
     def maker(x,y):
-        derevo = real_world_object.Real_world_object(x, y,150,150,250)
+        derevo = real_world_object.Real_world_object(x, y,150,150,250,'picture/дерево.png')
         return derevo
 
     randomspawn.add_derevo(100,maker,obshie_nospawn,obshie,50)
@@ -120,7 +120,7 @@ def step():
     global sostoynie,go_to_next_lvl,fight_wrag
     if time.time() - go_to_next_lvl > 2.5 and sostoynie == SOSTOYNIE_POTEMNENIE_WAR:
         sostoynie=SOSTOYNIE_START_WAR
-        model2.add_pole(random.randint(5, 25), random.randint(5, 25),igroc,igroc_2)
+        model2.add_pole(random.randint(5, 25), random.randint(5, 25),igroc,fight_wrag)
         # model2.add_pole(2, 2)
     if time.time()-go_to_next_lvl>2.5 and sostoynie==SOSTOYNIE_POTEMNENIE:
         sostoynie=SOSTOYNIE_PEREGENERACIY
@@ -155,7 +155,7 @@ obshie = []
 orugie_igroc = axe_energi.Axe_energi()
 orugie_igroc_2 = multi_orugie_effects.Multi_orugie_effects()
 igroc=guardian.Guardian(0, 1000, obshie,orugie_igroc,orugie_igroc_2)
-igroc_2=wrag_skelet.Wrag_skelet(1000, 2000)
+
 lvl = 5
 go_to_next_lvl = 0
 SOSTOYNIE_NORMAL=1

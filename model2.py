@@ -281,7 +281,7 @@ def effect_statistik(realx, realy):
         else:
             a.show_statistic = False
 
-
+#TODO есть шанс что при смене эфекта от оружия выпадет -10 макс хп и тогда враг будет жив с отрицательным хп
 def win_or_lose(wrag, igroc):
     global lose, win
     if igroc.hp <= 0:

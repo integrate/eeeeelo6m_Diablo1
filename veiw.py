@@ -22,7 +22,7 @@ def world(what, minimap):
     for stenaputi in model.obshie:
         stenaputi.draw(what, minimap)
     model.igroc.draw(what, minimap)
-    model.igroc_2.draw(what, minimap)
+
 
 
 # def smena_minimap():

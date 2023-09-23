@@ -5,6 +5,8 @@ import model2,pygame,cletca as cleta
 import time
 from pygame import display
 import igroc
+import nospawn
+import real_world_object
 import settings
 import wrag_skelet
 
@@ -33,7 +35,7 @@ def fight():
     import guardian
     print("MRO:", [x.__name__ for x in wrag_skelet.Wrag_skelet.__mro__])
     super(igroc.Igroc,model2.igroc).draw(screen)
-    # super(model2.wrag).draw(screen)
+    super(nospawn.Nospawn,model2.wrag).draw(screen)
 
     # model2.igroc.draw(screen)
 

@@ -3,8 +3,8 @@ import settings
 from pygame import font
 
 
-def draw_picture(screen, rect, cartinka: pygame.Surface, color, point_pic='center', point_rect='center'):
-    rect = fullscreen.fullscreen_rect(rect, screen, 'war', False)
+def draw_picture(screen, rect, cartinka: pygame.Surface, color, point_pic='center', point_rect='center',mul='war'):
+    rect = fullscreen.fullscreen_rect(rect, screen, mul, False)
     picture = fullscreen.fullscreen_surface(screen, cartinka)
     rect_2 = pygame.Rect(0, 0, picture.get_width(), picture.get_height())
 

@@ -15,7 +15,7 @@ def controller2():
             model2.knopka_lose.nagatie(r)
             model2.knopka_win.nagatie(r)
         model2.panel.init_event(r)
-        model2.panel_wrag.init_event(r)
+        # model2.panel_wrag.init_event(r)
         if r.type==model2.TIMER_DO_VIBOR:
             model2.do_vibor_vrag()
         if r.type==model2.TIMER_DO_ISPL:
