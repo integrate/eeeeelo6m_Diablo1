@@ -38,7 +38,7 @@ def add_vrag():
 
 def add_derevo():
     def maker(x,y):
-        derevo = real_world_object.Real_world_object(x, y,150,150,250,'picture/дерево.png')
+        derevo = real_world_object.Real_world_object(x, y,random.randint(250,350),random.randint(250,350),250,'picture/дерево.png')
         return derevo
 
     randomspawn.add_derevo(100,maker,obshie_nospawn,obshie,50)

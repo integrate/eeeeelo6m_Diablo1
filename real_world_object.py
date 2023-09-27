@@ -11,8 +11,9 @@ class Real_world_object(modul_nospawn.Nospawn):
         self.w=w
         self.h=h
         self.rect=pygame.Rect(self.x,self.y,self.w,self.h)
-        self.cartinka = load_cartinki.get_picture(cartinka)
-        # self.cartinka = pygame.transform.scale(self.cartinka, [w, h])
+        self.cartinka=load_cartinki.do_picture(cartinka,w,h)
+        # self.cartinka = load_cartinki.get_picture(cartinka)
+        # self.cartinka = load_cartinki.scale_picture(self.cartinka,w,h)
     def draw(self,screen:pygame.Surface,minimap=False):
 
         # super().draw(screen,minimap)
