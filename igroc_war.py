@@ -1,5 +1,7 @@
 import pygame, fullscreen
 
+import draw_helper
+import load_cartinki
 import observer
 from Orugie import orugie
 
@@ -11,7 +13,7 @@ class Igroc_war(observer.Observer):
 
     def __init__(self, hp,max_hp , stamina, point=None, need_point=None,
                  color=[255, 24, 74],
-                 cletca_color=[255, 100, 100], orugie: orugie.Orugie = None, orugie_2: orugie.Orugie = None):
+                 cletca_color=[255, 100, 100], orugie: orugie.Orugie = None, orugie_2: orugie.Orugie = None,picture=None):
         observer.Observer.__init__(self)
         self._hp = hp
         self._max_hp = max_hp
@@ -33,11 +35,14 @@ class Igroc_war(observer.Observer):
 
         self.effects = []
         self.active_orugie = None
+        self._activ = False
 
         self._mona_hodit = False
         self.color = color
         self.cletca_color = cletca_color
-        self._activ = False
+        self.picture=picture
+
+
 
     @property
     def activ(self):
@@ -47,6 +52,8 @@ class Igroc_war(observer.Observer):
         self.rect = pygame.Rect(x, y, w, h)
         self.stamina_orig = self.stamina
         self.max_hp_orig = self.max_hp
+        if self.picture is not None:
+            self.cartinka=load_cartinki.do_picture(self.picture, w, h)
 
     @property
     def mona_hodit(self):
@@ -68,6 +75,7 @@ class Igroc_war(observer.Observer):
         else:
             self._hp = hp_now
         self.notify(self.EVENT_HP_CHANGE, self._hp)
+        
 
     @property
     def max_hp(self):
@@ -92,9 +100,10 @@ class Igroc_war(observer.Observer):
         self.notify(self.EVENT_POINT_CHANGE)
 
     def draw(self, screen):
-
         self.rect_fullscren = fullscreen.fullscreen_rect(self.rect, screen, 'war', False)
         pygame.draw.rect(screen, self.color, self.rect_fullscren)
+        if self.picture is not None:
+            draw_helper.draw_picture(screen,self.rect,self.cartinka,None)
 
     def sdvig(self, x, y):
         if self._mona_hodit == True:

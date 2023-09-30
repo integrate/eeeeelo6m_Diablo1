@@ -57,5 +57,8 @@ def lose():
 
 
 def win():
+    screen.fill([0, 0, 0])
     model2.knopka_win.draw(screen)
+    model2.panel.draw(screen)
+    model2.panel_wrag.draw(screen)
     # pygame.draw.rect(screen,[0,0,0],model2.win_rect)

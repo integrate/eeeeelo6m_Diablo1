@@ -42,6 +42,7 @@ def add_pole(col_x, col_y, base_igroc: igroc_war.Igroc_war, base_wrag:igroc_war.
     global chey_hod
 
     # подготовка к созданию
+
     cletcas.clear()
     a = range(col_y)
     b = range(col_x)
@@ -54,6 +55,8 @@ def add_pole(col_x, col_y, base_igroc: igroc_war.Igroc_war, base_wrag:igroc_war.
     chey_hod = 'igroc'
     igroc = base_igroc
     wrag = base_wrag
+    igroc.subscribe(win_or_lose,igroc.EVENT_HP_CHANGE)
+    wrag.subscribe(win_or_lose,wrag.EVENT_HP_CHANGE)
 
     # создание поля
     for coly in a:
@@ -261,7 +264,6 @@ def hod_wrag():
 
 def smena_hoda():
     global chey_hod
-    win_or_lose(wrag, igroc)
     if lose is not True and win is not True:
         if chey_hod == 'igroc':
             chey_hod = 'wrag'
@@ -282,7 +284,7 @@ def effect_statistik(realx, realy):
             a.show_statistic = False
 
 #TODO есть шанс что при смене эфекта от оружия выпадет -10 макс хп и тогда враг будет жив с отрицательным хп
-def win_or_lose(wrag, igroc):
+def win_or_lose(observ, value, cod_event):
     global lose, win
     if igroc.hp <= 0:
         lose = True
