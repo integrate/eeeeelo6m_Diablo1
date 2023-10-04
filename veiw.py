@@ -1,6 +1,8 @@
 # 1366,768
 import pygame,os
 
+
+
 os.environ['SDL_VIDEO_WINDOW_POS'] = "341,192"
 
 # screen = pygame.display.set_mode(flags=pygame.FULLSCREEN)
@@ -9,7 +11,8 @@ screen = pygame.display.set_mode([683, 384])
 # print(screen.get_rect())
 import model, stenaputi, fullscreen, settings, time,model_view
 from pygame import display, draw
-
+import nospawn
+import wrag_skelet
 
 perehod = pygame.Surface([settings.BASE_W,settings.BASE_H], pygame.SRCALPHA)
 
@@ -21,6 +24,8 @@ def world(what, minimap):
     model.exit.draw(what,minimap)
     for stenaputi in model.obshie:
         stenaputi.draw(what, minimap)
+        # if wrag_skelet.Wrag_skelet is stenaputi.__class__:
+        nospawn.Nospawn.draw(stenaputi,what,mul)
     model.igroc.draw(what, minimap)
 
 
