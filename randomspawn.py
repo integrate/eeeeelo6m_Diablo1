@@ -1,7 +1,8 @@
 import random,settings
 def add_derevo(col,maker,obshie_nospawn,obshie,povtor=10,finalnospawn=150):
     colpowtor=povtor
-    nospawn_here= obshie_nospawn.copy
+    nospawn_here= {}
+
 
     while col > 0:
         if colpowtor == 0:
