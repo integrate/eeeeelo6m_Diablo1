@@ -1,6 +1,7 @@
 import  pygame, settings, stenaputi as osnovnay_stena, igroc as igroc_mod, real_world_object, random, \
     time,randomspawn,exit as exit_mod
 
+import derevo
 import full_wrag
 import wrag_skelet
 from Orugie import axe_energi,multi_orugie_effects
@@ -26,23 +27,22 @@ def add_stena_puti():
 def stena(x, y, w, h, nospawn=200):
     stena = osnovnay_stena.Stenaputi(x, y, w, h, nospawn)
     obshie.append(stena)
-    obshie_nospawn.append(stena.rect_nospawn)
 
 
 def add_vrag():
     def maker(x, y):
         wrag = wrag_skelet.Wrag_skelet(x,y)
         return wrag
-    randomspawn.add_derevo(10,maker,obshie_nospawn,obshie,50)
+    randomspawn.add_derevo(500,maker,wrag_skelet.Wrag_skelet,obshie,50)
 
 
 
 def add_derevo():
     def maker(x,y):
-        derevo = real_world_object.Real_world_object(x, y,random.randint(250,350),random.randint(250,350),500,'picture/дерево.png')
-        return derevo
+        derevy = derevo.Derevo(x, y,random.randint(250,350),random.randint(250,350))
+        return derevy
 
-    randomspawn.add_derevo(100,maker,obshie_nospawn,obshie,50)
+    randomspawn.add_derevo(10,maker,derevo.Derevo,obshie,50)
 
 
 
@@ -128,7 +128,6 @@ def step():
 
     elif sostoynie==SOSTOYNIE_PEREGENERACIY :
         obshie.clear()
-        obshie_nospawn.clear()
         add_stena_puti()
         add_granici()
         add_derevo()
@@ -150,7 +149,7 @@ def step():
 
 
 
-obshie_nospawn = []
+
 obshie = []
 # igroc = igroc_mod.Igroc(0, 1000, 100, 100, obshie)
 orugie_igroc = axe_energi.Axe_energi()

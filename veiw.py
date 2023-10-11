@@ -25,7 +25,7 @@ def world(what, minimap):
     for stenaputi in model.obshie:
         stenaputi.draw(what, minimap)
         # if wrag_skelet.Wrag_skelet is stenaputi.__class__:
-        nospawn.Nospawn.draw(stenaputi,what,mul)
+        # nospawn.Nospawn.draw(stenaputi,what,mul)
     model.igroc.draw(what, minimap)
 
 
