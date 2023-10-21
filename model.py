@@ -33,7 +33,7 @@ def add_vrag():
     def maker(x, y):
         wrag = wrag_skelet.Wrag_skelet(x,y)
         return wrag
-    randomspawn.add_derevo(500,maker,wrag_skelet.Wrag_skelet,obshie,50)
+    randomspawn.add_derevo(100,maker,wrag_skelet.Wrag_skelet,obshie,50)
 
 
 
@@ -42,7 +42,7 @@ def add_derevo():
         derevy = derevo.Derevo(x, y,random.randint(250,350),random.randint(250,350))
         return derevy
 
-    randomspawn.add_derevo(10,maker,derevo.Derevo,obshie,50)
+    randomspawn.add_derevo(300,maker,derevo.Derevo,obshie,50)
 
 
 

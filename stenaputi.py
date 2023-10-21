@@ -1,8 +1,9 @@
 import pygame,help,fullscreen,math,nospawn as modul_nospawn
 
 class Stenaputi(modul_nospawn.Nospawn):
-    def __init__(self,x,y,w,h,nospawn):
+    def __init__(self,x,y,w,h,nospawn,prohodimost=False):
         modul_nospawn.Nospawn.__init__(self,x,y,w,h,{},nospawn)
+        self.prohodimost=prohodimost
         self.cratinca=pygame.Surface([w,h])
         self.sten_cartinca=pygame.image.load('picture/стэнка.png')
         self.sten_cartinca=pygame.transform.scale(self.sten_cartinca,[self.sten_cartinca.get_width()/10,self.sten_cartinca.get_height()/10])

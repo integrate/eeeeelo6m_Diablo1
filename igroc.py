@@ -1,5 +1,7 @@
 import pygame, fullscreen
 
+import activ_object
+
 
 class Igroc:
     def __init__(self, x, y, speedx, speedy, rects,w,h,color):
@@ -24,7 +26,7 @@ class Igroc:
 
     def dvigenie_left(self):
         b=self.correct_wall_left()
-        if b is not None:
+        if b is not None and not b.prohodimost:
             self.rect_igroc.x = b.rect.right
             return b
         else:
@@ -51,7 +53,7 @@ class Igroc:
 
     def dvigenie_right(self):
         b=self.correct_wall_right()
-        if b is not None:
+        if b is not None and not b.prohodimost:
             self.rect_igroc.right = b.rect.x
             return b
         else:
@@ -78,7 +80,7 @@ class Igroc:
     # 1-17:10,2-17;11,3-17:15,4-17:16
     def dvigenie_bottom(self):
         b = self.correct_wall_bottom()
-        if b is not None:
+        if b is not None and not b.prohodimost:
             self.rect_igroc.bottom = b.rect.y
             return b
         else:
@@ -108,7 +110,7 @@ class Igroc:
 
     def dvigenie_top(self):
         b=self.correct_wall_top()
-        if b is not None:
+        if b is not None and not b.prohodimost:
             self.rect_igroc.y = b.rect.bottom
             return b
         else:
@@ -131,3 +133,19 @@ class Igroc:
                     b=stena
         return b
 
+
+
+    def obrabotca_events(self,events):
+
+        for r in events:
+            if r.type == pygame.KEYUP and pygame.K_e == r.key:
+                a=self.collide()
+                if issubclass(activ_object.Acriv_object,a):
+                    a.activate()
+
+
+
+    def collide(self):
+        for rect in self.rects:
+            if self.rect_igroc.colliderect(rect):
+                return rect
