@@ -1,5 +1,6 @@
 import random,settings
-def add_derevo(col,maker,object_class,obshie,povtor=10):
+def add_derevo(col,maker,obshie,povtor=10):
+    object_class=type(maker(0,0))
     colpowtor=povtor
     obshie_nospawn=[]
     for a in obshie:

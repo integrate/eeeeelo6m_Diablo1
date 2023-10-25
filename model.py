@@ -3,6 +3,7 @@ import  pygame, settings, stenaputi as osnovnay_stena, igroc as igroc_mod, real_
 
 import derevo
 import full_wrag
+import tp_object
 import wrag_skelet
 from Orugie import axe_energi,multi_orugie_effects
 import full_igroc
@@ -18,7 +19,10 @@ def add_stena_puti():
     stena(400, -400, 100, 2400, 400)
     stena(-2500, -400, 2900, 100, 400)
     stena(-2700, 0, 2700, 100, 400)
-    exit = exit_mod.Exit(-2600, -275, 150, 150)
+    exit = exit_mod.Exit(-2600, -275, 150, 150,next_lvl)
+    tp=tp_object.Tp_object(-2300, -275, 150, 150,70500,70500,igroc)
+    obshie.append(exit)
+    obshie.append(tp)
     spawn = [250, 3000]
     igroc.rect_igroc.x = spawn[0]
     igroc.rect_igroc.y = spawn[1]
@@ -29,20 +33,30 @@ def stena(x, y, w, h, nospawn=200):
     obshie.append(stena)
 
 
+def add_structure():
+    def maker(x, y):
+        exit = exit_mod.Exit(x, y, 500, 500,next_lvl)
+        return exit
+    randomspawn.add_derevo(10,maker,obshie,50)
+
+
 def add_vrag():
     def maker(x, y):
         wrag = wrag_skelet.Wrag_skelet(x,y)
         return wrag
-    randomspawn.add_derevo(100,maker,wrag_skelet.Wrag_skelet,obshie,50)
+    randomspawn.add_derevo(10,maker,obshie,50)
 
 
 
 def add_derevo():
     def maker(x,y):
-        derevy = derevo.Derevo(x, y,random.randint(250,350),random.randint(250,350))
+        derevy = derevo.Derevo(x, y,random.randint(2000,2000),random.randint(2000,2000))
         return derevy
 
-    randomspawn.add_derevo(300,maker,derevo.Derevo,obshie,50)
+    randomspawn.add_derevo(300,maker,obshie,50)
+
+
+
 
 
 
@@ -62,10 +76,10 @@ def add_granici():
     obshie.append(granici_right)
 
 
-def next_lvl():
+def next_lvl(data):
     global lvl,  go_to_next_lvl, sostoynie
 
-    if igroc.rect_igroc.colliderect(exit) and sostoynie==SOSTOYNIE_NORMAL:
+    if sostoynie==SOSTOYNIE_NORMAL:
         go_to_next_lvl = time.time()
         sostoynie = SOSTOYNIE_POTEMNENIE
         # if time.time() - go_to_next_lvl > 2:
@@ -132,6 +146,7 @@ def step():
         add_granici()
         add_derevo()
         add_vrag()
+        add_structure()
         time.sleep(random.randint(100,200)/100)
         sostoynie=SOSTOYNIE_OSVETLENIE
         go_to_next_lvl=time.time()
@@ -173,3 +188,4 @@ add_stena_puti()
 add_granici()
 add_derevo()
 add_vrag()
+add_structure()

@@ -6,6 +6,7 @@ pygame.key.set_repeat(50, 50)
 
 def control():
     e = event.get()
+    model.igroc.obrabotca_events(e)
     for r in e:
         if r.type == pygame.QUIT:
             exit()
@@ -20,8 +21,7 @@ def control():
         if r.type == pygame.KEYDOWN and r.key == pygame.K_s:
             model.go_down()
 
-        if r.type == pygame.KEYUP and pygame.K_e == r.key:
-            model.next_lvl()
+
         f11(r )
 def f11(r):
     if r.type==pygame.KEYUP and r.key==pygame.K_F11:

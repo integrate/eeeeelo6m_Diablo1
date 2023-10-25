@@ -1,22 +1,20 @@
 import pygame,fullscreen
 
-class Exit():
-    def __init__(self,x,y,w,h):
-        self.exit_art=pygame.image.load('picture/люк.png')
-        self.exit_art=pygame.transform.scale(self.exit_art,[w,h])
-        self.x=x
-        self.y=y
-        self.w=w
-        self.h=h
-        self.rect=pygame.Rect(x,y,h,w)
+import activ_object
 
 
-    def draw(self,screen,minimap=False):
-        mul='minimap' if minimap else 'map'
-        a=fullscreen.fullscreen_surface(screen,self.exit_art,mul)
-        exit_rect =fullscreen.fullscreen_rect(self.rect,screen,mul)
+class Exit(activ_object.Activ_object):
+    def __init__(self,x,y,w,h,activ):
+        activ_object.Activ_object.__init__(self,activ,x,y,w,h,'picture/люк.png')
 
-        screen.blit(a,exit_rect)
+
+
+    # def draw(self,screen,minimap=False):
+    #     mul='minimap' if minimap else 'map'
+    #     a=fullscreen.fullscreen_surface(screen,self.exit_art,mul)
+    #     exit_rect =fullscreen.fullscreen_rect(self.rect,screen,mul)
+    #
+    #     screen.blit(a,exit_rect)
 
 
 

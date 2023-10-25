@@ -1,9 +1,9 @@
 
 
 
-MUL={'war':1,'map':3,'minimap':7,'1':1}
+MUL={'war':1,'map':3,'minimap':12,'1':1}
 PERCENTMINIMAP=2.572
-MAP_SIZE=50000
+MAP_SIZE=140000
 MAP_FAT=50
 PANEL_SIZE_W=300
 PANEL_OTSTUP=75

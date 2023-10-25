@@ -21,7 +21,7 @@ perehod.fill([0, 0, 0, 0])
 
 def world(what, minimap):
     mul = 'minimap' if minimap else 'map'
-    model.exit.draw(what,minimap)
+    # model.exit.draw(what,minimap)
     for stenaputi in model.obshie:
         stenaputi.draw(what, minimap)
         # if wrag_skelet.Wrag_skelet is stenaputi.__class__:

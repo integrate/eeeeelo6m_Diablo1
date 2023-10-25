@@ -140,8 +140,11 @@ class Igroc:
         for r in events:
             if r.type == pygame.KEYUP and pygame.K_e == r.key:
                 a=self.collide()
-                if issubclass(activ_object.Acriv_object,a):
-                    a.activate()
+                if issubclass(type(a),activ_object.Activ_object):
+                    a.activate(None)
+
+
+                    
 
 
 
