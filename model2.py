@@ -304,5 +304,12 @@ def deystvie_lose_win():
         win = False
 
 
+def deystvie_run():
+    a=random.randint(1,4)
+    if a==4:
+        model.sostoynie=model.SOSTOYNIE_RUN_WAR
+        wrag.hp+=wrag.max_hp/2
+
+
 def step():
     pass

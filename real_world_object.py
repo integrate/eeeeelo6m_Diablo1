@@ -4,7 +4,7 @@ import load_cartinki
 
 
 class Real_world_object(modul_nospawn.Nospawn):
-    def __init__(self,x,y,w,h,cartinka,nospawn={},base_nospawn=150,prohodimost=True):
+    def __init__(self,x,y,w,h,cartinka,nospawn={},base_nospawn=150,prohodimost=False):
         modul_nospawn.Nospawn.__init__(self,x,y,w,h,nospawn,base_nospawn)
         self.prohodimost=prohodimost
         self.x=x

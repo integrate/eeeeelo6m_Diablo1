@@ -57,6 +57,9 @@ class Panel():
         self.exit = knopki.Knopka(' X ', self.slot_rect.x - 63, self.slot_rect.y, 'segoeui', 25,
                                   self.on_button_click_normal, [124, 45, 1])
 
+        self.knopka_run = button_change.Button_change(self.panel.centerx - settings.PANEL_SIZE_W / 3, self.panel.bottom - 100,
+                                        200, 70,'run','yugothicuiregular',[127,60,60],)
+
         self.opisanie_orugiy = draw_helper.text(igroc.orugie.opisanie, self.font,
                                                 settings.PANEL_SIZE_W)
         self.opisanie_orugiy_2 = draw_helper.text(igroc.orugie_2.opisanie, self.font,
@@ -86,22 +89,21 @@ class Panel():
         draw_helper.draw_picture(screen, self.hp_bar_rect, self.hp_bar_pic, [255, 255, 255])
         if self.igroc.need_ulta:
             self.ultimat.draw(screen)
-        element=0
-        line=1
+        element = 0
+        line = 1
         for a in self.igroc.effects:
-            if element>3:
-                element=0
-                line+=1
+            if element > 3:
+                element = 0
+                line += 1
 
-            a.effect_rect.y=50*line
-            a.effect_rect.x=self.panel.x+50+50*element
+            a.effect_rect.y = 50 * line
+            a.effect_rect.x = self.panel.x + 50 + 50 * element
             element += 1
 
             a.draw(screen)
 
         for a in self.igroc.effects:
             a.draw_statistik(screen)
-
 
     def draw_wibor(self, screen):
         a = fullscreen.fullscreen_rect(self.panel, screen, 'war', False)
@@ -146,14 +148,12 @@ class Panel():
             self.igroc.active_orugie = self.igroc.orugie_2
 
     def bloc(self):
-        self.regim='bloc'
-        self.igroc.mona_hodit=False
+        self.regim = 'bloc'
+        self.igroc.mona_hodit = False
+
     def normal(self):
-        self.regim='normal'
+        self.regim = 'normal'
         self.igroc.sort()
-
-
-
 
     def smena_hp_igroc(self, observ, value, cod_event):
         self.hp_bar_pic = self.font.render(str(self.igroc.hp), True, [0, 0, 0])
@@ -177,5 +177,5 @@ class Panel():
         self.exit.nagatie(event)
         self.slot_rect_vibor.nagatie(event)
         self.slot_rect_vibor_2.nagatie(event)
-        if self.regim=='normal' and self.igroc.need_ulta:
+        if self.regim == 'normal' and self.igroc.need_ulta:
             self.ultimat.nagatie(event)

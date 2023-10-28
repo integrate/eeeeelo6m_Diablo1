@@ -11,25 +11,25 @@ import guardian
 import model2
 
 
+
 def add_stena_puti():
     global vid, exit, spawn
     vid = random.randint(1, 3)
 
-    stena(0, 0, 100, 2000, 400)
+    stena(0, 0, 100, 2000, 400,prohodimost=True)
     stena(400, -400, 100, 2400, 400)
     stena(-2500, -400, 2900, 100, 400)
     stena(-2700, 0, 2700, 100, 400)
     exit = exit_mod.Exit(-2600, -275, 150, 150,next_lvl)
-    tp=tp_object.Tp_object(-2300, -275, 150, 150,70500,70500,igroc)
+    tp_object.Tp_object.make_portal(-2300, -275, 150, 150,10287,11508,igroc,obshie)
     obshie.append(exit)
-    obshie.append(tp)
     spawn = [250, 3000]
     igroc.rect_igroc.x = spawn[0]
     igroc.rect_igroc.y = spawn[1]
 
 
-def stena(x, y, w, h, nospawn=200):
-    stena = osnovnay_stena.Stenaputi(x, y, w, h, nospawn)
+def stena(x, y, w, h, nospawn=200,prohodimost=False):
+    stena = osnovnay_stena.Stenaputi(x, y, w, h, nospawn,prohodimost)
     obshie.append(stena)
 
 
@@ -156,6 +156,10 @@ def step():
         obshie.remove(fight_wrag)
         sostoynie=SOSTOYNIE_OSVETLENIE
         go_to_next_lvl = time.time()
+    elif sostoynie==SOSTOYNIE_WIN_WAR:
+
+        sostoynie=SOSTOYNIE_OSVETLENIE
+        go_to_next_lvl = time.time()
 
 
 
@@ -180,6 +184,7 @@ SOSTOYNIE_OSVETLENIE=4
 SOSTOYNIE_POTEMNENIE_WAR=5
 SOSTOYNIE_WIN_WAR=6
 SOSTOYNIE_START_WAR=7
+SOSTOYNIE_RUN_WAR=8
 
 exit=None
 sostoynie = SOSTOYNIE_NORMAL

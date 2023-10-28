@@ -12,4 +12,10 @@ class Tp_object(activ_object.Activ_object):
         self.igroc.rect_igroc.x=self.tp_x
         self.igroc.rect_igroc.y=self.tp_y
 
+    @classmethod
+    def make_portal(my_class,x,y,w,h,x_1,y_1,igroc,obshie):
+        a=my_class(x,y,w,h,x_1,y_1,igroc)
+        b=my_class(x_1,y_1,w,h,x,y,igroc)
+        obshie+= [a,b]
+
 
