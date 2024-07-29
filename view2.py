@@ -33,7 +33,7 @@ def fight():
     for cletca in model2.cletcas:
         cletca.draw(screen)
     import guardian
-    print("MRO:", [x.__name__ for x in wrag_skelet.Wrag_skelet.__mro__])
+    # print("MRO:", [x.__name__ for x in wrag_skelet.Wrag_skelet.__mro__])
     super(igroc.Igroc,model2.igroc).draw(screen)
     super(nospawn.Nospawn,model2.wrag).draw(screen)
 

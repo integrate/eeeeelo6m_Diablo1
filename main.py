@@ -5,6 +5,10 @@ import veiw,model,controller,time,controller2,view2,model2
 # sjd('ку','a','a','s','f','r','x','n')
 # exit()
 
+print("F11 - на весь экран")
+print("WASD - ходить")
+print("E - взаимодействовать с предметом")
+
 
 while True:
     # time.sleep(1/300)

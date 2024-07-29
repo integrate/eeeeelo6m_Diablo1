@@ -7,7 +7,7 @@ import knopki_kartinki
 import model2
 
 font.init()
-print(font.get_fonts())
+# print(font.get_fonts())
 
 
 class Panel():

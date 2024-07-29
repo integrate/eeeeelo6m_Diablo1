@@ -5,7 +5,7 @@ a={}
 def get_picture(put):
     if put in a.keys(): return a[put]
     pic=pygame.image.load(put)
-    print(put)
+    # print(put)
     a[put] = pic
 
 
@@ -20,7 +20,7 @@ def scale_picture(pic,w,h):
     cartinka = pygame.transform.scale(pic, [w, h])
     a['done_pic']=cartinka
     b.append(a)
-    print(pic,w,h,a['done_pic'])
+    # print(pic,w,h,a['done_pic'])
     return a['done_pic']
 
 

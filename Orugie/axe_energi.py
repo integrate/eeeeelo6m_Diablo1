@@ -11,7 +11,7 @@ class Axe_energi(orugie.Orugie):
         a=random.randint(self.damage[0],self.damage[1])
         if a>0:
             a+=1
-            print(a)
+            # print(a)
         wrag.hp-=a
 
 
